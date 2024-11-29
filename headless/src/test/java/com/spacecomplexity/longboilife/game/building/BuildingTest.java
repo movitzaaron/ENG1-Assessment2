@@ -103,6 +103,6 @@ public class BuildingTest {
     public void testLoadTexture() {
         HeadlessLauncher.main(new String[0]);
         BuildingType type = BuildingType.ROAD;
-        assertTrue(Gdx.files.internal(type.texturePath).exists());
+        assertTrue(Gdx.files.internal(type.getTexturePath()).exists());
     }
 }

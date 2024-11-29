@@ -1,23 +1,36 @@
 package com.spacecomplexity.longboilife.game.building;
 
-import com.spacecomplexity.longboilife.AbstractHeadlessGdxTest;
 import com.spacecomplexity.longboilife.game.utils.Vector2Int;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for the Building class.
  */
-public class BuildingTest extends AbstractHeadlessGdxTest {
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+public class BuildingTest {
 
-    /**
-     * Tests the constructor and getter methods of the Building class.
-     */
+    @BeforeAll
+    public void setUp() {
+        // No initialization needed
+    }
+
+    @AfterAll
+    public void tearDown() {
+        // Dispose of any loaded textures if necessary
+        for (BuildingType type : BuildingType.values()) {
+            type.dispose();
+        }
+    }
+
     @Test
     public void testBuildingConstructorAndGetters() {
         // Arrange
-        BuildingType type = BuildingType.GREGGS; // Using actual enum constants
+        BuildingType type = BuildingType.GREGGS;
         Vector2Int position = new Vector2Int(10, 20);
 
         // Act
@@ -28,13 +41,10 @@ public class BuildingTest extends AbstractHeadlessGdxTest {
         assertEquals(position, building.getPosition(), "Building position should match the constructor argument.");
     }
 
-    /**
-     * Tests the setPosition method of the Building class.
-     */
     @Test
     public void testSetPosition() {
         // Arrange
-        BuildingType type = BuildingType.GYM; // Using actual enum constants
+        BuildingType type = BuildingType.LIBRARY;
         Vector2Int initialPosition = new Vector2Int(5, 5);
         Building building = new Building(type, initialPosition);
 
@@ -47,14 +57,10 @@ public class BuildingTest extends AbstractHeadlessGdxTest {
         assertEquals(newPosition, building.getPosition(), "Building position should be updated to the new position.");
     }
 
-    /**
-     * Tests that the Building class allows setting the position to null.
-     * Adjust this test based on your intended behavior.
-     */
     @Test
     public void testSetPositionToNull() {
         // Arrange
-        BuildingType type = BuildingType.HALLS; // Using actual enum constants
+        BuildingType type = BuildingType.HALLS;
         Vector2Int initialPosition = new Vector2Int(0, 0);
         Building building = new Building(type, initialPosition);
 
@@ -65,33 +71,29 @@ public class BuildingTest extends AbstractHeadlessGdxTest {
         assertNull(building.getPosition(), "Building position should be set to null.");
     }
 
-    /**
-     * Tests that the Building constructor throws a NullPointerException when type is null.
-     * This assumes that your constructor should not accept a null type.
-     */
     @Test
     public void testConstructorWithNullType() {
         // Arrange
         Vector2Int position = new Vector2Int(10, 20);
 
         // Act & Assert
-        assertThrows(NullPointerException.class, () -> {
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> {
             new Building(null, position);
         }, "Constructor should throw NullPointerException when type is null.");
+
+        assertEquals("Building type cannot be null.", exception.getMessage());
     }
 
-    /**
-     * Tests that the Building constructor throws a NullPointerException when position is null.
-     * This assumes that your constructor should not accept a null position.
-     */
     @Test
     public void testConstructorWithNullPosition() {
         // Arrange
-        BuildingType type = BuildingType.ROAD; // Using actual enum constants
+        BuildingType type = BuildingType.ROAD;
 
         // Act & Assert
-        assertThrows(NullPointerException.class, () -> {
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> {
             new Building(type, null);
         }, "Constructor should throw NullPointerException when position is null.");
+
+        assertEquals("Building position cannot be null.", exception.getMessage());
     }
 }

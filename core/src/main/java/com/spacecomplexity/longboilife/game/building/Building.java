@@ -16,6 +16,13 @@ public class Building {
      * @param position the position of this building in the world.
      */
     public Building(BuildingType type, Vector2Int position) {
+        if (type == null) {
+            throw new NullPointerException("Building type cannot be null.");
+        }
+
+        if (position == null) {
+            throw new NullPointerException("Building position cannot be null.");
+        }
         this.type = type;
         this.position = position;
     }

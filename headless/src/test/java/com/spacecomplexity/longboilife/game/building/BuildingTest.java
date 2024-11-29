@@ -1,6 +1,8 @@
 package com.spacecomplexity.longboilife.game.building;
 
+import com.badlogic.gdx.Gdx;
 import com.spacecomplexity.longboilife.game.utils.Vector2Int;
+import com.spacecomplexiy.longboilife.headless.HeadlessLauncher;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -95,5 +97,12 @@ public class BuildingTest {
         }, "Constructor should throw NullPointerException when position is null.");
 
         assertEquals("Building position cannot be null.", exception.getMessage());
+    }
+
+    @Test
+    public void testLoadTexture() {
+        HeadlessLauncher.main(new String[0]);
+        BuildingType type = BuildingType.ROAD;
+        assertTrue(Gdx.files.internal(type.texturePath).exists());
     }
 }

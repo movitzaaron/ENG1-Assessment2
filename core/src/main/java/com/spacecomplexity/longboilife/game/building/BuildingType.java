@@ -40,16 +40,25 @@ public enum BuildingType {
         this.cost = cost;
     }
 
+
+
     /**
      * Lazily initializes and returns the Texture.
      *
      * @return the Texture associated with this BuildingType.
      */
+
+
+
     public Texture getTexture() {
         if (texture == null) {
             texture = new Texture(texturePath);
         }
         return texture;
+    }
+
+    public String getTexturePath() {
+        return texturePath;
     }
 
     public String getDisplayName() {

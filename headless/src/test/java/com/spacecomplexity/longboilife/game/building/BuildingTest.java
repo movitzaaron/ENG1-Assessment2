@@ -1,5 +1,6 @@
 package com.spacecomplexity.longboilife.game.building;
 
+import com.spacecomplexity.longboilife.AbstractHeadlessGdxTest;
 import com.spacecomplexity.longboilife.game.utils.Vector2Int;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Unit tests for the Building class.
  */
-public class BuildingTest {
+public class BuildingTest extends AbstractHeadlessGdxTest {
 
     /**
      * Tests the constructor and getter methods of the Building class.

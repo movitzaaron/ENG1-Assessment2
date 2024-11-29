@@ -39,3 +39,4 @@ public class Building {
         this.position = position;
     }
 }
+

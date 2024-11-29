@@ -47,9 +47,6 @@ public enum BuildingType {
      *
      * @return the Texture associated with this BuildingType.
      */
-
-
-
     public Texture getTexture() {
         if (texture == null) {
             texture = new Texture(texturePath);

@@ -8,7 +8,7 @@ import com.spacecomplexity.longboilife.Main;
 /** Launches the headless application. Can be converted into a utilities project or a server application. */
 public class HeadlessLauncher {
     public static void main(String[] args) {
-//        createApplication();
+        createApplication();
     }
 
     private static Application createApplication() {

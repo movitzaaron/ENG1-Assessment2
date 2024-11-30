@@ -102,9 +102,17 @@ public class BuildingTest {
     }
 
     @Test
-    public void testLoadTexture() {
+    public void testAllTexturesExist() {
         HeadlessLauncher.main(new String[0]);
         BuildingType type = BuildingType.ROAD;
+        assertTrue(Gdx.files.internal(type.getTexturePath()).exists());
+        type = BuildingType.LIBRARY;
+        assertTrue(Gdx.files.internal(type.getTexturePath()).exists());
+        type = BuildingType.GREGGS;
+        assertTrue(Gdx.files.internal(type.getTexturePath()).exists());
+        type = BuildingType.HALLS;
+        assertTrue(Gdx.files.internal(type.getTexturePath()).exists());
+        type = BuildingType.GYM;
         assertTrue(Gdx.files.internal(type.getTexturePath()).exists());
     }
 }

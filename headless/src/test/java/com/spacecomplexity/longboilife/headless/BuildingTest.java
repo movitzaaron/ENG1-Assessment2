@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Unit tests for the Building class.
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class BuildingTest {
+public class BuildingTest extends AbstractHeadlessGdxTest {
 
     @BeforeAll
     public void setUp() {
@@ -103,7 +103,6 @@ public class BuildingTest {
 
     @Test
     public void testAllTexturesExist() {
-        HeadlessLauncher.main(new String[0]);
         BuildingType type = BuildingType.ROAD;
         assertTrue(Gdx.files.internal(type.getTexturePath()).exists());
         type = BuildingType.LIBRARY;

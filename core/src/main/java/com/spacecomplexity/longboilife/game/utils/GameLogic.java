@@ -1,7 +1,6 @@
 package com.spacecomplexity.longboilife.game.utils;
 
 import com.badlogic.gdx.Gdx;
-import com.spacecomplexity.longboilife.Main;
 import com.spacecomplexity.longboilife.game.building.Building;
 import com.spacecomplexity.longboilife.game.building.BuildingType;
 import com.spacecomplexity.longboilife.game.globals.Constants;

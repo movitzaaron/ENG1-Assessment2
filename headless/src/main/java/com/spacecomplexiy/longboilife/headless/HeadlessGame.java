@@ -1,6 +1,7 @@
 package com.spacecomplexiy.longboilife.headless;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.spacecomplexity.longboilife.MainInputManager;
 import com.spacecomplexity.longboilife.game.globals.GameState;
@@ -27,6 +28,12 @@ public class HeadlessGame extends ApplicationAdapter {
 
         // Create an input multiplexer to handle input from all sources
         InputMultiplexer inputMultiplexer = new InputMultiplexer(new MainInputManager());
+
+        // Set up an InputManager to handle user inputs
+        inputManager = new InputManager(inputMultiplexer);
+        // Set the Gdx input processor to handle all our input processes
+        Gdx.input.setInputProcessor(inputMultiplexer);
+
     }
 
     @Override

@@ -41,6 +41,10 @@ public enum BuildingType {
     }
 
 
+    // This setter is used for mocking in testing
+    public void setTexture(Texture texture) {
+        this.texture = texture;
+    }
 
     /**
      * Lazily initializes and returns the Texture.
@@ -89,6 +93,7 @@ public enum BuildingType {
     public void dispose() {
         if (texture != null) {
             texture.dispose();
+            texture = null;
         }
     }
 }

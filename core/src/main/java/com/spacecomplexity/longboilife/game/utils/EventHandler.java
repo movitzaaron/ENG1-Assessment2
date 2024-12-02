@@ -19,6 +19,8 @@ public class EventHandler {
         CLOSE_BUILD_MENU,
         GAME_END,
         RETURN_MENU,
+        DUCK_DEATH_BEGIN,
+        DUCK_DEATH_END,
         ;
 
         private Function<Object[], Object> callback;

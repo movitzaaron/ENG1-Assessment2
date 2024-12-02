@@ -1,6 +1,8 @@
 package com.spacecomplexity.longboilife;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.spacecomplexity.longboilife.game.GameScreen;
 import com.spacecomplexity.longboilife.menu.MenuScreen;
@@ -45,7 +47,9 @@ public class Main extends Game {
     @Override
     public void create() {
         // Initially load the menu screen
-        switchScreen(ScreenType.MENU);
+        if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop){
+            switchScreen(ScreenType.MENU);
+        }
     }
 
     /**

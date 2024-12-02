@@ -6,25 +6,29 @@ import com.badlogic.gdx.graphics.Texture;
  * Contains a list of all tile types, including there default data.
  */
 public enum TileType {
-    GRASS(new Texture("tiles/grass.png"), true),
-    WATER(new Texture("tiles/water.png"), false),
+    GRASS("tiles/grass.png", true),
+    WATER("tiles/water.png", false),
     ;
 
-    private final Texture texture;
+    private Texture texture;
+    private final String texturePath;
     private final boolean isNaturallyBuildable;
 
     /**
      * Constructor to create a {@link TileType} with specified attributes.
      *
-     * @param texture              the texture representing the tile.
+     * @param texturePath          the texture path representing the tile.
      * @param isNaturallyBuildable a boolean indicating if the tile can be built on.
      */
-    TileType(Texture texture, boolean isNaturallyBuildable) {
-        this.texture = texture;
+    TileType(String texturePath, boolean isNaturallyBuildable) {
+        this.texturePath = texturePath;
         this.isNaturallyBuildable = isNaturallyBuildable;
     }
 
     public Texture getTexture() {
+        if (texture == null) {
+            this.texture = new Texture(texturePath);
+        }
         return texture;
     }
 

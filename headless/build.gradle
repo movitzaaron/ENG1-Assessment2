@@ -14,8 +14,9 @@ if (JavaVersion.current().isJava9Compatible()) {
  * directory during testing, similarly to the lwjgl3 project.
  */
 sourceSets.test.resources.srcDirs += [ rootProject.file('assets').path ]
+sourceSets.main.resources.srcDirs += [ rootProject.file('assets').path ]
 
-mainClassName = 'uk.ac.york.cs.eng1.gemo.headless.HeadlessLauncher'
+mainClassName = 'com.spacecomplexiy.longboilife.headless.HeadlessLauncher'
 application.setMainClass(mainClassName)
 eclipse.project.name = appName + '-headless'
 

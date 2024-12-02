@@ -6,6 +6,7 @@ import com.spacecomplexity.longboilife.game.building.BuildingType;
 import com.spacecomplexity.longboilife.game.globals.Constants;
 import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.globals.MainTimer;
+import com.spacecomplexity.longboilife.game.scenarios.DuckDeath;
 import com.spacecomplexity.longboilife.game.tile.InvalidSaveMapException;
 import com.spacecomplexity.longboilife.game.tile.Tile;
 import com.spacecomplexity.longboilife.game.world.World;
@@ -168,6 +169,16 @@ public class GameLogic {
             // Close the menu
             eventHandler.callEvent(EventHandler.Event.CLOSE_SELECTED_MENU);
 
+            return null;
+        });
+
+        eventHandler.createEvent(EventHandler.Event.DUCK_DEATH_BEGIN, (params) -> {
+            DuckDeath.begin();
+            return null;
+        });
+
+        eventHandler.createEvent(EventHandler.Event.DUCK_DEATH_END, (params) -> {
+            DuckDeath.end();
             return null;
         });
     }

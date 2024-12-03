@@ -4,66 +4,96 @@ import com.spacecomplexity.longboilife.game.utils.EventHandler;
 import com.spacecomplexity.longboilife.game.utils.Timer;
 
 /**
- * Singleton class to contain the duck death timer and relevant begin and end functions.
+ * Singleton class that manages the Duck Death scenario in the game.
+ * Handles a sequence of timed events: beginning and ending the Duck Death state.
+ * Utilizes the {@link Timer} class to control timing and {@link EventHandler}
+ * to trigger relevant game events.
  */
 public class DuckDeath {
+    // Singleton instance of the DuckDeath class
     public static final DuckDeath duckDeath = new DuckDeath();
 
+    // Timer to manage the start of the Duck Death event
     private final Timer startTimer;
+
+    // Timer to manage the end of the Duck Death event
     private final Timer endTimer;
 
+    /**
+     * Private constructor to enforce the singleton pattern.
+     * Initializes the start and end timers and sets up their events.
+     */
     private DuckDeath() {
         startTimer = new Timer();
         endTimer = new Timer();
 
+        // Register events for the start and end of the Duck Death sequence
         EventHandler.getEventHandler().createEvent(EventHandler.Event.DUCK_DEATH_BEGIN, DuckDeath::begin);
         EventHandler.getEventHandler().createEvent(EventHandler.Event.DUCK_DEATH_END, DuckDeath::end);
 
-        // Setup timer, example time
+        // Configure the start timer to trigger after 3 seconds
         startTimer.setTimer(3 * 1000);
         startTimer.setEvent(() -> {
             System.out.println("Duck timer over");
+            // Trigger the "begin" event for Duck Death
             EventHandler.getEventHandler().callEvent(EventHandler.Event.DUCK_DEATH_BEGIN);
         });
 
-        // set the end timer to start and have it go on for 5 seconds
+        // Configure the end timer to trigger after 5 seconds (recurring)
         endTimer.setTimer(5 * 1000, true);
         endTimer.setEvent(() -> {
             System.out.println("Duck timer over");
+            // Trigger the "end" event for Duck Death
             EventHandler.getEventHandler().callEvent(EventHandler.Event.DUCK_DEATH_END);
         });
     }
 
-    public static Object begin(Object... params){
-        // do something
+    /**
+     * Event handler for the start of the Duck Death scenario.
+     *
+     * @param params Optional parameters (unused in this implementation).
+     * @return Always returns null.
+     */
+    public static Object begin(Object... params) {
         System.out.println("Duck Death has occurred");
+        // Resume the end timer to ensure the scenario completes
         duckDeath.endTimer.resumeTimer();
-
         return null;
     }
 
-    public static Object end(Object... params){
-        // do something
+    /**
+     * Event handler for the end of the Duck Death scenario.
+     *
+     * @param params Optional parameters (unused in this implementation).
+     * @return Always returns null.
+     */
+    public static Object end(Object... params) {
         System.out.println("Duck Death has ended");
         return null;
     }
 
     /**
-     * Get the singleton instance of the {@link DuckDeath} class.
+     * Retrieve the start timer.
      *
-     * @return The single {@link DuckDeath} class.
+     * @return The timer managing the start of the Duck Death event.
      */
-
-    public static DuckDeath getDuckDeath() {return duckDeath;}
-
-    public Timer getStartTimer() {
+    private Timer getStartTimer() {
         return startTimer;
     }
 
-    public Timer getEndTimer() {
+    /**
+     * Retrieve the end timer.
+     *
+     * @return The timer managing the end of the Duck Death event.
+     */
+    private Timer getEndTimer() {
         return endTimer;
     }
 
+    /**
+     * Polls the state of the timers. Checks if the start timer has finished,
+     * and if so, also polls the end timer.
+     */
     public static void poll() {
         if (duckDeath.getStartTimer().poll()) {
             duckDeath.getEndTimer().poll();

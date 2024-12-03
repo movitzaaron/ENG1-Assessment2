@@ -1,6 +1,5 @@
 package com.spacecomplexity.longboilife.game.scenarios;
 
-import com.spacecomplexity.longboilife.game.utils.EventHandler;
 import com.spacecomplexity.longboilife.game.utils.Timer;
 
 /**

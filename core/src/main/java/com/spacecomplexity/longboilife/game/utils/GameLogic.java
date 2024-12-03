@@ -30,11 +30,20 @@ public class GameLogic {
             throw new RuntimeException(e);
         }
 
+        EventHandler eventHandler = EventHandler.getEventHandler();
+
         // Create a new timer for 5 minutes
         MainTimer.getTimerManager().getTimer().setTimer(5 * 60 * 1000);
         MainTimer.getTimerManager().getTimer().setEvent(() -> {
-            EventHandler.getEventHandler().callEvent(EventHandler.Event.GAME_END);
+            eventHandler.callEvent(EventHandler.Event.GAME_END);
         });
+
+        DuckDeath.getDuckDeath().getTimer().setTimer(3*1000);
+        DuckDeath.getDuckDeath().getTimer().setEvent(() -> {
+            System.out.println("Duck timer over");
+           eventHandler.callEvent(EventHandler.Event.DUCK_DEATH_BEGIN);
+        });
+
 
         // Initialise the events performed from this script.
         initialiseEvents();

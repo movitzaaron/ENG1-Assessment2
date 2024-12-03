@@ -146,7 +146,7 @@ public class GameScreen implements Screen {
         ui.render();
 
         // Poll the Duck Death timer to run the event if the timer has expired
-        DuckDeath.getDuckDeath().getTimer().poll();
+        DuckDeath.poll();
 
         // Poll the timer to run the event if the timer has expired
         // Do not update satisfaction score if the game is paused or has ended

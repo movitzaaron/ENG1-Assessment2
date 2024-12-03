@@ -29,9 +29,16 @@ public class Timer {
      * @param duration duration of timer in ms.
      */
     public void setTimer(long duration) {
+        setTimer(duration, false);
+    }
+
+    public void setTimer(long duration, boolean paused) {
         finishTime = System.currentTimeMillis() + duration;
-        paused = false;
         eventCalled = false;
+
+        if (paused) {
+            pauseTimer();
+        }
     }
 
     /**
@@ -92,10 +99,8 @@ public class Timer {
                 event.run();
                 eventCalled = true;
             }
-            
             return true;
         }
-
         return false;
     }
 }

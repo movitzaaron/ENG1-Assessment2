@@ -21,9 +21,6 @@ import com.spacecomplexity.longboilife.game.ui.UIManager;
 import com.spacecomplexity.longboilife.game.utils.*;
 import com.spacecomplexity.longboilife.game.world.World;
 
-import java.io.FileNotFoundException;
-import java.util.Arrays;
-
 
 /**
  * Main class to control the game logic.

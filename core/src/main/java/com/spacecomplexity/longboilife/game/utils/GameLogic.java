@@ -33,9 +33,7 @@ public class GameLogic {
 
         // Create a new timer for 5 minutes
         MainTimer.getTimerManager().getTimer().setTimer(5 * 60 * 1000);
-        MainTimer.getTimerManager().getTimer().setEvent(() -> {
-            eventHandler.callEvent(EventHandler.Event.GAME_END);
-        });
+        MainTimer.getTimerManager().getTimer().setEvent(() -> eventHandler.callEvent(EventHandler.Event.GAME_END));
 
         // Initialise the events performed from this script.
         initialiseEvents();

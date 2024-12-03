@@ -16,6 +16,7 @@ import com.spacecomplexity.longboilife.game.globals.Constants;
 import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.globals.MainCamera;
 import com.spacecomplexity.longboilife.game.globals.MainTimer;
+import com.spacecomplexity.longboilife.game.scenarios.DuckDeath;
 import com.spacecomplexity.longboilife.game.ui.UIManager;
 import com.spacecomplexity.longboilife.game.utils.*;
 import com.spacecomplexity.longboilife.game.world.World;
@@ -146,6 +147,9 @@ public class GameScreen implements Screen {
 
         // Render the UI
         ui.render();
+
+        // Poll the Duck Death timer to run the event if the timer has expired
+        DuckDeath.getDuckDeath().getTimer().poll();
 
         // Poll the timer to run the event if the timer has expired
         // Do not update satisfaction score if the game is paused or has ended

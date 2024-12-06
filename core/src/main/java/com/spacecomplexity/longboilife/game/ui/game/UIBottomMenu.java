@@ -100,7 +100,6 @@ public class UIBottomMenu extends UIElement {
             GameState.getState().paused = true;
             // Pause the timer
             MainTimer.getTimerManager().getTimer().pauseTimer();
-            DuckDeath.pauseTimers();
             // Cancel all actions
             eventHandler.callEvent(EventHandler.Event.CANCEL_OPERATIONS);
             // Disable all UI but the pause button
@@ -117,7 +116,6 @@ public class UIBottomMenu extends UIElement {
             GameState.getState().paused = false;
             // Resume the timer
             MainTimer.getTimerManager().getTimer().resumeTimer();
-            DuckDeath.resumeTimers();
             // Re enable all UI
             UIUtils.enableAllActors(parentTable.getStage());
             // Change background to ❚❚

@@ -94,16 +94,26 @@ public class DuckDeath {
         return endTimer;
     }
 
+    /**
+     * Pause both timers if they are currently going
+     */
     public static void pauseTimers(){
-        duckDeath.getStartTimer().pauseTimer();
+        if (!duckDeath.getStartTimer().isPaused()){
+            duckDeath.getStartTimer().pauseTimer();
+        }
         if (!duckDeath.getEndTimer().isPaused()) {
             duckDeath.getEndTimer().pauseTimer();
         }
     }
 
+    /**
+     * Resume both timers if they were previously
+     */
     public static void resumeTimers(){
-        duckDeath.getStartTimer().resumeTimer();
-        if (duckDeath.getStartTimer().poll()) {
+        if (duckDeath.getStartTimer().isPaused()){
+            duckDeath.getStartTimer().resumeTimer();
+        }
+        if (duckDeath.getStartTimer().poll() && duckDeath.getEndTimer().isPaused()) {
             duckDeath.getEndTimer().resumeTimer();
         }}
 
@@ -114,6 +124,12 @@ public class DuckDeath {
     public static void poll() {
         if (duckDeath.getStartTimer().poll()) {
             duckDeath.getEndTimer().poll();
+        }
+        if (GameState.getState().paused){
+            DuckDeath.pauseTimers();
+        }
+        else{
+            DuckDeath.resumeTimers();
         }
     }
 }

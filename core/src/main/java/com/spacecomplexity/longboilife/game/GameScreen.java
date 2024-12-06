@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
@@ -30,6 +31,7 @@ public class GameScreen implements Screen {
 
     private final SpriteBatch batch;
     private final ShapeRenderer shapeRenderer;
+    private final BitmapFont font;
     private UIManager ui;
     private InputManager inputManager;
 
@@ -46,6 +48,7 @@ public class GameScreen implements Screen {
         // Initialise SpriteBatch and ShapeRender for rendering
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
+        font = new BitmapFont();
     }
 
     /**

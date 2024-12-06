@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.spacecomplexity.longboilife.game.building.BuildingCategory;
 import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.globals.MainTimer;
+import com.spacecomplexity.longboilife.game.scenarios.DuckDeath;
 import com.spacecomplexity.longboilife.game.ui.UIElement;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
 import com.spacecomplexity.longboilife.game.utils.UIUtils;
@@ -99,6 +100,7 @@ public class UIBottomMenu extends UIElement {
             GameState.getState().paused = true;
             // Pause the timer
             MainTimer.getTimerManager().getTimer().pauseTimer();
+            DuckDeath.pauseTimers();
             // Cancel all actions
             eventHandler.callEvent(EventHandler.Event.CANCEL_OPERATIONS);
             // Disable all UI but the pause button
@@ -115,6 +117,7 @@ public class UIBottomMenu extends UIElement {
             GameState.getState().paused = false;
             // Resume the timer
             MainTimer.getTimerManager().getTimer().resumeTimer();
+            DuckDeath.resumeTimers();
             // Re enable all UI
             UIUtils.enableAllActors(parentTable.getStage());
             // Change background to ❚❚

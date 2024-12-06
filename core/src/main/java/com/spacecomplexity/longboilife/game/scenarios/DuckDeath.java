@@ -1,5 +1,6 @@
 package com.spacecomplexity.longboilife.game.scenarios;
 
+import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
 import com.spacecomplexity.longboilife.game.utils.Timer;
 
@@ -56,6 +57,8 @@ public class DuckDeath {
      */
     public static Object begin(Object... params) {
         System.out.println("Duck Death has occurred");
+        GameState.getState().duckDeathAlert = true;
+        EventHandler.getEventHandler().callEvent(EventHandler.Event.CANCEL_OPERATIONS);
         // Resume the end timer to ensure the scenario completes
         duckDeath.endTimer.resumeTimer();
         return null;
@@ -69,6 +72,7 @@ public class DuckDeath {
      */
     public static Object end(Object... params) {
         System.out.println("Duck Death has ended");
+        GameState.getState().duckDeathAlert = false;
         return null;
     }
 
@@ -89,6 +93,19 @@ public class DuckDeath {
     private Timer getEndTimer() {
         return endTimer;
     }
+
+    public static void pauseTimers(){
+        duckDeath.getStartTimer().pauseTimer();
+        if (!duckDeath.getEndTimer().isPaused()) {
+            duckDeath.getEndTimer().pauseTimer();
+        }
+    }
+
+    public static void resumeTimers(){
+        duckDeath.getStartTimer().resumeTimer();
+        if (duckDeath.getStartTimer().poll()) {
+            duckDeath.getEndTimer().resumeTimer();
+        }}
 
     /**
      * Polls the state of the timers. Checks if the start timer has finished,

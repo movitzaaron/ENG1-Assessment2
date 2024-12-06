@@ -1,5 +1,6 @@
 package com.spacecomplexity.longboilife.game.scenarios;
 
+import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
 import com.spacecomplexity.longboilife.game.utils.Timer;
 
@@ -90,12 +91,37 @@ public class SkeletonScenario {
     }
 
     /**
+     * Pause both timers if they are currently going
+     */
+    public static void pauseTimers(){
+        skeletonScenario.getStartTimer().pauseTimer();
+        if (!skeletonScenario.getEndTimer().isPaused()) {
+            skeletonScenario.getEndTimer().pauseTimer();
+        }
+    }
+
+    /**
+     * Resume both timers if they were previously
+     */
+    public static void resumeTimers(){
+        skeletonScenario.getStartTimer().resumeTimer();
+        if (skeletonScenario.getStartTimer().poll()) {
+            skeletonScenario.getEndTimer().resumeTimer();
+        }}
+
+    /**
      * Polls the state of the timers. Checks if the start timer has finished,
      * and if so, also polls the end timer.
      */
     public static void poll() {
         if (skeletonScenario.getStartTimer().poll()) {
             skeletonScenario.getEndTimer().poll();
+        }
+        if (GameState.getState().paused){
+            SkeletonScenario.pauseTimers();
+        }
+        else{
+            SkeletonScenario.resumeTimers();
         }
     }
 }

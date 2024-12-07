@@ -18,7 +18,6 @@ public class PathwayTextures {
         CORNER,
         TJUNC,
         CROSS,
-        ;
     }
 
     /**

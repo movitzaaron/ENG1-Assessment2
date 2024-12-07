@@ -15,6 +15,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.ui.game.*;
 import com.spacecomplexity.longboilife.game.ui.gameover.UIOverview;
+import com.spacecomplexity.longboilife.game.ui.scenario.UIScenario;
+import com.spacecomplexity.longboilife.game.ui.scenario.UIThreeOption;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
 
 /**
@@ -74,7 +76,8 @@ public class UIManager {
             new UISatisfactionMenu(viewport, table, skin),
             new UIMoneyMenu(viewport, table, skin),
             new UIBuildingCounter(viewport, table, skin),
-            new UIScenario(viewport, table, skin)
+//            new UIScenario(viewport, table, skin)
+            new UIThreeOption(viewport, table, skin)
         };
 
         // Hide game UI and show end UI

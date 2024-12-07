@@ -24,21 +24,21 @@ public class PathwayTextures {
      * Map containing the file paths for each texture.
      * This map is initialized with all possible BuildingType and Type combinations.
      */
-    private static final HashMap<BuildingType, HashMap<Type, String>> texturePaths = new HashMap<BuildingType, HashMap<Type, String>>() {{
-        put(BuildingType.ROAD, new HashMap<Type, String>() {{
-            put(Type.STRAIGHT, "buildings/roads/straight.png");
-            put(Type.CORNER, "buildings/roads/corner.png");
-            put(Type.TJUNC, "buildings/roads/3-way.png");
-            put(Type.CROSS, "buildings/roads/4-way.png");
-        }});
-        // Add more BuildingTypes and their corresponding texture paths here
+    private static final HashMap<BuildingType, HashMap<Type, String>> texturePaths = new HashMap<>() {{
+      put(BuildingType.ROAD, new HashMap<>() {{
+        put(Type.STRAIGHT, "buildings/roads/straight.png");
+        put(Type.CORNER, "buildings/roads/corner.png");
+        put(Type.TJUNC, "buildings/roads/3-way.png");
+        put(Type.CROSS, "buildings/roads/4-way.png");
+      }});
+      // Add more BuildingTypes and their corresponding texture paths here
     }};
 
     /**
      * Map containing the loaded textures.
      * Textures are loaded and stored here on demand.
      */
-    private static final HashMap<BuildingType, HashMap<Type, Texture>> textureList = new HashMap<BuildingType, HashMap<Type, Texture>>();
+    private static final HashMap<BuildingType, HashMap<Type, Texture>> textureList = new HashMap<>();
 
     /**
      * Retrieves the texture for the specified BuildingType and Type.
@@ -57,7 +57,7 @@ public class PathwayTextures {
         }
 
         if (typeMap == null) {
-            typeMap = new HashMap<Type, Texture>();
+            typeMap = new HashMap<>();
             textureList.put(buildingType, typeMap);
         }
 

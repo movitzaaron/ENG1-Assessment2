@@ -6,7 +6,6 @@ import com.spacecomplexity.longboilife.game.building.BuildingType;
 import com.spacecomplexity.longboilife.game.globals.Constants;
 import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.globals.MainTimer;
-import com.spacecomplexity.longboilife.game.scenarios.DuckDeath;
 import com.spacecomplexity.longboilife.game.tile.InvalidSaveMapException;
 import com.spacecomplexity.longboilife.game.tile.Tile;
 import com.spacecomplexity.longboilife.game.world.World;

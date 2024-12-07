@@ -1,4 +1,4 @@
-package com.spacecomplexity.longboilife.game.ui.game;
+package com.spacecomplexity.longboilife.game.ui.scenario;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -37,7 +37,7 @@ public class UIScenario extends UIElement {
         button.setColor(Color.RED);
         button.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                GameState.getState().duckDeathAlert = false;
+//                GameState.getState().duckDeathAlert = false;
             }
         });
 
@@ -54,7 +54,7 @@ public class UIScenario extends UIElement {
     }
 
     public void render() {
-        table.setVisible(GameState.getState().duckDeathAlert);
+//        table.setVisible(GameState.getState().duckDeathAlert);
     }
 
     @Override

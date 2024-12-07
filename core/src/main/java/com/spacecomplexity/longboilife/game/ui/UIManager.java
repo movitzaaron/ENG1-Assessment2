@@ -15,7 +15,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.ui.game.*;
 import com.spacecomplexity.longboilife.game.ui.gameover.UIOverview;
-import com.spacecomplexity.longboilife.game.ui.scenario.UIScenario;
 import com.spacecomplexity.longboilife.game.ui.scenario.UIThreeOption;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
 
@@ -23,9 +22,9 @@ import com.spacecomplexity.longboilife.game.utils.EventHandler;
  * Class to manage the UI in the game.
  */
 public class UIManager {
-    private Viewport viewport;
+    private final Viewport viewport;
 
-    private Stage stage;
+    private final Stage stage;
     private final Skin skin;
 
     private UIElement[] uiElements;

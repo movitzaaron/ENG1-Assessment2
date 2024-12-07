@@ -119,11 +119,6 @@ public class GameState {
     public boolean satisfactionModifierPositive = false;
 
     /**
-     * If the duck death alert should be on screen
-     */
-    public boolean duckDeathAlert = false;
-
-    /**
      * If the game has ended
      */
     public boolean gameOver = false;
@@ -160,7 +155,6 @@ public class GameState {
         buildingsCount = new HashMap<>();
         satisfactionScoreVelocity = 0;
         satisfactionModifierPositive = false;
-        duckDeathAlert = false;
         gameOver = false;
     }
 }

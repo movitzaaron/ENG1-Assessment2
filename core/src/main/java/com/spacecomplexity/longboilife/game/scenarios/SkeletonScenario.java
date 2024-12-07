@@ -11,7 +11,7 @@ import com.spacecomplexity.longboilife.game.utils.Timer;
  * to trigger relevant game events.
  */
 public class SkeletonScenario {
-    // Singleton instance of the SkeletonScenario class
+    // Singleton instance of the SkeletonScenario classSkeletonScenario
     public static final SkeletonScenario skeletonScenario = new SkeletonScenario();
 
     // Timer to manage the start of the Skeleton Scenario event
@@ -32,14 +32,14 @@ public class SkeletonScenario {
         endTimer = new Timer();
 
         // Register events for the start and end of the Skeleton Scenario sequence
-//        EventHandler.getEventHandler().createEvent(EventHandler.Event.SKELETON_SCENARIO_START, SkeletonScenario::begin);
+//        EventHandler.getEventHandler().createEvent(EventHandler.Event.SKELETON_SCENARIO_BEGIN, SkeletonScenario::begin);
 //        EventHandler.getEventHandler().createEvent(EventHandler.Event.SKELETON_SCENARIO_END, SkeletonScenario::end);
 
         // Configure the start timer to trigger after 3 seconds
         startTimer.setTimer(startTime);
         startTimer.setEvent(() -> {
             // Trigger the "begin" event for Skeleton Scenario
-//            EventHandler.getEventHandler().callEvent(EventHandler.Event.SKELETON_SCENARIO_START);
+//            EventHandler.getEventHandler().callEvent(EventHandler.Event.SKELETON_SCENARIO_BEGIN);
         });
 
         // Configure the end timer to trigger after 5 seconds (recurring)

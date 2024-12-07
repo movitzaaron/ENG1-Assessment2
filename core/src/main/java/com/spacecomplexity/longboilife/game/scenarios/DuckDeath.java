@@ -19,6 +19,8 @@ public class DuckDeath {
 
     // Timer to manage the end of the Duck Death event
     private final Timer endTimer;
+    private int result;
+    private boolean showUI = false;
 
     /**
      * Private constructor to enforce the singleton pattern.
@@ -33,7 +35,7 @@ public class DuckDeath {
         EventHandler.getEventHandler().createEvent(EventHandler.Event.DUCK_DEATH_END, DuckDeath::end);
 
         // Configure the start timer to trigger after 3 seconds
-        startTimer.setTimer(3 * 1000);
+        startTimer.setTimer(1 * 1000);
         startTimer.setEvent(() -> {
             System.out.println("Duck timer over");
             // Trigger the "begin" event for Duck Death
@@ -41,7 +43,7 @@ public class DuckDeath {
         });
 
         // Configure the end timer to trigger after 5 seconds (recurring)
-        endTimer.setTimer(5 * 1000, true);
+        endTimer.setTimer(20 * 1000, true);
         endTimer.setEvent(() -> {
             System.out.println("Duck timer over");
             // Trigger the "end" event for Duck Death
@@ -57,7 +59,7 @@ public class DuckDeath {
      */
     public static Object begin(Object... params) {
         System.out.println("Duck Death has occurred");
-        GameState.getState().duckDeathAlert = true;
+        duckDeath.showUI = true;
         EventHandler.getEventHandler().callEvent(EventHandler.Event.CANCEL_OPERATIONS);
         // Resume the end timer to ensure the scenario completes
         duckDeath.endTimer.resumeTimer();
@@ -72,8 +74,12 @@ public class DuckDeath {
      */
     public static Object end(Object... params) {
         System.out.println("Duck Death has ended");
-        GameState.getState().duckDeathAlert = false;
+        duckDeath.showUI = false;
         return null;
+    }
+
+    public static DuckDeath getDuckDeath() {
+        return duckDeath;
     }
 
     /**
@@ -131,5 +137,18 @@ public class DuckDeath {
         else{
             DuckDeath.resumeTimers();
         }
+    }
+
+    public void setResult(int result) {
+        this.result = result;
+        System.out.println(result);
+    }
+
+    public void setShowUI(boolean bool) {
+        this.showUI = bool;
+    }
+
+    public boolean isShowUI() {
+        return showUI;
     }
 }

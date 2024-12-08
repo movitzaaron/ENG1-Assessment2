@@ -19,8 +19,6 @@ public class DuckDeath {
 
     // Timer to manage the end of the Duck Death event
     private final Timer endTimer;
-    private int result;
-    private boolean showUI = false;
 
     /**
      * Private constructor to enforce the singleton pattern.
@@ -30,25 +28,13 @@ public class DuckDeath {
         startTimer = new Timer();
         endTimer = new Timer();
 
-        // Register events for the start and end of the Duck Death sequence
-        EventHandler.getEventHandler().createEvent(EventHandler.Event.DUCK_DEATH_BEGIN, DuckDeath::begin);
-        EventHandler.getEventHandler().createEvent(EventHandler.Event.DUCK_DEATH_END, DuckDeath::end);
-
         // Configure the start timer to trigger after 3 seconds
-        startTimer.setTimer(1 * 1000);
-        startTimer.setEvent(() -> {
-            System.out.println("Duck timer over");
-            // Trigger the "begin" event for Duck Death
-            EventHandler.getEventHandler().callEvent(EventHandler.Event.DUCK_DEATH_BEGIN);
-        });
+        startTimer.setTimer(10 * 1000);
+        startTimer.setEvent(DuckDeath::begin);
 
         // Configure the end timer to trigger after 5 seconds (recurring)
         endTimer.setTimer(20 * 1000, true);
-        endTimer.setEvent(() -> {
-            System.out.println("Duck timer over");
-            // Trigger the "end" event for Duck Death
-            EventHandler.getEventHandler().callEvent(EventHandler.Event.DUCK_DEATH_END);
-        });
+        endTimer.setEvent(DuckDeath::end);
     }
 
     /**
@@ -59,8 +45,8 @@ public class DuckDeath {
      */
     public static Object begin(Object... params) {
         System.out.println("Duck Death has occurred");
-        duckDeath.showUI = true;
-        EventHandler.getEventHandler().callEvent(EventHandler.Event.CANCEL_OPERATIONS);
+
+        EventHandler.getEventHandler().callEvent(EventHandler.Event.PAUSE_GAME);
         // Resume the end timer to ensure the scenario completes
         duckDeath.endTimer.resumeTimer();
         return null;
@@ -74,12 +60,7 @@ public class DuckDeath {
      */
     public static Object end(Object... params) {
         System.out.println("Duck Death has ended");
-        duckDeath.showUI = false;
         return null;
-    }
-
-    public static DuckDeath getDuckDeath() {
-        return duckDeath;
     }
 
     /**
@@ -137,18 +118,5 @@ public class DuckDeath {
         else{
             DuckDeath.resumeTimers();
         }
-    }
-
-    public void setResult(int result) {
-        this.result = result;
-        System.out.println(result);
-    }
-
-    public void setShowUI(boolean bool) {
-        this.showUI = bool;
-    }
-
-    public boolean isShowUI() {
-        return showUI;
     }
 }

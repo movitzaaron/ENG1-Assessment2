@@ -4,18 +4,18 @@ import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
 import com.spacecomplexity.longboilife.game.utils.Timer;
 
-public class GrantScenario {
-    public static final GrantScenario grantScenario = new GrantScenario();
+public class DuckScenario {
+    public static final DuckScenario duckScenario = new DuckScenario();
 
     private final Timer timer;
 
-    private GrantScenario() {
+    private DuckScenario() {
         timer = new Timer();
 
-        timer.setTimer(1000 * 2);
+        timer.setTimer(1000 * 16);
         timer.setEvent(() -> {
             EventHandler.getEventHandler().callEvent(EventHandler.Event.PAUSE_GAME);
-            EventHandler.getEventHandler().callEvent(EventHandler.Event.GRANT_SCENARIO_DIALOG);
+            EventHandler.getEventHandler().callEvent(EventHandler.Event.DUCK_SCENARIO_DIALOG);
         });
     }
 
@@ -32,8 +32,8 @@ public class GrantScenario {
      * Pause both timers if they are currently going
      */
     public static void pauseTimers(){
-        if (!grantScenario.getTimer().isPaused()){
-            grantScenario.getTimer().pauseTimer();
+        if (!duckScenario.getTimer().isPaused()){
+            duckScenario.getTimer().pauseTimer();
         }
     }
 
@@ -41,8 +41,8 @@ public class GrantScenario {
      * Resume both timers if they were previously
      */
     public static void resumeTimers() {
-        if (grantScenario.getTimer().isPaused()) {
-            grantScenario.getTimer().resumeTimer();
+        if (duckScenario.getTimer().isPaused()) {
+            duckScenario.getTimer().resumeTimer();
         }
     }
 
@@ -51,12 +51,12 @@ public class GrantScenario {
      * and if so, also polls the end timer.
      */
     public static void poll() {
-        grantScenario.getTimer().poll();
+        duckScenario.getTimer().poll();
         if (GameState.getState().paused){
-            GrantScenario.pauseTimers();
+            DuckScenario.pauseTimers();
         }
         else {
-            GrantScenario.resumeTimers();
+            DuckScenario.resumeTimers();
         }
     }
 }

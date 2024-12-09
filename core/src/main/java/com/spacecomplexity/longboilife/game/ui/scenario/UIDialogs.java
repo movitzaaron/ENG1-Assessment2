@@ -39,6 +39,7 @@ public class UIDialogs extends UIElement {
             @Override
             protected void result(Object object) {
                 System.out.println("Dialog choice: " + object);
+                EventHandler.getEventHandler().callEvent(EventHandler.Event.RESUME_GAME);
                 // can call another event here that has access to more of the game variables,
                 // passing in the result (object)
             }

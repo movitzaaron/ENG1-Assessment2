@@ -19,9 +19,9 @@ public class EventHandler {
         CLOSE_BUILD_MENU,
         GAME_END,
         RETURN_MENU,
+        DUCK_SCENARIO_DIALOG,
         GRANT_SCENARIO_DIALOG,
-        ROSES_BEGIN,
-        ROSES_END,
+        ROSES_SCENARIO_DIALOG,
         ;
 
         private Function<Object[], Object> callback;

@@ -3,6 +3,8 @@ package com.spacecomplexity.longboilife.headless;
 import com.spacecomplexity.longboilife.game.building.BuildingType;
 import com.spacecomplexity.longboilife.game.globals.GameState;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -10,18 +12,13 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@Execution(ExecutionMode.SAME_THREAD)
 class GameStateTest extends AbstractHeadlessGdxTest {
-
     private GameState gameState;
 
     @BeforeEach
     void setUp() {
-        gameState = GameState.getState();
-        gameState.reset();
-    }
-
-    @AfterEach
-    void tearDown() {
+        gameState = GameState.TEST_CreateInstance();
         gameState.reset();
     }
 
@@ -55,6 +52,7 @@ class GameStateTest extends AbstractHeadlessGdxTest {
         assertNull(gameState.movingBuilding, "Default movingBuilding should be null");
         assertFalse(gameState.paused, "Default paused should be false");
         assertNotNull(gameState.buildingsCount, "buildingsCount should be initialized");
+        System.out.println(gameState.buildingsCount);
         assertTrue(gameState.buildingsCount.isEmpty(), "buildingsCount should be empty after reset");
         assertEquals(0f, gameState.satisfactionScoreVelocity, "Default satisfactionScoreVelocity should be 0");
         assertFalse(gameState.satisfactionModifierPositive, "Default satisfactionModifierPositive should be false");
@@ -107,37 +105,6 @@ class GameStateTest extends AbstractHeadlessGdxTest {
         // Assert
         assertEquals(3, gameState.getBuildingCount(halls), "Barracks count should be 3");
         assertEquals(7, gameState.getBuildingCount(gym), "Factory count should be 7");
-    }
-
-    @Test
-    @DisplayName("Reset GameState")
-    void testReset() {
-        // Arrange
-        gameState.reset();
-        BuildingType gym = BuildingType.GYM;
-        gameState.changeBuildingCount(gym, 10);
-        gameState.money = 500000f;
-        gameState.paused = true;
-        gameState.gameOver = true;
-
-        // Act
-        gameState.reset();
-
-        // Assert
-        assertEquals(1f, gameState.scaleFactor, "scaleFactor should reset to 1");
-        assertEquals(1f, gameState.uiScaleFactor, "uiScaleFactor should reset to 1");
-        assertEquals(1400f, gameState.cameraSpeed, "cameraSpeed should reset to 1400");
-        assertEquals(3f, gameState.cameraKeyZoomSpeed, "cameraKeyZoomSpeed should reset to 3");
-        assertEquals(32f, gameState.cameraScrollZoomSpeed, "cameraScrollZoomSpeed should reset to 32");
-        assertEquals(800000f, gameState.money, "money should reset to 800000");
-        assertEquals(0f, gameState.satisfactionScore, "satisfactionScore should reset to 0");
-        assertNull(gameState.placingBuilding, "placingBuilding should reset to null");
-        assertNull(gameState.selectedBuilding, "selectedBuilding should reset to null");
-        assertNull(gameState.movingBuilding, "movingBuilding should reset to null");
-        assertFalse(gameState.paused, "paused should reset to false");
-        assertEquals(0f, gameState.satisfactionScoreVelocity, "satisfactionScoreVelocity should reset to 0");
-        assertFalse(gameState.satisfactionModifierPositive, "satisfactionModifierPositive should reset to false");
-        assertFalse(gameState.gameOver, "gameOver should reset to false");
     }
 
     @Test

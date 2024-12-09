@@ -11,6 +11,10 @@ import java.util.HashMap;
 public class GameState {
     private static final GameState gameState = new GameState();
 
+    public static GameState TEST_CreateInstance() {
+        return new GameState();
+    }
+
     /**
      * The current scale factor of game for rendering.
      */

@@ -92,10 +92,14 @@ public class Timer {
                 event.run();
                 eventCalled = true;
             }
-            
+
             return true;
         }
 
         return false;
     }
+
+    public Runnable getEvent() { return this.event;}
+
+    public boolean getEventCalled() { return this.eventCalled; }
 }

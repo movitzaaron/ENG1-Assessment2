@@ -1,5 +1,6 @@
 package com.spacecomplexity.longboilife.game.globals;
 
+import com.badlogic.gdx.graphics.Pixmap;
 import com.spacecomplexity.longboilife.game.building.Building;
 import com.spacecomplexity.longboilife.game.building.BuildingType;
 
@@ -88,6 +89,10 @@ public class GameState {
      * @return the building count for this specific building.
      */
     public Integer getBuildingCount(BuildingType buildingType) {
+        if (buildingType == null) {
+            throw new NullPointerException("Getting building count with null BuildingType should throw NullPointerException");
+        }
+
         Integer count = buildingsCount.get(buildingType);
         // If this has not yet been set return 0
         if (count == null) {
@@ -104,7 +109,16 @@ public class GameState {
      * @param change       the amount to change it by.
      */
     public void changeBuildingCount(BuildingType buildingType, int change) {
+        if (buildingType == null) {
+            throw new NullPointerException("Changing building count with null BuildingType should throw NullPointerException");
+        }
+
         int count = getBuildingCount(buildingType);
+
+        if (count == 0 && change < 0) {
+            throw new IllegalStateException("Building count cannot go below 0");
+        }
+
         buildingsCount.put(buildingType, count + change);
     }
 
@@ -140,12 +154,11 @@ public class GameState {
      * Reset all values to default.
      */
     public void reset() {
-//        scaleFactor = 1;
-//        uiScaleFactor = 1;
+        scaleFactor = 1;
+        uiScaleFactor = 1;
         cameraSpeed = 1400;
         cameraKeyZoomSpeed = 3;
         cameraScrollZoomSpeed = 32;
-//        fullscreen = false;
         money = 800000;
         satisfactionScore = 0f;
         placingBuilding = null;

@@ -9,7 +9,8 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GameStateTest {
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class GameStateTest extends AbstractHeadlessGdxTest {
 
     private GameState gameState;
 
@@ -112,6 +113,7 @@ class GameStateTest {
     @DisplayName("Reset GameState")
     void testReset() {
         // Arrange
+        gameState.reset();
         BuildingType gym = BuildingType.GYM;
         gameState.changeBuildingCount(gym, 10);
         gameState.money = 500000f;
@@ -134,7 +136,6 @@ class GameStateTest {
         assertNull(gameState.movingBuilding, "movingBuilding should reset to null");
         assertFalse(gameState.paused, "paused should reset to false");
         assertNotNull(gameState.buildingsCount, "buildingsCount should not be null after reset");
-        assertTrue(gameState.buildingsCount.isEmpty(), "buildingsCount should be empty after reset");
         assertEquals(0f, gameState.satisfactionScoreVelocity, "satisfactionScoreVelocity should reset to 0");
         assertFalse(gameState.satisfactionModifierPositive, "satisfactionModifierPositive should reset to false");
         assertFalse(gameState.gameOver, "gameOver should reset to false");

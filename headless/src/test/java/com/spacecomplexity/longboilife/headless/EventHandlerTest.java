@@ -3,12 +3,12 @@ package com.spacecomplexity.longboilife.headless;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Function;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class EventHandlerTest {
 
     private EventHandler eventHandler;
@@ -16,6 +16,13 @@ class EventHandlerTest {
     @BeforeEach
     void setUp() {
         eventHandler = EventHandler.getEventHandler();
+    }
+
+    @AfterEach
+    void tearDown() {
+        for (EventHandler.Event event : EventHandler.Event.values()) {
+            EventHandler.getEventHandler().createEvent(event, null);
+        }
     }
 
     @Test

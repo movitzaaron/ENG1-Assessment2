@@ -1,6 +1,5 @@
 package com.spacecomplexity.longboilife.game.globals;
 
-import com.badlogic.gdx.graphics.Pixmap;
 import com.spacecomplexity.longboilife.game.building.Building;
 import com.spacecomplexity.longboilife.game.building.BuildingType;
 

@@ -37,7 +37,7 @@ public class Timer {
         if (duration < 0) {
             duration = 0;
             paused = true;
-        };
+        }
         finishTime = System.currentTimeMillis() + duration;
         eventCalled = false;
 

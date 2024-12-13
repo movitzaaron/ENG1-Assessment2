@@ -18,7 +18,7 @@ public class UIBuildingCounter extends UIElement {
     private Label counterLabel;
 
     /**
-     * Initialise clock menu elements.
+     * Initialise Building Counter menu elements.
      *
      * @param uiViewport  the viewport used to render UI.
      * @param parentTable the table to render this element onto.

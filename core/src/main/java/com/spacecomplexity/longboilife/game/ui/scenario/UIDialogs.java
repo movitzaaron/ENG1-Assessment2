@@ -3,6 +3,8 @@ package com.spacecomplexity.longboilife.game.ui.scenario;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.spacecomplexity.longboilife.game.GameScreen;
+import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.ui.UIElement;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
 
@@ -19,16 +21,18 @@ public class UIDialogs extends UIElement {
         this.skin = skin;
         this.stage = stage;
 
+        EventHandler eventHandler = EventHandler.getEventHandler();
+
         // Test Dialog
-        EventHandler.getEventHandler().createEvent(EventHandler.Event.DUCK_SCENARIO_DIALOG, (p) -> {
+        eventHandler.createEvent(EventHandler.Event.DUCK_SCENARIO_DIALOG, (p) -> {
             duckDialog();
             return null;
         });
-        EventHandler.getEventHandler().createEvent(EventHandler.Event.GRANT_SCENARIO_DIALOG, (p) -> {
+        eventHandler.createEvent(EventHandler.Event.GRANT_SCENARIO_DIALOG, (p) -> {
             grantDialog();
             return null;
         });
-        EventHandler.getEventHandler().createEvent(EventHandler.Event.ROSES_SCENARIO_DIALOG, (p) -> {
+        eventHandler.createEvent(EventHandler.Event.ROSES_SCENARIO_DIALOG, (p) -> {
             rosesDialog();
             return null;
         });
@@ -60,11 +64,6 @@ public class UIDialogs extends UIElement {
         label.setWrap(true);
 
         // Add the label to the dialog's content table
-        dialog.getContentTable().add(label).width(500).pad(10); // You can adjust width as needed
-
-
-        // Add the scroll pane as the content of the dialog
-        dialog.getContentTable().clear(); // Clear existing content
         dialog.getContentTable().add(label).width(500).height(300).pad(10); // You can adjust the size
 
         dialog.button("Refuse grant", 0);
@@ -80,8 +79,9 @@ public class UIDialogs extends UIElement {
             protected void result(Object object) {
                 System.out.println("Dialog choice: " + object);
                 EventHandler.getEventHandler().callEvent(EventHandler.Event.RESUME_GAME);
-                // can call another event here that has access to more of the game variables,
-                // passing in the result (object)
+                if(object.equals(0)){
+                    GameState.getState().money = GameState.getState().money - 1000;
+                }
             }
         };
 
@@ -99,8 +99,8 @@ public class UIDialogs extends UIElement {
         dialog.getContentTable().clear(); // Clear existing content
         dialog.getContentTable().add(label).width(500).height(300).pad(10); // You can adjust the size
 
-        dialog.button("duck button 0", 0);
-        dialog.button("duck button 1", 1);
+        dialog.button("Nurse the duck back to life", 0);
+        dialog.button("Let duck die", 1);
 
         // Show the dialog
         dialog.show(stage);

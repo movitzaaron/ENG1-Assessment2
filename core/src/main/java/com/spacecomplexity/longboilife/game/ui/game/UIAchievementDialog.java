@@ -14,6 +14,10 @@ public class UIAchievementDialog extends UIElement {
     private final Stage stage;
     private final String title = "You unlocked an achievement!";
 
+    /**
+     * A UI class that creates dialogs to display achievements
+     */
+
     public UIAchievementDialog(Viewport uiViewport, Table parentTable, Skin skin, Stage stage) {
         super(uiViewport, parentTable, skin);
         this.skin = skin;
@@ -39,6 +43,9 @@ public class UIAchievementDialog extends UIElement {
     protected void placeTable() {
     }
 
+    /**
+     * Dialog for the 'broke' achievement
+     */
     private void brokeDialog() {
         Dialog dialog = new Dialog(title, skin);
 
@@ -57,6 +64,9 @@ public class UIAchievementDialog extends UIElement {
         dialog.show(stage);
     }
 
+    /**
+     * Dialog for the 'satisfied' achievement
+     */
     private void satisfiedDialog() {
         Dialog dialog = new Dialog(title, skin);
 

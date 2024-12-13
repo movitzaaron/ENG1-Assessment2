@@ -3,7 +3,6 @@ name: Measure coverage
 on:
   pull_request:
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,3 +30,7 @@ jobs:
           paths: |
             ${{ github.workspace }}/headless/build/reports/jacoco/**/jacocoTestReport.xml
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Echo test coverage result
+        run: |
+          echo "Coverage = ${{ steps.jacoco.outputs.coverage-overall }}"

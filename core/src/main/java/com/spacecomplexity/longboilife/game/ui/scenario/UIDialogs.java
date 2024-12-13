@@ -3,6 +3,7 @@ package com.spacecomplexity.longboilife.game.ui.scenario;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.ui.UIElement;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
 
@@ -47,6 +48,11 @@ public class UIDialogs extends UIElement {
             @Override
             protected void result(Object object) {
                 System.out.println("Dialog choice: " + object);
+                if (object.equals(1)){
+                    GameState.getState().money += 800000; // Current amount player starts with,
+                                                          // unsure if this is sufficient.
+                }
+
                 EventHandler.getEventHandler().callEvent(EventHandler.Event.RESUME_GAME);
                 // can call another event here that has access to more of the game variables,
                 // passing in the result (object)

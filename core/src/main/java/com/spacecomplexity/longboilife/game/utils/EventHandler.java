@@ -19,15 +19,21 @@ public class EventHandler {
         CLOSE_BUILD_MENU,
         GAME_END,
         RETURN_MENU,
+        DUCK_SCENARIO_DIALOG,
+        GRANT_SCENARIO_DIALOG,
+        ROSES_SCENARIO_DIALOG,
         ;
 
-        private Function<Object[], Object> callback;
+        private Function<Object[], Object> callback = null;
 
         private void setCallback(Function<Object[], Object> callback) {
             this.callback = callback;
         }
 
         private Function<Object[], Object> getCallback() {
+            if (callback == null) {
+                return null;
+            }
             return callback;
         }
     }

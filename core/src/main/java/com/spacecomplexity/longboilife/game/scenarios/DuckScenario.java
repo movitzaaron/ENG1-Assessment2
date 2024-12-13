@@ -1,0 +1,62 @@
+package com.spacecomplexity.longboilife.game.scenarios;
+
+import com.spacecomplexity.longboilife.game.globals.GameState;
+import com.spacecomplexity.longboilife.game.utils.EventHandler;
+import com.spacecomplexity.longboilife.game.utils.Timer;
+
+public class DuckScenario {
+    public static final DuckScenario duckScenario = new DuckScenario();
+
+    private final Timer timer;
+
+    private DuckScenario() {
+        timer = new Timer();
+
+        timer.setTimer(1000 * 16);
+        timer.setEvent(() -> {
+            EventHandler.getEventHandler().callEvent(EventHandler.Event.PAUSE_GAME);
+            EventHandler.getEventHandler().callEvent(EventHandler.Event.DUCK_SCENARIO_DIALOG);
+        });
+    }
+
+    /**
+     * Retrieve the start timer.
+     *
+     * @return The timer managing the start of the Duck Death event.
+     */
+    private Timer getTimer() {
+        return timer;
+    }
+
+    /**
+     * Pause both timers if they are currently going
+     */
+    public static void pauseTimers(){
+        if (!duckScenario.getTimer().isPaused()){
+            duckScenario.getTimer().pauseTimer();
+        }
+    }
+
+    /**
+     * Resume both timers if they were previously
+     */
+    public static void resumeTimers() {
+        if (duckScenario.getTimer().isPaused()) {
+            duckScenario.getTimer().resumeTimer();
+        }
+    }
+
+    /**
+     * Polls the state of the timers. Checks if the start timer has finished,
+     * and if so, also polls the end timer.
+     */
+    public static void poll() {
+        duckScenario.getTimer().poll();
+        if (GameState.getState().paused){
+            DuckScenario.pauseTimers();
+        }
+        else {
+            DuckScenario.resumeTimers();
+        }
+    }
+}

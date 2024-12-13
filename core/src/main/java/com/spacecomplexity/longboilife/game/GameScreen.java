@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
@@ -16,12 +17,11 @@ import com.spacecomplexity.longboilife.game.globals.Constants;
 import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.globals.MainCamera;
 import com.spacecomplexity.longboilife.game.globals.MainTimer;
+import com.spacecomplexity.longboilife.game.scenarios.DuckScenario;
+import com.spacecomplexity.longboilife.game.scenarios.GrantScenario;
 import com.spacecomplexity.longboilife.game.ui.UIManager;
 import com.spacecomplexity.longboilife.game.utils.*;
 import com.spacecomplexity.longboilife.game.world.World;
-
-import java.io.FileNotFoundException;
-import java.util.Arrays;
 
 
 /**
@@ -32,6 +32,7 @@ public class GameScreen implements Screen {
 
     private final SpriteBatch batch;
     private final ShapeRenderer shapeRenderer;
+    private final BitmapFont font;
     private UIManager ui;
     private InputManager inputManager;
 
@@ -48,6 +49,7 @@ public class GameScreen implements Screen {
         // Initialise SpriteBatch and ShapeRender for rendering
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
+        font = new BitmapFont();
     }
 
     /**
@@ -146,6 +148,10 @@ public class GameScreen implements Screen {
 
         // Render the UI
         ui.render();
+
+        // Poll the Duck Death timer to run the event if the timer has expired
+        DuckScenario.poll();
+        GrantScenario.poll();
 
         // Poll the timer to run the event if the timer has expired
         // Do not update satisfaction score if the game is paused or has ended

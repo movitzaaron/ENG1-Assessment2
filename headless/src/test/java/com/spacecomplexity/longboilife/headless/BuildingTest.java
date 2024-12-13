@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BuildingTest extends AbstractHeadlessGdxTest {
-
     @BeforeAll
     public void setUp() {
         // No initialization needed

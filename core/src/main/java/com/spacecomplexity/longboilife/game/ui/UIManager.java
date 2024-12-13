@@ -15,15 +15,16 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.ui.game.*;
 import com.spacecomplexity.longboilife.game.ui.gameover.UIOverview;
+import com.spacecomplexity.longboilife.game.ui.scenario.UIDialogs;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
 
 /**
  * Class to manage the UI in the game.
  */
 public class UIManager {
-    private Viewport viewport;
+    private final Viewport viewport;
 
-    private Stage stage;
+    private final Stage stage;
     private final Skin skin;
 
     private UIElement[] uiElements;
@@ -74,6 +75,7 @@ public class UIManager {
             new UISatisfactionMenu(viewport, table, skin),
             new UIMoneyMenu(viewport, table, skin),
             new UIBuildingCounter(viewport, table, skin),
+            new UIDialogs(viewport, table, skin, stage),
         };
 
         // Hide game UI and show end UI

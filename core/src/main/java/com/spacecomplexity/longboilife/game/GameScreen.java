@@ -24,7 +24,6 @@ import com.spacecomplexity.longboilife.game.ui.UIManager;
 import com.spacecomplexity.longboilife.game.utils.*;
 import com.spacecomplexity.longboilife.game.world.World;
 
-import javax.imageio.stream.FileCacheImageInputStream;
 
 
 /**
@@ -35,7 +34,6 @@ public class GameScreen implements Screen {
 
     private final SpriteBatch batch;
     private final ShapeRenderer shapeRenderer;
-    private final BitmapFont font;
     private UIManager ui;
     private InputManager inputManager;
     private AchievementManager achievementManager;
@@ -53,7 +51,6 @@ public class GameScreen implements Screen {
         // Initialise SpriteBatch and ShapeRender for rendering
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
-        font = new BitmapFont();
     }
 
     /**

@@ -1,6 +1,5 @@
 package com.spacecomplexity.longboilife.game.utils;
 
-import com.badlogic.gdx.Game;
 import com.spacecomplexity.longboilife.game.globals.GameState;
 
 public class AchievementManager {

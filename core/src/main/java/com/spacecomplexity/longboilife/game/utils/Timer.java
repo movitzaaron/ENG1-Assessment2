@@ -103,4 +103,8 @@ public class Timer {
         }
         return false;
     }
+
+    public Runnable getEvent() { return this.event;}
+
+    public boolean getEventCalled() { return this.eventCalled; }
 }

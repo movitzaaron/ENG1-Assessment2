@@ -49,4 +49,8 @@ public enum TileType {
     public void dispose() {
         texture.dispose();
     }
+
+    public String getTexturePath() {
+        return texturePath;
+    }
 }

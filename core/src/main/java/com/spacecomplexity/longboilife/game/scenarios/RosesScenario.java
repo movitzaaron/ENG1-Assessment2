@@ -12,7 +12,7 @@ public class RosesScenario {
     private RosesScenario() {
         timer = new Timer();
 
-        timer.setTimer(1000 * 8);
+        timer.setTimer(4 * 60 * 1000);
         timer.setEvent(() -> {
             EventHandler.getEventHandler().callEvent(EventHandler.Event.PAUSE_GAME);
             EventHandler.getEventHandler().callEvent(EventHandler.Event.ROSES_SCENARIO_DIALOG);

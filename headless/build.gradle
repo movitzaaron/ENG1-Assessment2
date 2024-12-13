@@ -51,8 +51,16 @@ tasks.register('dist') {
 
 // CHANGED: need to tell Gradle about our use of JUnit and have JaCoCo look at core sources
 jacocoTestReport {
-    sourceSets project(':core').sourceSets.main
+  dependsOn test
+  sourceSets project(':core').sourceSets.main
+  dependsOn test
+
+  reports {
+    xml.required = true
+    html.required = true
+  }
 }
+
 
 test {
   useJUnitPlatform()
@@ -72,4 +80,5 @@ test {
       events "passed", "skipped", "failed"
     }
   }
+  finalizedBy jacocoTestReport
 }

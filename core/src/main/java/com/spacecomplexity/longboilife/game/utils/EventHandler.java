@@ -22,6 +22,8 @@ public class EventHandler {
         DUCK_SCENARIO_DIALOG,
         GRANT_SCENARIO_DIALOG,
         ROSES_SCENARIO_DIALOG,
+        BROKE_ACHIEVEMENT_DIALOG,
+        SATISFIED_ACHIEVEMENT_DIALOG,
         ;
 
         private Function<Object[], Object> callback = null;

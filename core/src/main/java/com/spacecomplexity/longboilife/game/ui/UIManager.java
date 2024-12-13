@@ -76,6 +76,7 @@ public class UIManager {
             new UIMoneyMenu(viewport, table, skin),
             new UIBuildingCounter(viewport, table, skin),
             new UIDialogs(viewport, table, skin, stage),
+            new UIAchievementDialog(viewport, table, skin, stage),
         };
 
         // Hide game UI and show end UI

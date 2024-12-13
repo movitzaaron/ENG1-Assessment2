@@ -12,7 +12,7 @@ public class GrantScenario {
     private GrantScenario() {
         timer = new Timer();
 
-        timer.setTimer(1000 * 2);
+        timer.setTimer(2 * 60 * 1000);
         timer.setEvent(() -> {
             EventHandler.getEventHandler().callEvent(EventHandler.Event.PAUSE_GAME);
             EventHandler.getEventHandler().callEvent(EventHandler.Event.GRANT_SCENARIO_DIALOG);

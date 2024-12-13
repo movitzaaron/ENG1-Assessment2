@@ -4,7 +4,6 @@ on:
   pull_request:
   push:
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,4 +34,4 @@ jobs:
 
       - name: Echo test coverage result
         run: |
-          echo "Coverage = ${{ steps.jacoco.output.coverage-overall }}"
+          echo "Coverage = ${{ steps.jacoco.outputs.coverage-overall }}"

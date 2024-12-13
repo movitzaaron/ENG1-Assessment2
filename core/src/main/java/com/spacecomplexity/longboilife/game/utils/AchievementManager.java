@@ -2,15 +2,22 @@ package com.spacecomplexity.longboilife.game.utils;
 
 import com.spacecomplexity.longboilife.game.globals.GameState;
 
+/**
+ * Class to manage achievements
+ */
 public class AchievementManager {
 
     // Give each achievement a boolean value signifying whether the achievement has been unlocked
     public boolean broke = false;
     public boolean satisfied = false;
 
+    /**
+     * Check the game state against the conditions of each achievement and call the event if necessary
+     */
     public void poll(){
         GameState gameState = GameState.getState();
         EventHandler eventHandler = EventHandler.getEventHandler();
+
         if (!broke && gameState.money == 0){
             broke = true;
             eventHandler.callEvent(EventHandler.Event.BROKE_ACHIEVEMENT_DIALOG);

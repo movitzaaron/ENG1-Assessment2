@@ -33,6 +33,11 @@ public class Timer {
     }
 
     public void setTimer(long duration, boolean paused) {
+        // If duration given is invalid, instantiates timer to 0ms and paused.
+        if (duration < 0) {
+            duration = 0;
+            paused = true;
+        };
         finishTime = System.currentTimeMillis() + duration;
         eventCalled = false;
 
@@ -103,8 +108,6 @@ public class Timer {
         }
         return false;
     }
-
-    public Runnable getEvent() { return this.event;}
 
     public boolean getEventCalled() { return this.eventCalled; }
 }

@@ -3,7 +3,7 @@ package com.spacecomplexity.longboilife.game.utils;
 import java.util.function.Function;
 
 /**
- * CLass to manage events which can be called from anywhere within the game.
+ * Class to manage events which can be called from anywhere within the game.
  */
 public class EventHandler {
     public enum Event {

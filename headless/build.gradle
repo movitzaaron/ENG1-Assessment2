@@ -53,6 +53,23 @@ tasks.register('dist') {
 jacocoTestReport {
     sourceSets project(':core').sourceSets.main
 }
+
 test {
-    useJUnitPlatform()
+  useJUnitPlatform()
+  testLogging {
+    // Set options for log level LIFECYCLE
+    events "passed", "skipped", "failed"
+    exceptionFormat "short"
+
+    // Set options for log level DEBUG
+    debug {
+      events "started", "passed", "skipped", "failed"
+      exceptionFormat "full"
+    }
+
+    // Set options for log level INFO
+    info {
+      events "passed", "skipped", "failed"
+    }
+  }
 }

@@ -11,7 +11,7 @@ public class ScoreSave {
     /**
      * Accesses preferences file if it exists, otherwise creates it.
      */
-    private Preferences scores = Gdx.app.getPreferences("playerScores");
+    private final Preferences scores = Gdx.app.getPreferences("playerScores");
 
     /**
      * <p>Updates playerScores preferences file:</p>

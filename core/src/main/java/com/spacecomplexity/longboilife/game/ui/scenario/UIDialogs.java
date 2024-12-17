@@ -3,6 +3,7 @@ package com.spacecomplexity.longboilife.game.ui.scenario;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.spacecomplexity.longboilife.game.building.BuildingType;
 import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.ui.UIElement;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
@@ -23,6 +24,10 @@ public class UIDialogs extends UIElement {
         EventHandler eventHandler = EventHandler.getEventHandler();
 
         // Test Dialog
+        eventHandler.createEvent(EventHandler.Event.TUTORIAL_DIALOG, (p) -> {
+            tutorialDialog();
+            return null;
+        });
         eventHandler.createEvent(EventHandler.Event.DUCK_SCENARIO_DIALOG, (p) -> {
             duckDialog();
             return null;
@@ -43,6 +48,39 @@ public class UIDialogs extends UIElement {
 
     @Override
     protected void placeTable() {
+    }
+
+    private void tutorialDialog() {
+        Dialog dialog = new Dialog("Welcome to Longboi Life.", skin) {
+            @Override
+            protected void result(Object object) {
+                System.out.println("Dialog choice: " + object);
+                if (object.equals(0)){
+                    //Enables the tutorial
+                    GameState.getState().money += 800000;
+
+                }
+
+                EventHandler.getEventHandler().callEvent(EventHandler.Event.RESUME_GAME);
+                // Resumes the game,
+            }
+        };
+
+        // Create a Label with text wrapping enabled
+        Label label = new Label("Thank you for playing Longboi Life ! \n\n" +
+            "If you have not played the game before. We recommend enabling the tutorial!", skin);
+
+        // Set the label to wrap text
+        label.setWrap(true);
+
+        // Add the label to the dialog's content table
+        dialog.getContentTable().add(label).width(500).height(300).pad(10); // You can adjust the size
+
+        dialog.button("Enable tutorial", 0);
+        dialog.button("Disable tutorial", 1);
+
+        // Show the dialog
+        dialog.show(stage);
     }
 
     private void grantDialog() {
@@ -112,19 +150,34 @@ public class UIDialogs extends UIElement {
 
 
     private void rosesDialog() {
-        Dialog dialog = new Dialog("Roses", skin) {
+        Dialog dialog = new Dialog("Roses!", skin) {
             @Override
             protected void result(Object object) {
                 System.out.println("Dialog choice: " + object);
+                if(object.equals(1)){
+                    if(GameState.getState().satisfactionScore > 0.3 && GameState.getState().getBuildingCount(BuildingType.GYM) >= 2 ) {
+                        GameState.getState().money += 200000;
+                        GameState.getState().satisfactionScore += 10;
+                    } else {
+                        GameState.getState().money -= 100000;
+                        GameState.getState().satisfactionScore -= 10;
+                    }
+
+                }
                 EventHandler.getEventHandler().callEvent(EventHandler.Event.RESUME_GAME);
-                // can call another event here that has access to more of the game variables,
-                // passing in the result (object)
+                // Resumes game
             }
         };
 
         // Create a Label with text wrapping enabled
-        Label label = new Label("rosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhiterosesarewhite", skin);
-
+        Label label = new Label(
+            "Your rival University has challenged you to a prestigious sports competition!\n\n" +
+                "With over 47 individual sports on display, this event will test your students' fitness, teamwork, and determination to the limit.\n\n" +
+                "Rumors suggest that universities with strong sports facilities and highly motivated students often fare better in such challenges...\n\n" +
+                "The victorious university will receive a £200,000 reward, but beware.... failure will cost you £100,000!\n\n" +
+                "Are your students ready to rise to the occasion and bring glory to your university?",
+            skin
+        );
         // Set the label to wrap text
         label.setWrap(true);
 

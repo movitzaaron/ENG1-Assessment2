@@ -4,21 +4,21 @@ import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
 import com.spacecomplexity.longboilife.game.utils.Timer;
 
-public class RosesScenario {
-    public static final RosesScenario rosesScenario = new RosesScenario();
+public class TutorialScenario {
+    public static final TutorialScenario tutorialScenario = new TutorialScenario();
 
     private final Timer timer;
 
-    private RosesScenario() {
+    private TutorialScenario() {
         timer = new Timer();
         /*
           Creates a countdown timer until the fixed event
           Calls the events that the scenario uses
          */
-        timer.setTimer(4 * 60 * 1000);
+        timer.setTimer(1000);
         timer.setEvent(() -> {
             EventHandler.getEventHandler().callEvent(EventHandler.Event.PAUSE_GAME);
-            EventHandler.getEventHandler().callEvent(EventHandler.Event.ROSES_SCENARIO_DIALOG);
+            EventHandler.getEventHandler().callEvent(EventHandler.Event.TUTORIAL_DIALOG);
         });
     }
 
@@ -35,8 +35,8 @@ public class RosesScenario {
      * Pause both timers if they are currently going
      */
     public static void pauseTimers(){
-        if (!rosesScenario.getTimer().isPaused()){
-            rosesScenario.getTimer().pauseTimer();
+        if (!tutorialScenario.getTimer().isPaused()){
+            tutorialScenario.getTimer().pauseTimer();
         }
     }
 
@@ -44,8 +44,8 @@ public class RosesScenario {
      * Resume both timers if they were previously paused
      */
     public static void resumeTimers() {
-        if (rosesScenario.getTimer().isPaused()) {
-            rosesScenario.getTimer().resumeTimer();
+        if (tutorialScenario.getTimer().isPaused()) {
+            tutorialScenario.getTimer().resumeTimer();
         }
     }
 
@@ -54,12 +54,12 @@ public class RosesScenario {
      * and if so, also polls the end timer.
      */
     public static void poll() {
-        rosesScenario.getTimer().poll();
+        tutorialScenario.getTimer().poll();
         if (GameState.getState().paused){
-            RosesScenario.pauseTimers();
+            TutorialScenario.pauseTimers();
         }
         else {
-            RosesScenario.resumeTimers();
+            TutorialScenario.resumeTimers();
         }
     }
 }

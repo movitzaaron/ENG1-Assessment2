@@ -24,6 +24,7 @@ public class EventHandler {
         ROSES_SCENARIO_DIALOG,
         BROKE_ACHIEVEMENT_DIALOG,
         SATISFIED_ACHIEVEMENT_DIALOG,
+        TUTORIAL_DIALOG,
         ;
 
         private Function<Object[], Object> callback = null;

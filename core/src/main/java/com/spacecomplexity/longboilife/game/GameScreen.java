@@ -20,6 +20,7 @@ import com.spacecomplexity.longboilife.game.globals.MainTimer;
 import com.spacecomplexity.longboilife.game.scenarios.DuckScenario;
 import com.spacecomplexity.longboilife.game.scenarios.GrantScenario;
 import com.spacecomplexity.longboilife.game.scenarios.RosesScenario;
+import com.spacecomplexity.longboilife.game.scenarios.TutorialScenario;
 import com.spacecomplexity.longboilife.game.ui.UIManager;
 import com.spacecomplexity.longboilife.game.utils.*;
 import com.spacecomplexity.longboilife.game.world.World;
@@ -156,6 +157,7 @@ public class GameScreen implements Screen {
         DuckScenario.poll();
         GrantScenario.poll();
         RosesScenario.poll();
+        TutorialScenario.poll();
 
         // Check if any
         achievementManager.poll();

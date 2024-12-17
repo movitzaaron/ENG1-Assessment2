@@ -11,7 +11,10 @@ public class DuckScenario {
 
     private DuckScenario() {
         timer = new Timer();
-
+        /*
+          Creates a countdown timer until the fixed event
+          Calls the events that the scenario uses
+         */
         timer.setTimer(3 * 60 * 1000);
         timer.setEvent(() -> {
             EventHandler.getEventHandler().callEvent(EventHandler.Event.PAUSE_GAME);
@@ -38,7 +41,7 @@ public class DuckScenario {
     }
 
     /**
-     * Resume both timers if they were previously
+     * Resume both timers if they were previously paused
      */
     public static void resumeTimers() {
         if (duckScenario.getTimer().isPaused()) {

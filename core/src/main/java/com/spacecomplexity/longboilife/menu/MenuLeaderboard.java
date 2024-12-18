@@ -96,6 +96,7 @@ public class MenuLeaderboard implements Screen{
 
     }
 
+    // Disallows input of hidden buttons
     @Override
     public void hide() {
         Gdx.input.setInputProcessor(null);

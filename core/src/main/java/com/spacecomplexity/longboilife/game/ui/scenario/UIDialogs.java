@@ -119,9 +119,8 @@ public class UIDialogs extends UIElement {
             @Override
             protected void result(Object object) {
                 System.out.println("Dialog choice: " + object);
-                if (object.equals(1)){
-                    GameState.getState().money += 500000; // Current amount player starts with,
-                                                          // unsure if this is sufficient.
+                if (object.equals(0)){
+                    GameState.getState().money += 500000; // may need a revise when balancing game
                 }
 
                 EventHandler.getEventHandler().callEvent(EventHandler.Event.RESUME_GAME);
@@ -131,7 +130,9 @@ public class UIDialogs extends UIElement {
         };
 
         // Create a Label with text wrapping enabled
-        Label label = new Label("The university has been awarded a substantial research grant from a renowned foundation to fund groundbreaking projects in various academic fields. This financial boost is expected to enhance the university’s reputation, attract top-tier researchers, and provide students with cutting-edge learning opportunities. The administration is eager to promote this achievement and the university community celebrates the recognition.", skin);
+        Label label = new Label("Congratulations! You've been awarded a financial grant of £500,000 to support your efforts.\n\n" +
+            "We understand that managing resources can be challenging, but this grant is here to help you bounce back and continue building your legacy.\n\n" +
+            "Keep pushing forward, and remember, strategic decisions are the key to success!", skin);
 
         // Set the label to wrap text
         label.setWrap(true);
@@ -139,8 +140,7 @@ public class UIDialogs extends UIElement {
         // Add the label to the dialog's content table
         dialog.getContentTable().add(label).width(500).height(300).pad(10); // You can adjust the size
 
-        dialog.button("Refuse grant", 0);
-        dialog.button("Take grant", 1);
+        dialog.button("Accept grant", 0);
 
         // Show the dialog
         dialog.show(stage);

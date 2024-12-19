@@ -7,59 +7,14 @@ import com.spacecomplexity.longboilife.game.utils.Timer;
 public class GrantScenario {
     public static final GrantScenario grantScenario = new GrantScenario();
 
-    private final Timer timer;
+    private boolean grantTaken = false;
 
-    private GrantScenario() {
-        timer = new Timer();
-        /*
-          Creates a countdown timer until the fixed event
-          Calls the events that the scenario uses
-         */
-        timer.setTimer(2 * 60 * 1000);
-        timer.setEvent(() -> {
+    public void update() {
+        // Check the condition dynamically
+        if (GameState.getState().money <= 200000 && !grantTaken) {
+            grantTaken = true; // Ensure the event is triggered only once
             EventHandler.getEventHandler().callEvent(EventHandler.Event.PAUSE_GAME);
             EventHandler.getEventHandler().callEvent(EventHandler.Event.GRANT_SCENARIO_DIALOG);
-        });
-    }
-
-    /**
-     * Retrieve the start timer.
-     *
-     * @return The timer managing the start of the Duck Death event.
-     */
-    private Timer getTimer() {
-        return timer;
-    }
-
-    /**
-     * Pause both timers if they are currently going
-     */
-    public static void pauseTimers(){
-        if (!grantScenario.getTimer().isPaused()){
-            grantScenario.getTimer().pauseTimer();
-        }
-    }
-
-    /**
-     * Resume both timers if they were previously paused
-     */
-    public static void resumeTimers() {
-        if (grantScenario.getTimer().isPaused()) {
-            grantScenario.getTimer().resumeTimer();
-        }
-    }
-
-    /**
-     * Polls the state of the timers. Checks if the start timer has finished,
-     * and if so, also polls the end timer.
-     */
-    public static void poll() {
-        grantScenario.getTimer().poll();
-        if (GameState.getState().paused){
-            GrantScenario.pauseTimers();
-        }
-        else {
-            GrantScenario.resumeTimers();
         }
     }
 }

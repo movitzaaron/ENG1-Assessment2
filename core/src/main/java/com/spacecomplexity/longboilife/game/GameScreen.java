@@ -155,9 +155,11 @@ public class GameScreen implements Screen {
 
         // Poll the scenario timers to run the event if the timer has expired
         DuckScenario.poll();
-        GrantScenario.poll();
         RosesScenario.poll();
         TutorialScenario.poll();
+
+        // Check player money for grant scenario
+        GrantScenario.grantScenario.update();
 
         // Check if any
         achievementManager.poll();

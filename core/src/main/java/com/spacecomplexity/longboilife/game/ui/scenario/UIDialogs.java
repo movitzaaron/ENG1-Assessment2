@@ -120,7 +120,7 @@ public class UIDialogs extends UIElement {
             protected void result(Object object) {
                 System.out.println("Dialog choice: " + object);
                 if (object.equals(1)){
-                    GameState.getState().money += 800000; // Current amount player starts with,
+                    GameState.getState().money += 500000; // Current amount player starts with,
                                                           // unsure if this is sufficient.
                 }
 

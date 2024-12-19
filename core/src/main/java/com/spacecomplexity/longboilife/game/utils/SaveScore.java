@@ -46,13 +46,17 @@ public class SaveScore {
     }
 
     /**
-     * <p>Gets stored preferences and returns as Hashmap.</p>
+     * <p>Gets preferences and returns as a {@link String} table.</p>
      *
-     * @return {@link HashMap} User's name as {@link String} keys with correlating {@link Integer} scores
+     * @return {@link String} Table of users names and corresponding scores
      */
-    @SuppressWarnings("unchecked")
-    public static HashMap<String, Integer> getScores(){
-      return (HashMap<String, Integer>) scores.get();
+
+    public static String getScores(){
+        StringBuilder scoreStringBuild = new StringBuilder();
+
+        scores.get().forEach( (k, v) -> {scoreStringBuild.append(k).append(" ").append(v.toString()).append("\r\n");});
+
+        return scoreStringBuild.substring(0, scoreStringBuild.length()-1);
     }
 
     /**

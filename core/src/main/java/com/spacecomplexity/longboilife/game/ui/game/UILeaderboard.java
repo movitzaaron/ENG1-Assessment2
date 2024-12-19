@@ -26,42 +26,42 @@ public class UILeaderboard extends UIElement {
      */
     public UILeaderboard(Viewport uiViewport, Table parentTable, Skin skin) {
         super(uiViewport, parentTable, skin);
-
-        // Initialise building label
-        String buildingList = String.join(
-            "\r\n",
-            Arrays.stream(BuildingType.values())
-                .map(BuildingType::getDisplayName)
-                .toArray(String[]::new)
-        );
-        Label buildingLabel = new Label(buildingList, skin);
-        buildingLabel.setFontScale(1f);
-        buildingLabel.setColor(Color.WHITE);
-
-        // Initialise counter label
-        counterLabel = new Label(null, skin);
-        counterLabel.setFontScale(1f);
-        counterLabel.setColor(Color.WHITE);
-
-        // Place labels onto table
-        table.left().padLeft(15).add(buildingLabel);
-        table.add(counterLabel).padLeft(5);
-
-        // Style and place the table
-        table.setBackground(skin.getDrawable("panel1"));
-        table.setSize(100, 110);
-        placeTable();
+//
+//        // Initialise leaderboard label
+//        String leaderboard = String.join(
+//            "\r\n",
+//            Arrays.stream(BuildingType.values())
+//                .map(BuildingType::getDisplayName)
+//                .toArray(String[]::new)
+//        );
+//        Label buildingLabel = new Label(buildingList, skin);
+//        buildingLabel.setFontScale(1f);
+//        buildingLabel.setColor(Color.WHITE);
+//
+//        // Initialise counter label
+//        counterLabel = new Label(null, skin);
+//        counterLabel.setFontScale(1f);
+//        counterLabel.setColor(Color.WHITE);
+//
+//        // Place labels onto table
+//        table.left().padLeft(15).add(buildingLabel);
+//        table.add(counterLabel).padLeft(5);
+//
+//        // Style and place the table
+//        table.setBackground(skin.getDrawable("panel1"));
+//        table.setSize(100, 110);
+//        placeTable();
     }
 
     public void render() {
-        // Get the count of all buildings and display them
-        String buildingCount = String.join(
-            "\r\n",
-            Arrays.stream(BuildingType.values())
-                .map((buildingType -> GameState.getState().getBuildingCount(buildingType).toString()))
-                .toArray(String[]::new)
-        );
-        counterLabel.setText(buildingCount);
+//        // Get the count of all buildings and display them
+//        String buildingCount = String.join(
+//            "\r\n",
+//            Arrays.stream(BuildingType.values())
+//                .map((buildingType -> GameState.getState().getBuildingCount(buildingType).toString()))
+//                .toArray(String[]::new)
+//        );
+//        counterLabel.setText(buildingCount);
     }
 
     @Override

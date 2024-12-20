@@ -31,11 +31,8 @@ public class MenuLeaderboard implements Screen{
     private Stage stage;
     private Skin skin;
 
-    private final HashMap<String, Integer> userScores;
-
     public MenuLeaderboard(Main game){
         this.game = game;
-        userScores = SaveScore.getScores();
 
         // Initialise viewport and drawing elements
         viewport = new FitViewport(640, 480);

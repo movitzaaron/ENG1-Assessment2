@@ -2,9 +2,8 @@ package com.spacecomplexity.longboilife.game.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 /**
  * <p>Class used for saving user scores to a preferences file, "playerScores".</p>
@@ -53,8 +52,40 @@ public class SaveScore {
 
     public static String getScores(){
         StringBuilder scoreStringBuild = new StringBuilder();
-
         scores.get().forEach( (k, v) -> {scoreStringBuild.append(k).append(" ").append(v.toString()).append("\r\n");});
+        return scoreStringBuild.substring(0, scoreStringBuild.length()-1);
+    }
+
+    public static String getTopFive(){
+        StringBuilder scoreStringBuild = new StringBuilder();
+        Map<String, ?> scoreMap= scores.get();
+        LinkedHashMap<String, Integer> sortedScoreMap = new LinkedHashMap<>();
+        ArrayList<Integer> scoreList = new ArrayList<>();
+
+        // create a list of score entries
+        for (Map.Entry<String, ?> entry : scoreMap.entrySet()){
+            scoreList.add(Integer.parseInt(entry.getValue().toString()));
+        }
+
+        // sort the score list in descending order
+        scoreList.sort(Collections.reverseOrder());
+
+        // arrange the k,v pairs according to the list we just ordered
+        for (int num : scoreList){
+            for (Map.Entry<String, ?> entry : scoreMap.entrySet()){
+                if (Integer.parseInt(entry.getValue().toString()) == num){
+                    sortedScoreMap.put(entry.getKey(), num);
+                }
+            }
+        }
+
+        // add the top 5 entries to the StringBuilder
+        int count = 0;
+        for (Map.Entry<String, Integer> entry : sortedScoreMap.entrySet()){
+            if (count == 5) break;
+            scoreStringBuild.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\r\n");
+            count++;
+        }
 
         return scoreStringBuild.substring(0, scoreStringBuild.length()-1);
     }

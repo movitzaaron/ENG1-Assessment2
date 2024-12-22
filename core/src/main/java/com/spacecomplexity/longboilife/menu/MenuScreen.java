@@ -64,6 +64,16 @@ public class MenuScreen implements Screen {
             }
         });
 
+        // Initialise leaderboard button
+        TextButton lbButton = new TextButton("Leaderboard", skin, "round");
+        lbButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                // Switch to leaderboard screen here
+                game.switchScreen(ScreenType.LB);
+            }
+        });
+
         // Initialise exit button
         TextButton exitButton = new TextButton("Exit", skin, "round");
         exitButton.addListener(new ClickListener() {
@@ -74,23 +84,13 @@ public class MenuScreen implements Screen {
             }
         });
 
-        // Initialise leaderboard button
-        TextButton lbButton = new TextButton("Leaderboard", skin, "round");
-        lbButton.addListener(new ClickListener(){
-           @Override
-           public void clicked(InputEvent event, float x, float y){
-               // Switch to leaderboard screen here
-               game.switchScreen(ScreenType.LB);
-           }
-        });
-
         // Add buttons to table
         table.pad(100).right().bottom();
         table.add(playButton);
         table.row();
-        table.add(exitButton).padTop(10);
-        table.row();
         table.add(lbButton).padTop(10);
+        table.row();
+        table.add(exitButton).padTop(10);
 
         // Allows UI to capture touch events
         InputMultiplexer inputMultiplexer = new InputMultiplexer(new MainInputManager(), stage);

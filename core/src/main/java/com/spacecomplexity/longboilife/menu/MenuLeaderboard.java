@@ -3,22 +3,23 @@ package com.spacecomplexity.longboilife.menu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.spacecomplexity.longboilife.Main;
-import com.spacecomplexity.longboilife.Main.ScreenType;
 import com.spacecomplexity.longboilife.MainInputManager;
 import com.spacecomplexity.longboilife.game.utils.SaveScore;
-import java.util.HashMap;
 
 /**
  * Main class to control the leaderboard screen.
@@ -59,9 +60,21 @@ public class MenuLeaderboard implements Screen{
             }
         });
 
-        // Add buttons to table
-        table.pad(100).right().bottom();
-        table.add(backButton);
+        String scores = SaveScore.getTopFive();
+        Label boardLabel = new Label(scores, skin);
+        boardLabel.setFontScale(4f);
+        boardLabel.setColor(Color.WHITE);
+        boardLabel.setAlignment(Align.center);
+
+        // Add the back button with padding to the top-left corner
+        table.add(backButton).pad(10).top().left().width(100).height(50); // Set width and height for button
+
+        // Add an empty row to separate the back button from the label
+        table.row().pad(10);
+
+        // Add the board label, centered in the table
+        table.add(boardLabel).center().expand();
+
 
         // Allows UI to capture touch events
         InputMultiplexer inputMultiplexer = new InputMultiplexer(new MainInputManager(), stage);

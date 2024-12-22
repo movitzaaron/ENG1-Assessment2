@@ -17,6 +17,9 @@ import com.spacecomplexity.longboilife.game.ui.game.*;
 import com.spacecomplexity.longboilife.game.ui.gameover.UIOverview;
 import com.spacecomplexity.longboilife.game.ui.scenario.UIDialogs;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
+import com.spacecomplexity.longboilife.game.utils.SaveScore;
+
+import java.util.UUID;
 
 /**
  * Class to manage the UI in the game.
@@ -94,6 +97,9 @@ public class UIManager {
             uiElements = new UIElement[]{
                 new UIOverview(viewport, table, skin),
             };
+
+            // save the score under a random 8-character username
+            SaveScore.updateScores(UUID.randomUUID().toString().substring(28), (int) GameState.getState().satisfactionScore * 1000);
 
             return null;
         });

@@ -9,12 +9,16 @@ public class GrantScenario {
 
     private boolean grantTaken = false;
 
-    public void update() {
+    private void update() {
         // Check the condition dynamically
         if (GameState.getState().money <= 200000 && !grantTaken) {
             grantTaken = true; // Ensure the event is triggered only once
             EventHandler.getEventHandler().callEvent(EventHandler.Event.PAUSE_GAME);
             EventHandler.getEventHandler().callEvent(EventHandler.Event.GRANT_SCENARIO_DIALOG);
         }
+    }
+
+    public static void poll(){
+        grantScenario.update();
     }
 }

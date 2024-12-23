@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -60,11 +61,14 @@ public class MenuLeaderboard implements Screen{
             }
         });
 
+        // Initialize the leaderboard label
         String scores = SaveScore.getTopFive();
+        BitmapFont font = skin.getFont("font-title"); // use the title font for the leaderboard as it is big on screen
+        Label.LabelStyle labelStyle = new Label.LabelStyle(font, Color.WHITE);
         Label boardLabel = new Label(scores, skin);
-        boardLabel.setFontScale(4f);
-        boardLabel.setColor(Color.WHITE);
+        boardLabel.setStyle(labelStyle);
         boardLabel.setAlignment(Align.center);
+        boardLabel.setFontScale(2f);
 
         // Add the back button with padding to the top-left corner
         table.add(backButton).pad(10).top().left().width(100).height(50); // Set width and height for button

@@ -98,9 +98,6 @@ public class UIManager {
                 new UIOverview(viewport, table, skin),
             };
 
-            // save the score under a random 8-character username
-            SaveScore.updateScores(UUID.randomUUID().toString().substring(28), (int) GameState.getState().satisfactionScore * 1000);
-
             return null;
         });
     }

@@ -27,6 +27,7 @@ public class SaveScore {
      * @param score {@link Integer} User's new score
      */
     public static void updateScores(String user, Integer score){
+        user = user.isBlank() ? "Unknown" : user;
         if (scores.contains(user)) {
             Integer highScore = getUserScore(user);
             if (highScore.compareTo(score) < 0) {

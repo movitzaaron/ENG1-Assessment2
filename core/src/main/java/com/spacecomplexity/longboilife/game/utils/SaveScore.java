@@ -57,7 +57,8 @@ public class SaveScore {
     }
 
     public static String getTopFive(){
-        StringBuilder scoreStringBuild = new StringBuilder();
+        StringBuilder nameStringBuilder = new StringBuilder();
+        StringBuilder scoreStringBuilder = new StringBuilder();
         Map<String, ?> scoreMap= scores.get();
         LinkedHashMap<String, Integer> sortedScoreMap = new LinkedHashMap<>();
         ArrayList<Integer> scoreList = new ArrayList<>();
@@ -83,11 +84,13 @@ public class SaveScore {
         int count = 0;
         for (Map.Entry<String, Integer> entry : sortedScoreMap.entrySet()){
             if (count == 5) break;
-            scoreStringBuild.append(entry.getKey()).append(" ").append(entry.getValue().toString()).append("\r\n");
+            nameStringBuilder.append(entry.getKey()).append("\r\n");
+            scoreStringBuilder.append(entry.getValue().toString()).append("\r\n");
+
             count++;
         }
 
-        return scoreStringBuild.substring(0, scoreStringBuild.length()-1);
+        return nameStringBuilder.append("|").append(scoreStringBuilder).toString();
     }
 
     /**

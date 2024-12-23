@@ -62,22 +62,43 @@ public class MenuLeaderboard implements Screen{
         });
 
         // Initialize the leaderboard label
-        String scores = SaveScore.getTopFive();
+        String[] topFive = SaveScore.getTopFive().split("\\|");
+        String names = topFive[0].substring(0, topFive[0].length() - 2);
+        String scores = topFive[1].substring(0, topFive[1].length() - 2);;
+
         BitmapFont font = skin.getFont("font-title"); // use the title font for the leaderboard as it is big on screen
         Label.LabelStyle labelStyle = new Label.LabelStyle(font, Color.WHITE);
-        Label boardLabel = new Label(scores, skin);
-        boardLabel.setStyle(labelStyle);
-        boardLabel.setAlignment(Align.center);
-        boardLabel.setFontScale(2f);
 
-        // Add the back button with padding to the top-left corner
-        table.add(backButton).pad(10).top().left().width(100).height(50); // Set width and height for button
+        Label title = new Label("Leaderboard", labelStyle);
+        title.setStyle(labelStyle);
+        title.setFontScale(2f);
+        title.setAlignment(Align.center);
 
-        // Add an empty row to separate the back button from the label
+        Label namesLabel = new Label(names, skin);
+        namesLabel.setStyle(labelStyle);
+        namesLabel.setAlignment(Align.left);
+        namesLabel.setFontScale(1.5f);
+
+        Label scoresLabel = new Label(scores, skin);
+        scoresLabel.setStyle(labelStyle);
+        scoresLabel.setAlignment(Align.right);
+        scoresLabel.setFontScale(1.5f);
+
+        Table boardTable = new Table();
+        boardTable.add(namesLabel).pad(20).left().expand();
+        boardTable.add(scoresLabel).pad(20).right().expand();
+        boardTable.setBackground(skin.getDrawable("panel1"));
+
+
+        table.add(title).center();
+
         table.row().pad(10);
 
-        // Add the board label, centered in the table
-        table.add(boardLabel).center().expand();
+        table.add(boardTable).expand();
+
+        table.row().pad(10);
+
+        table.add(backButton).pad(10).bottom().left().width(100).height(50);
 
 
         // Allows UI to capture touch events

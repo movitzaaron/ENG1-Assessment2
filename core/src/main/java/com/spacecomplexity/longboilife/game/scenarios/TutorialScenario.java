@@ -5,7 +5,7 @@ import com.spacecomplexity.longboilife.game.utils.EventHandler;
 import com.spacecomplexity.longboilife.game.utils.Timer;
 
 public class TutorialScenario {
-    public static final TutorialScenario tutorialScenario = new TutorialScenario();
+    public static TutorialScenario tutorialScenario = new TutorialScenario();
 
     private final Timer timer;
 
@@ -61,5 +61,9 @@ public class TutorialScenario {
         else {
             TutorialScenario.resumeTimers();
         }
+    }
+
+    public static void reset() {
+        tutorialScenario = new TutorialScenario();
     }
 }

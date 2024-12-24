@@ -2,10 +2,9 @@ package com.spacecomplexity.longboilife.game.scenarios;
 
 import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
-import com.spacecomplexity.longboilife.game.utils.Timer;
 
 public class GrantScenario {
-    public static final GrantScenario grantScenario = new GrantScenario();
+    public static GrantScenario grantScenario = new GrantScenario();
 
     private boolean grantTaken = false;
 
@@ -20,5 +19,9 @@ public class GrantScenario {
 
     public static void poll(){
         grantScenario.update();
+    }
+
+    public static void reset() {
+        grantScenario = new GrantScenario();
     }
 }

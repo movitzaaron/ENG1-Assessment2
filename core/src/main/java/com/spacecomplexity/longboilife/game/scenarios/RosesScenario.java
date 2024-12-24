@@ -5,7 +5,7 @@ import com.spacecomplexity.longboilife.game.utils.EventHandler;
 import com.spacecomplexity.longboilife.game.utils.Timer;
 
 public class RosesScenario {
-    public static final RosesScenario rosesScenario = new RosesScenario();
+    public static RosesScenario rosesScenario = new RosesScenario();
 
     private final Timer timer;
 
@@ -61,5 +61,9 @@ public class RosesScenario {
         else {
             RosesScenario.resumeTimers();
         }
+    }
+
+    public static void reset() {
+        rosesScenario = new RosesScenario();
     }
 }

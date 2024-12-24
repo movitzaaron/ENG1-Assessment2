@@ -5,7 +5,7 @@ import com.spacecomplexity.longboilife.game.utils.EventHandler;
 import com.spacecomplexity.longboilife.game.utils.Timer;
 
 public class DuckScenario {
-    public static final DuckScenario duckScenario = new DuckScenario();
+    public static DuckScenario duckScenario = new DuckScenario();
 
     private final Timer timer;
 
@@ -61,5 +61,9 @@ public class DuckScenario {
         else {
             DuckScenario.resumeTimers();
         }
+    }
+
+    public static void reset() {
+        duckScenario = new DuckScenario();
     }
 }

@@ -6,9 +6,9 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permission: write-all
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -31,14 +31,15 @@ jobs:
           echo "Extracted Version: $VERSION"
           echo "PROJECT_VERSION=$VERSION" >> $GITHUB_ENV
         shell: bash
-      - name: Build Project
-        run: |
-          ./gradlew lwjgl3:dist
-          ls lwjgl3/build/libs/
       - name: Create Source ZIP
         run: git archive -o source-code.zip HEAD
       - name: Create Source TAR.GZ
         run: git archive --format=tar.gz -o source-code.tar.gz HEAD
+      - name: Build Project
+        run: |
+          ./gradlew lwjgl3:dist
+          ls lwjgl3/build/libs/
+          ls
       - name: Create Release
         run: gh release create "Release v${{ env.PROJECT_VERSION }}" --draft --generate-notes lwjgl3/build/libs/longboi-life-${{ env.PROJECT_VERSION }}.jar source-code.zip source-code.tar.gz
         env:

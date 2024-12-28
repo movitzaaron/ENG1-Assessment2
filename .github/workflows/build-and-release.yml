@@ -6,7 +6,7 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    permission: write-all
+    permissions: write-all
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17

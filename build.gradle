@@ -72,3 +72,9 @@ subprojects {
 }
 
 eclipse.project.name = 'longboi-life' + '-parent'
+
+task printVersion {
+  doLast {
+    println "$projectVersion"
+  }
+}

@@ -18,13 +18,23 @@ jobs:
       # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
-      - name: Extract Project Version
+      # - name: Extract Project Version
+      #   run: |
+      #     VERSION=$(./gradlew printVersion -q)
+      #     echo "PROJECT_VERSION=${VERSION}" >> $GITHUB_ENV
+      #   shell: bash
+      - name: Extract Version from Tag
+        id: extract_version
         run: |
-          VERSION=$(./gradlew printVersion -q)
-          echo "PROJECT_VERSION=${VERSION}" >> $GITHUB_ENV
+          TAG_NAME=${GITHUB_REF#refs/tags/}   # e.g., v0.0.4
+          VERSION=${TAG_NAME#v}               # e.g., 0.0.4
+          echo "Extracted Version: $VERSION"
+          echo "PROJECT_VERSION=$VERSION" >> $GITHUB_ENV
         shell: bash
       - name: Build Project
-        run: ./gradlew lwjgl3:dist
+        run: |
+          ./gradlew lwjgl3:dist
+          ls lwjgl3/build/libs/
       - name: Create Source ZIP
         run: git archive -o source-code.zip HEAD
       - name: Create Source TAR.GZ

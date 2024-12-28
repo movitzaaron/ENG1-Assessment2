@@ -1,8 +1,15 @@
 name: Measure coverage
-
 on:
   pull_request:
-
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+  push:
+    branches:
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,19 +17,16 @@ jobs:
       pull-requests: write
       contents: read
     steps:
-    
       - uses: actions/checkout@v4
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-          
       - name: Run Coverage
         run: |
           chmod +x gradlew
           ./gradlew test
-
       - name: Add coverage to PR
         id: jacoco
         uses: madrapps/jacoco-report@v1.7.1
@@ -30,7 +34,14 @@ jobs:
           paths: |
             ${{ github.workspace }}/headless/build/reports/jacoco/**/jacocoTestReport.xml
           token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Echo test coverage result
         run: |
           echo "Coverage = ${{ steps.jacoco.outputs.coverage-overall }}"
+      - name: Upload raw coverage data as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Coverage report(s) (HTML and XML)
+          path: |
+            headless/build/reports
+            core/build/reports
+          retention-days: 30

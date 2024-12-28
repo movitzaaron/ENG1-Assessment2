@@ -11,7 +11,7 @@ on:
     branches:
       - main
 jobs:
-  Run tests and create coverage report:
+  test-and-coverage-report:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write

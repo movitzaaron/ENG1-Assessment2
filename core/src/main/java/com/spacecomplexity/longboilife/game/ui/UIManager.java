@@ -17,9 +17,6 @@ import com.spacecomplexity.longboilife.game.ui.game.*;
 import com.spacecomplexity.longboilife.game.ui.gameover.UIOverview;
 import com.spacecomplexity.longboilife.game.ui.scenario.UIDialogs;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
-import com.spacecomplexity.longboilife.game.utils.SaveScore;
-
-import java.util.UUID;
 
 /**
  * Class to manage the UI in the game.
@@ -78,8 +75,7 @@ public class UIManager {
             new UISatisfactionMenu(viewport, table, skin),
             new UIMoneyMenu(viewport, table, skin),
             new UIBuildingCounter(viewport, table, skin),
-            new UIDialogs(viewport, table, skin, stage),
-            new UILeaderboard(viewport, table, skin)
+            new UIDialogs(viewport, table, skin, stage)
         };
 
         // Hide game UI and show end UI

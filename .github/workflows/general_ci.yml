@@ -32,8 +32,7 @@ jobs:
       - name: Extract Version from Tag
         id: extract_version
         run: |
-          TAG_NAME=${GITHUB_REF#refs/tags/}   # e.g., v0.0.4
-          VERSION=${TAG_NAME#v}               # e.g., 0.0.4
+          VERSION=${./gradlew printVersion -q}   # e.g., v0.0.4
           echo "Extracted Version: $VERSION"
           echo "PROJECT_VERSION=$VERSION" >> $GITHUB_ENV
         shell: bash

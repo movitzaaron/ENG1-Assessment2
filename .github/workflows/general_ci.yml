@@ -29,10 +29,10 @@ jobs:
         uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
       - name: Build with Gradle Wrapper
         run: ./gradlew build
-      - name: Extract Version from Tag
+      - name: Extract Version from build.gradle (properties.gradle)
         id: extract_version
         run: |
-          VERSION=${./gradlew printVersion -q}   # e.g., v0.0.4
+          VERSION=$(./gradlew printVersion -q)   # e.g., v0.0.4
           echo "Extracted Version: $VERSION"
           echo "PROJECT_VERSION=$VERSION" >> $GITHUB_ENV
         shell: bash

@@ -147,7 +147,7 @@ public class UIDialogs extends UIElement {
     }
 
     private void duckDialog() {
-        Dialog dialog = new Dialog("University Duck has died", skin) {
+        Dialog dialog = new Dialog("University Duck has fallen ill", skin) {
             @Override
             protected void result(Object object) {
                 System.out.println("Dialog choice: " + object);
@@ -159,7 +159,7 @@ public class UIDialogs extends UIElement {
         };
 
         // Create a Label with text wrapping enabled
-        Label label = new Label("yap", skin);
+        Label label = new Label("The beloved university duck has fallen ill! This duck was extremely long for a duck, and images of it have gone viral internationally. The students love the duck and some people come to the campus just to see the duck! You could take it to the vet and make it better, or you could let it die. Which will you choose?", skin);
 
         // Set the label to wrap text
         label.setWrap(true);
@@ -172,8 +172,8 @@ public class UIDialogs extends UIElement {
         dialog.getContentTable().clear(); // Clear existing content
         dialog.getContentTable().add(label).width(500).height(300).pad(10); // You can adjust the size
 
-        dialog.button("Nurse the duck back to life", 0);
-        dialog.button("Let duck die", 1);
+        dialog.button("Spend £1000 taking the duck to the vet", 0);
+        dialog.button("Let the duck die", 1);
 
         // Show the dialog
         dialog.show(stage);
@@ -188,11 +188,11 @@ public class UIDialogs extends UIElement {
                 if(object.equals(1)){
                     if(GameState.getState().satisfactionScore >= 0.3 && GameState.getState().getBuildingCount(BuildingType.GYM) >= 2 ) {
                         GameState.getState().money += 200000;
-                        GameState.getState().satisfactionScore += 0.1;
+                        GameState.getState().satisfactionScore += 0.1f;
                         rosesDialogOutcome(true);
                     } else {
                         GameState.getState().money -= 100000;
-                        GameState.getState().satisfactionScore -= 0.1;
+                        GameState.getState().satisfactionScore -= 0.1f;
                         rosesDialogOutcome(false);
                     }
                 } else {

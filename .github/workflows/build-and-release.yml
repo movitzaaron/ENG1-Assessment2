@@ -39,6 +39,6 @@ jobs:
           ls lwjgl3/build/libs/
           ls
       - name: Create Release
-        run: gh release create "Release v${{ env.PROJECT_VERSION }}" --generate-notes lwjgl3/build/libs/longboi-life-${{ env.PROJECT_VERSION }}.jar source-code.zip source-code.tar.gz
+        run: gh release create "Release v${{ env.PROJECT_VERSION }}" --draft --generate-notes lwjgl3/build/libs/longboi-life-${{ env.PROJECT_VERSION }}.jar source-code.zip source-code.tar.gz
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

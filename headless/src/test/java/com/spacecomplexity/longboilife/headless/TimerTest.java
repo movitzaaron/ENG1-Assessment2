@@ -28,12 +28,15 @@ public class TimerTest extends AbstractHeadlessGdxTest{
     public void testSetTimerAndGetTimeLeft(){
         // Arrange
         Timer timer = new Timer();
+        Timer timer2 = new Timer();
 
         //Act
         timer.setTimer(100);
+        timer2.setTimer(-1);
 
         // Assert
-        assertEquals(timer.getTimeLeft(), 100, "Timer should be set to 100.");
+        assertEquals(100, timer.getTimeLeft(), "Timer should be set to 100.");
+        assertEquals(0, timer2.getTimeLeft(), "Timer should be set to 0 upon invalid input.");
     }
 
     @Test
@@ -42,29 +45,77 @@ public class TimerTest extends AbstractHeadlessGdxTest{
         Timer timer = new Timer();
         Timer timer2 = new Timer();
         Timer timer3 = new Timer();
+        Timer timer4 = new Timer();
 
         // Act
         timer.pauseTimer();
+
         timer3.pauseTimer();
         timer3.resumeTimer();
+
+        timer4.pauseTimer();
+        timer4.pauseTimer();
 
         // Assert
         assertTrue(timer.isPaused(), "Timer should be paused upon calling pauseTimer().");
         assertFalse(timer2.isPaused(), "Timer should not be paused when initialised.");
         assertFalse(timer3.isPaused(), "Timer should not be paused when resumeTimer() is called.");
+        assertTrue(timer4.isPaused(), "Timers that are repeatedly paused should remain so.");
     }
 
     @Test
     public void testPoll() {
         // Arrange
         Timer timer = new Timer();
+        timer.setTimer(100);
+        timer.setEvent(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
+
+        Timer timer2 = new Timer();
+        timer2.setTimer(0);
+        timer2.setEvent(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
+
+        Timer timer3 = new Timer();
+        timer3.setTimer(100);
 
         // Act
 
-
         // Assert
-
-
+        assertFalse(timer.poll(), "Timers with time remaining should not be polled.");
+        assertTrue(timer2.poll(), "Timers with time remaining should be polled.");
+        assertTrue(timer2.poll(), "Timers that have already been polled should always return true.");
+        assertFalse(timer3.poll(), "Timers with no event set should not be polled.");
     }
 
+    @Test
+    public void testGetEventCalled() {
+        // Arrange
+        Timer timer = new Timer();
+        timer.setTimer(100);
+
+        Timer timer2 = new Timer();
+        timer2.setEvent(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
+        timer2.setTimer(0);
+        timer2.poll();
+
+        // Act
+
+        // Assert
+        assertFalse(timer.getEventCalled(), "EventCalled should be false for timers with no event set.");
+        assertTrue(timer2.getEventCalled(), "EventCalled should be true for timers that have been polled.");
+    }
 }

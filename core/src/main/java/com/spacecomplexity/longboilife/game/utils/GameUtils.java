@@ -105,7 +105,7 @@ public class GameUtils {
             satisfactionModifier = Float.MAX_VALUE;
 
             // For every accommodation building
-            for (Building accomidationBuilding : categorisedBuildings.get(BuildingCategory.ACCOMMODATION)) {
+            for (Building accommodationBuilding : categorisedBuildings.get(BuildingCategory.ACCOMMODATION)) {
                 float modifier = 0;
 
                 // Go through each other category of building
@@ -113,7 +113,7 @@ public class GameUtils {
                     float closest = mapMax;
                     // Find the closest of this category of building
                     for (Building building : categorisedBuildings.get(category)) {
-                        float distance = (accomidationBuilding.getPosition().subtract(building.getPosition())).mag();
+                        float distance = (accommodationBuilding.getPosition().subtract(building.getPosition())).mag();
                         if (distance < closest) {
                             closest = distance;
                         }

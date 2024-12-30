@@ -5,14 +5,17 @@ import com.spacecomplexity.longboilife.game.utils.EventHandler;
 import com.spacecomplexity.longboilife.game.utils.Timer;
 
 public class DuckScenario {
-    public static final DuckScenario duckScenario = new DuckScenario();
+    public static DuckScenario duckScenario = new DuckScenario();
 
     private final Timer timer;
 
     private DuckScenario() {
         timer = new Timer();
-
-        timer.setTimer(1000 * 16);
+        /*
+          Creates a countdown timer until the fixed event
+          Calls the events that the scenario uses
+         */
+        timer.setTimer(3 * 60 * 1000);
         timer.setEvent(() -> {
             EventHandler.getEventHandler().callEvent(EventHandler.Event.PAUSE_GAME);
             EventHandler.getEventHandler().callEvent(EventHandler.Event.DUCK_SCENARIO_DIALOG);
@@ -38,7 +41,7 @@ public class DuckScenario {
     }
 
     /**
-     * Resume both timers if they were previously
+     * Resume both timers if they were previously paused
      */
     public static void resumeTimers() {
         if (duckScenario.getTimer().isPaused()) {
@@ -58,5 +61,9 @@ public class DuckScenario {
         else {
             DuckScenario.resumeTimers();
         }
+    }
+
+    public static void reset() {
+        duckScenario = new DuckScenario();
     }
 }

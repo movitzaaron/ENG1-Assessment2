@@ -6,6 +6,10 @@ import com.spacecomplexity.longboilife.game.building.BuildingType;
 import com.spacecomplexity.longboilife.game.globals.Constants;
 import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.globals.MainTimer;
+import com.spacecomplexity.longboilife.game.scenarios.DuckScenario;
+import com.spacecomplexity.longboilife.game.scenarios.GrantScenario;
+import com.spacecomplexity.longboilife.game.scenarios.RosesScenario;
+import com.spacecomplexity.longboilife.game.scenarios.TutorialScenario;
 import com.spacecomplexity.longboilife.game.tile.InvalidSaveMapException;
 import com.spacecomplexity.longboilife.game.tile.Tile;
 import com.spacecomplexity.longboilife.game.world.World;
@@ -34,6 +38,12 @@ public class GameLogic {
         // Create a new timer for 5 minutes
         MainTimer.getTimerManager().getTimer().setTimer(5 * 60 * 1000);
         MainTimer.getTimerManager().getTimer().setEvent(() -> eventHandler.callEvent(EventHandler.Event.GAME_END));
+
+        DuckScenario.reset();
+        GrantScenario.reset();
+        RosesScenario.reset();
+        TutorialScenario.reset();
+
 
         // Initialise the events performed from this script.
         initialiseEvents();

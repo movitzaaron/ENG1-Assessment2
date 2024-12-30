@@ -3,7 +3,7 @@ package com.spacecomplexity.longboilife.game.utils;
 import java.util.function.Function;
 
 /**
- * CLass to manage events which can be called from anywhere within the game.
+ * Class to manage events which can be called from anywhere within the game.
  */
 public class EventHandler {
     public enum Event {
@@ -22,6 +22,9 @@ public class EventHandler {
         DUCK_SCENARIO_DIALOG,
         GRANT_SCENARIO_DIALOG,
         ROSES_SCENARIO_DIALOG,
+        BROKE_ACHIEVEMENT_DIALOG,
+        SATISFIED_ACHIEVEMENT_DIALOG,
+        TUTORIAL_DIALOG,
         ;
 
         private Function<Object[], Object> callback = null;

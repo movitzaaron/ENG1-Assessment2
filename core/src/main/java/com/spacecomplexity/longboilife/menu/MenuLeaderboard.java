@@ -62,9 +62,14 @@ public class MenuLeaderboard implements Screen{
         });
 
         // Initialize the leaderboard label
-        String[] topFive = SaveScore.getTopFive().split("\\|");
-        String names = topFive[0].substring(0, topFive[0].length() - 2);
-        String scores = topFive[1].substring(0, topFive[1].length() - 2);;
+        String topFive = SaveScore.getTopFive();
+        String names = "Nothing to show";
+        String scores = "";
+        if(topFive.length() > 1){
+            String[] topFiveSplit = topFive.split("\\|");
+            names = topFiveSplit[0].substring(0, topFiveSplit[0].length() - 2);
+            scores = topFiveSplit[1].substring(0, topFiveSplit[1].length() - 2);
+        }
 
         BitmapFont font = skin.getFont("font-title"); // use the title font for the leaderboard as it is big on screen
         Label.LabelStyle labelStyle = new Label.LabelStyle(font, Color.WHITE);

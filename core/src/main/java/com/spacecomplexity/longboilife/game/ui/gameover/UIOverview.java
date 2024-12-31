@@ -57,7 +57,7 @@ public class UIOverview extends UIElement {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 // Save the user score
-                SaveScore.updateScores(nameField.getText(), (int) GameState.getState().satisfactionScore * 1000);
+                SaveScore.updateScores(nameField.getText(), Math.round(GameState.getState().satisfactionScore * 1000));
                 // Call the events to return to the menu
                 EventHandler.getEventHandler().callEvent(EventHandler.Event.RETURN_MENU);
             }

@@ -35,7 +35,7 @@ public class BuildingTypeTest extends AbstractHeadlessGdxTest {
         BuildingType greggs = BuildingType.GREGGS;
         assertEquals("Greggs", greggs.getDisplayName(), "GREGGS display name should be 'Greggs'");
         assertEquals("buildings/greggs.png", greggs.getTexturePath(), "GREGGS texture path mismatch");
-        assertEquals(new Vector2Int(2, 2), greggs.getSize(), "GREGGS size mismatch");
+        assertEquals(new Vector2Int(3, 3), greggs.getSize(), "GREGGS size mismatch");
         assertEquals(BuildingCategory.FOOD, greggs.getCategory(), "GREGGS category should be FOOD");
         assertEquals(5000, greggs.getCost(), "GREGGS cost mismatch");
 
@@ -59,7 +59,7 @@ public class BuildingTypeTest extends AbstractHeadlessGdxTest {
         BuildingType halls = BuildingType.HALLS;
         assertEquals("Halls", halls.getDisplayName(), "HALLS display name should be 'Halls'");
         assertEquals("buildings/halls.png", halls.getTexturePath(), "HALLS texture path mismatch");
-        assertEquals(new Vector2Int(3, 3), halls.getSize(), "HALLS size mismatch");
+        assertEquals(new Vector2Int(4, 4), halls.getSize(), "HALLS size mismatch");
         assertEquals(BuildingCategory.ACCOMMODATION, halls.getCategory(), "HALLS category should be ACCOMMODATION");
         assertEquals(12000, halls.getCost(), "HALLS cost mismatch");
 

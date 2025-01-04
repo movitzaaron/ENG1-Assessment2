@@ -27,7 +27,7 @@ public class DuckScenario {
      *
      * @return The timer managing the start of the Duck Death event.
      */
-    private Timer getTimer() {
+    public Timer getTimer() {
         return timer;
     }
 

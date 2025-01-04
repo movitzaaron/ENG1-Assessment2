@@ -9,10 +9,10 @@ import java.util.stream.Stream;
  * Contains a list of all buildings, including there default data.
  */
 public enum BuildingType {
-    GREGGS("Greggs", "buildings/greggs.png", new Vector2Int(2, 2), BuildingCategory.FOOD, 5000),
+    GREGGS("Greggs", "buildings/greggs.png", new Vector2Int(3, 3), BuildingCategory.FOOD, 5000),
     LIBRARY("Library", "buildings/library.png", new Vector2Int(4, 4), BuildingCategory.EDUCATIONAL, 200000),
     GYM("Gym", "buildings/gym.png", new Vector2Int(4, 3), BuildingCategory.RECREATIONAL, 80000),
-    HALLS("Halls", "buildings/halls.png", new Vector2Int(3, 3), BuildingCategory.ACCOMMODATION, 12000),
+    HALLS("Halls", "buildings/halls.png", new Vector2Int(4, 4), BuildingCategory.ACCOMMODATION, 12000),
     ROAD("Road", "buildings/roads/straight.png", new Vector2Int(1, 1), BuildingCategory.PATHWAY, 100),
     ;
 

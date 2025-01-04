@@ -52,13 +52,17 @@ jobs:
         shell: bash
 
       # === === === === === === === === === ===
+
+      # This has been commented out to save space on GH action storage
+      # Each JAR file is ~30MB and we only get 500MB a month... there is less than
+      # a month left on this project, have to use what we have wisely
       # Upload all generated artifacts
-      - name: Upload JAR as workflow artifact
-        uses: actions/upload-artifact@v4
-        with:
-          compression-level: 0
-          name: longboi-life-${{ env.PROJECT_VERSION }}.jar
-          path: lwjgl3/build/libs/longboi-life-${{ env.PROJECT_VERSION }}.jar
+      # - name: Upload JAR as workflow artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     compression-level: 0
+      #     name: longboi-life-${{ env.PROJECT_VERSION }}.jar
+      #     path: lwjgl3/build/libs/longboi-life-${{ env.PROJECT_VERSION }}.jar
 
       - name: Upload test report as workflow artifact
         uses: actions/upload-artifact@v4

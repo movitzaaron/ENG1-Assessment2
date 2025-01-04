@@ -15,7 +15,7 @@ public class TutorialScenario {
           Creates a countdown timer until the fixed event
           Calls the events that the scenario uses
          */
-        timer.setTimer(1000);
+        timer.setTimer(1000, true);
         timer.setEvent(() -> {
             EventHandler.getEventHandler().callEvent(EventHandler.Event.PAUSE_GAME);
             EventHandler.getEventHandler().callEvent(EventHandler.Event.TUTORIAL_DIALOG);

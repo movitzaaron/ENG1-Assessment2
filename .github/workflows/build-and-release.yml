@@ -2,7 +2,7 @@ name: Build and Release
 on:
   push:
     tags:
-      - 'v*.*.*' # Triggers on a push with a tag like v1.2.3
+      - 'none' # Triggers on a push with a tag like v1.2.3
 jobs:
   release:
     runs-on: ubuntu-latest

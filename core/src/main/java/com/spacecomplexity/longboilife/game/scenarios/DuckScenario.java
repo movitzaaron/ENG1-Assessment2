@@ -15,7 +15,7 @@ public class DuckScenario {
           Creates a countdown timer until the fixed event
           Calls the events that the scenario uses
          */
-        timer.setTimer(3 * 60 * 1000);
+        timer.setTimer(3* 60 * 1000);
         timer.setEvent(() -> {
             EventHandler.getEventHandler().callEvent(EventHandler.Event.PAUSE_GAME);
             EventHandler.getEventHandler().callEvent(EventHandler.Event.DUCK_SCENARIO_DIALOG);

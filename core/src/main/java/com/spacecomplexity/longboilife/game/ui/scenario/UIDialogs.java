@@ -1,7 +1,9 @@
 package com.spacecomplexity.longboilife.game.ui.scenario;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.spacecomplexity.longboilife.game.building.BuildingType;
 import com.spacecomplexity.longboilife.game.globals.GameState;
@@ -20,6 +22,14 @@ public class UIDialogs extends UIElement {
         super(uiViewport, parentTable, skin);
         this.skin = skin;
         this.stage = stage;
+
+        // Retrieve the larger font
+        BitmapFont largeFont = skin.getFont("font-large");
+        // Create a new LabelStyle with the larger font
+        Label.LabelStyle largeLabelStyle = new Label.LabelStyle();
+        largeLabelStyle.font = largeFont;
+        // Store the new style in the new skin
+        skin.add("large-label", largeLabelStyle, Label.LabelStyle.class);
 
         EventHandler eventHandler = EventHandler.getEventHandler();
 
@@ -65,9 +75,13 @@ public class UIDialogs extends UIElement {
             }
         };
 
+
+
         // Create a Label with text wrapping enabled
-        Label label = new Label("Thank you for playing Longboi Life ! \n\n" +
-            "If you have not played the game before. We recommend enabling the tutorial!", skin);
+        Label label = new Label("""
+            Thank you for playing Longboi Life!\s
+
+            If you have not played the game before. We recommend enabling the tutorial!""", skin, "large-label");
 
         // Set the label to wrap text
         label.setWrap(true);
@@ -93,24 +107,35 @@ public class UIDialogs extends UIElement {
         };
         // Label for the tutorial dialog
         Label tutorialLabel = new Label(
-            "Welcome to the tutorial!\n\n\n" +
-                "1. To get started place buildings by selecting them from the build menu.\n\n" +
-                "2. Placing a building costs money. Once placed, the building can be moved or sold by clicking on it.\n\n" +
-                "3. Throughout the game events will occur that will impact your gameplay.\n\n" +
-                "4. To keep your students satisfied you must create adequate supporting buildings and connect them via roads.\n\n" +
-                "5. Grow your university by strategically managing your buildings and funds.\n\n\n" +
-                "Good luck, and enjoy Longboi Life!",
-            skin
+            """
+                1. To get started place buildings by selecting them from the build menu.
+
+                2. Placing a building costs money. Once placed, the building can be moved or sold by clicking on it.
+
+                3. Throughout the game events will occur that will impact your gameplay.
+
+                4. To keep your students satisfied you must create adequate supporting buildings and connect them via roads.
+
+                5. Grow your university by strategically managing your buildings and funds.
+
+
+                Good luck, and enjoy Longboi Life!""",
+            skin, "large-label"
         );
         tutorialLabel.setWrap(true);
 
-        // Add the label to the content table
-        tutorialDialog.getContentTable().add(tutorialLabel).width(500).height(300).pad(10);
+        // Create a scroll pane for the label
+        ScrollPane scrollPane = new ScrollPane(tutorialLabel, skin);
+        scrollPane.setScrollingDisabled(true, false); // Enable vertical scrolling only
+        scrollPane.setFadeScrollBars(false); // Keep scrollbars always visible
+        scrollPane.setForceScroll(false, true); // Force vertical scroll even if not actively scrolling
+        tutorialDialog.getContentTable().add(scrollPane).width(500).height(300).pad(10).align(Align.center);
 
         // Add a "Continue" button to close the tutorial dialog
         tutorialDialog.button("Continue", 0);
 
         // Show the tutorial dialog
+        stage.addActor(tutorialDialog);
         tutorialDialog.show(stage);
     }
 
@@ -130,9 +155,10 @@ public class UIDialogs extends UIElement {
         };
 
         // Create a Label with text wrapping enabled
-        Label label = new Label("Congratulations! You've been awarded a financial grant of £500,000 to support your efforts.\n\n" +
-            "We understand that managing resources can be challenging, but this grant is here to help you bounce back and continue building your legacy.\n\n" +
-            "Keep pushing forward, and remember, strategic decisions are the key to success!", skin);
+        Label label = new Label("""
+            Congratulations! You've been awarded a financial grant of £500,000 to support your efforts.
+
+            Keep pushing forward, good luck on making your University prosper!""", skin, "large-label");
 
         // Set the label to wrap text
         label.setWrap(true);
@@ -153,13 +179,21 @@ public class UIDialogs extends UIElement {
                 System.out.println("Dialog choice: " + object);
                 EventHandler.getEventHandler().callEvent(EventHandler.Event.RESUME_GAME);
                 if(object.equals(0)){
-                    GameState.getState().money = GameState.getState().money - 1000;
+                    GameState.getState().money = GameState.getState().money - 50000;
                 }
+                else{GameState.getState().satisfactionScore = GameState.getState().satisfactionScore - 10; }
+
             }
         };
 
         // Create a Label with text wrapping enabled
-        Label label = new Label("The beloved university duck has fallen ill! This duck was extremely long for a duck, and images of it have gone viral internationally. The students love the duck and some people come to the campus just to see the duck! You could take it to the vet and make it better, or you could let it die. Which will you choose?", skin);
+        Label label = new Label(
+            """
+                The beloved university duck, has fallen ill!!\s
+
+                Its health crisis has sparked concern and emotional turmoil among the university community.""",
+             skin, "large-label")
+            ;
 
         // Set the label to wrap text
         label.setWrap(true);
@@ -172,7 +206,7 @@ public class UIDialogs extends UIElement {
         dialog.getContentTable().clear(); // Clear existing content
         dialog.getContentTable().add(label).width(500).height(300).pad(10); // You can adjust the size
 
-        dialog.button("Spend £1000 taking the duck to the vet", 0);
+        dialog.button("Spend £50000 on duck surgery", 0);
         dialog.button("Let the duck die", 1);
 
         // Show the dialog
@@ -204,12 +238,12 @@ public class UIDialogs extends UIElement {
 
         // Create a Label with text wrapping enabled
         Label label = new Label(
-            "Your rival University has challenged you to a prestigious sports competition!\n\n" +
-                "With over 47 individual sports on display, this event will test your students' fitness, teamwork, and determination to the limit.\n\n" +
-                "Rumors suggest that universities with strong sports facilities and highly motivated students often fare better in such challenges...\n\n" +
-                "The victorious university will receive a £200,000 reward, but beware.... failure will cost you £100,000!\n\n" +
-                "Are your students ready to rise to the occasion and bring glory to your university?",
-            skin
+            """
+                Your rival University has challenged you to a sports competition!
+
+                Rumors suggest that universities with strong sports facilities and motivated students often fare better in such challenges...
+                The victorious university will receive a £200,000 reward, but beware.... failure will cost you £100,000!""",
+            skin, "large-label"
         );
         // Set the label to wrap text
         label.setWrap(true);
@@ -242,20 +276,24 @@ public class UIDialogs extends UIElement {
         if(outcome) {
             // Label for the roses success dialog
              rosesOutcomeLabel = new Label(
-                "Congratulations! Your University has emerged victorious in the prestigious Roses competition!\n\n" +
-                    "Your students' dedication, fitness, and preparation have paid off, showcasing their incredible spirit across all 47 sports.\n\n" +
-                    "Your University is now the envy of the academic world, and the £200,000 reward will surely aid in its continued growth.\n\n" +
-                    "Well done! Glory and pride are yours to celebrate!",
-                skin
+                 """
+                     Congratulations! Your University has emerged victorious in the prestigious Roses competition!
+
+                     Your University is now the envy of the academic world, and the £200,000 reward will surely aid in its continued growth.
+
+                     Glory and pride are yours to celebrate!""",
+                skin, "large-label"
             );
         } else {
             // Label for the roses loss dialog
              rosesOutcomeLabel = new Label(
-                "Defeat... Your University fought valiantly in the Roses competition but fell short of victory.\n\n" +
-                    "The rival University proved to be stronger this time, dominating the competition across the 47 events.\n\n" +
-                    "The loss comes at a cost... £100,000 must now be paid to your rivals. Perhaps your facilities and student satisfaction need a closer look...\n\n" +
-                    "Take this as a lesson and come back stronger. The next challenge awaits!",
-                skin
+                 """
+                     Defeat...\s
+
+                     The rival University proved to be stronger this time, dominating the competition across the 47 events.
+
+                     The loss comes at a cost... £100,000 must now be paid to your rivals. Perhaps your facilities and student satisfaction need a closer look...""",
+                skin, "large-label"
             );
         }
         rosesOutcomeLabel.setWrap(true);

@@ -1,4 +1,4 @@
-name: CI for Longboi Life
+name: CI and CD for Longboi Life
 on:
   push:
     branches: ['CI']
@@ -57,13 +57,12 @@ jobs:
       # Each JAR file is ~30MB and we only get 500MB a month... there is less than
       # a month left on this project, have to use what we have wisely
       # Upload all generated artifacts
-      # Uncommented on this push to test release
-      - name: Upload JAR as workflow artifact
-        uses: actions/upload-artifact@v4
-        with:
-          compression-level: 0
-          name: longboi-life-${{ env.PROJECT_VERSION }}.jar
-          path: lwjgl3/build/libs/longboi-life-${{ env.PROJECT_VERSION }}.jar
+      # - name: Upload JAR as workflow artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     compression-level: 0
+      #     name: longboi-life-${{ env.PROJECT_VERSION }}.jar
+      #     path: lwjgl3/build/libs/longboi-life-${{ env.PROJECT_VERSION }}.jar
 
       - name: Upload test report as workflow artifact
         uses: actions/upload-artifact@v4

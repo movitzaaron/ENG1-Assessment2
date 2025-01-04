@@ -60,6 +60,7 @@ configure(subprojects) {
       // This will place the HTML report in build/reports/checkstyle/checkstyle.html for each subproject
       html.destination file("${project.buildDir}/reports/checkstyle/checkstyle.html")
     }
+    showViolations = false
   }
 
   // From https://lyze.dev/2021/04/29/libGDX-Internal-Assets-List/

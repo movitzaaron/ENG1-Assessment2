@@ -9,8 +9,9 @@ buildscript {
     maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
   }
   dependencies {
-
-
+    // Not strictly necessary if you use the modern Gradle plugins{} block in your buildscript,
+    // but you can add a specific Checkstyle plugin classpath if needed:
+    // classpath "org.gradle:gradle-checkstyle-plugin:<VERSION>"
   }
 }
 
@@ -30,7 +31,37 @@ allprojects {
 configure(subprojects) {
   apply plugin: 'java-library'
   apply plugin: 'jacoco'
+  apply plugin: 'checkstyle'
+
   sourceCompatibility = 17
+
+  // Configure Checkstyle to use Google Java Style.
+  checkstyle {
+    // Choose a Checkstyle version compatible with the rules you want.
+    // (You can adjust this version as needed.)
+    toolVersion = '10.12.0'
+
+    // Point to the official Google Checks config hosted on GitHub:
+    // Alternatively, you could place a local copy in your project (e.g. config/checkstyle/google_checks.xml)
+    // and use `resources.text.fromFile("config/checkstyle/google_checks.xml")`.
+    config = resources.text.fromUri(
+    'https://raw.githubusercontent.com/checkstyle/checkstyle/checkstyle-10.12.0/src/main/resources/google_checks.xml')
+
+    // If you want to disable or tweak certain properties from google_checks.xml,
+    // you can also add properties here, e.g.:
+    // configProperties = [ 'checkstyle.cache.file': "${project.buildDir}/checkstyle.cache" ]
+  }
+
+  // Configure how Checkstyle reports are generated.
+  tasks.withType(Checkstyle) {
+    reports {
+      xml.required = false
+      html.required = true
+      // This will place the HTML report in build/reports/checkstyle/checkstyle.html for each subproject
+      html.destination file("${project.buildDir}/reports/checkstyle/checkstyle.html")
+    }
+    showViolations = false
+  }
 
   // From https://lyze.dev/2021/04/29/libGDX-Internal-Assets-List/
   // The article can be helpful when using assets.txt in your project.

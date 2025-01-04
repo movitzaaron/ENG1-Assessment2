@@ -133,12 +133,11 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: longboi-life-${{ needs.build.outputs.PROJECT_VERSION }}.jar
-          path: ./download-artifacts
+          path: ./downloaded-artifacts
 
       # FOR TESTING ONLY
       - name: Make sure that artifact is in the correct place
         run: ls downloaded-artifacts
-
 
       # Create release using the JAR downloaded
       - name: Create Release

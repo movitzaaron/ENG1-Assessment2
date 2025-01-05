@@ -2,7 +2,6 @@ package com.spacecomplexity.longboilife.game.globals;
 
 import com.spacecomplexity.longboilife.game.building.BuildingCategory;
 
-import java.util.HashMap;
 import java.util.TreeMap;
 
 /**

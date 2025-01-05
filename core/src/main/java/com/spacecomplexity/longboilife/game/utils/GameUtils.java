@@ -101,7 +101,7 @@ public class GameUtils {
         for (BuildingCategory category : searchBuildingCategories) {
             if (categorisedBuildings.get(category).isEmpty()) {
                 // for each empty category, halve the satisfaction score
-                emptyCategoryModifier *= 0.5;
+                emptyCategoryModifier *= 0.5f;
             }
         }
 

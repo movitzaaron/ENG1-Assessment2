@@ -50,20 +50,20 @@ public class Constants {
     public static float moveCostRecovery = 0.25f;
 
     /**
+     * The number of buildings required for the buildingCount satisfaction modifier to be 1.
+     */
+    public static int satisfactionMinBuildingCount = 20;
+
+    /**
+     * The minimum difference in number between 2 categories of building that will lead to a satisfaction score reduction
+     */
+    public static int satisfactionMaxAllowedBuildingDifference = 2;
+
+    /**
      * Which category of buildings will not be deselected when built.
      */
     public static BuildingCategory[] dontRemoveSelection = new BuildingCategory[]{
         BuildingCategory.PATHWAY
     };
 
-    /**
-     * The satisfactory distances from accommodation to a specific category of building
-     * <p>
-     * Used for calculating satisfaction score
-     */
-    public static HashMap<BuildingCategory, Float> satisfactoryDistance = new HashMap<BuildingCategory, Float>() {{
-        put(BuildingCategory.FOOD, 5f);
-        put(BuildingCategory.RECREATIONAL, 5f);
-        put(BuildingCategory.EDUCATIONAL, 10f);
-    }};
 }

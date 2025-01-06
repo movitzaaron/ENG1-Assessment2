@@ -139,14 +139,11 @@ public class GameUtils {
             distanceModifier = 0;
         }
 
-
         int buildingCount = gameState.getBuildingCountNoPath();
-        System.out.println("Building count: " + buildingCount);
+
         if (buildingCount < Constants.satisfactionMinBuildingCount){
             buildingCountModifier = (float) buildingCount / Constants.satisfactionMinBuildingCount;
         }
-        System.out.println("buildingCountModifier: " + buildingCountModifier);
-
 
         HashMap<BuildingCategory, Integer> buildingCategoryCounts= new HashMap<>();
         for (BuildingType buildingType : BuildingType.values()) {
@@ -168,13 +165,6 @@ public class GameUtils {
 
         newSatisfactionScore = distanceModifier * buildingCountModifier * buildingProportionModifier * emptyCategoryModifier;
         gameState.satisfactionScore = newSatisfactionScore;
-
-//        System.out.print(
-//            "distanceModifier: " + distanceModifier + "\n"
-//            + "buildingCountModifier: " + buildingCountModifier + "\n"
-//            + "buildingProportionModifier: " + buildingProportionModifier + "\n"
-//            + "emptyCategoryModifier: " + emptyCategoryModifier + "\n"
-//        );
 
     }
 }

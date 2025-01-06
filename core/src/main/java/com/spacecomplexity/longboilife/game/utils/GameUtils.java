@@ -169,12 +169,12 @@ public class GameUtils {
         newSatisfactionScore = distanceModifier * buildingCountModifier * buildingProportionModifier * emptyCategoryModifier;
         gameState.satisfactionScore = newSatisfactionScore;
 
-        System.out.print(
-            "distanceModifier: " + distanceModifier + "\n"
-            + "buildingCountModifier: " + buildingCountModifier + "\n"
-            + "buildingProportionModifier: " + buildingProportionModifier + "\n"
-            + "emptyCategoryModifier: " + emptyCategoryModifier + "\n"
-        );
+//        System.out.print(
+//            "distanceModifier: " + distanceModifier + "\n"
+//            + "buildingCountModifier: " + buildingCountModifier + "\n"
+//            + "buildingProportionModifier: " + buildingProportionModifier + "\n"
+//            + "emptyCategoryModifier: " + emptyCategoryModifier + "\n"
+//        );
 
     }
 }

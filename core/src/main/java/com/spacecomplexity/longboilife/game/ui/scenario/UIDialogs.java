@@ -38,6 +38,10 @@ public class UIDialogs extends UIElement {
             tutorialDialog();
             return null;
         });
+        eventHandler.createEvent(EventHandler.Event.TUTORIAL_TEXT_DIALOG, (p) -> {
+            tutorialDialogOutcome();
+            return null;
+        });
         eventHandler.createEvent(EventHandler.Event.DUCK_SCENARIO_DIALOG, (p) -> {
             duckDialog();
             return null;
@@ -108,6 +112,8 @@ public class UIDialogs extends UIElement {
         // Label for the tutorial dialog
         Label tutorialLabel = new Label(
             """
+                press T at any time to bring this text back, or press the '?' button
+
                 1. To get started place buildings by selecting them from the build menu.
 
                 2. Placing a building costs money. Once placed, the building can be moved or sold by clicking on it.

@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.spacecomplexity.longboilife.game.building.BuildingType;
 import com.spacecomplexity.longboilife.game.globals.GameState;
+import com.spacecomplexity.longboilife.game.scenarios.DuckScenario;
 import com.spacecomplexity.longboilife.game.ui.UIElement;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
 
@@ -185,9 +186,13 @@ public class UIDialogs extends UIElement {
                 System.out.println("Dialog choice: " + object);
                 EventHandler.getEventHandler().callEvent(EventHandler.Event.RESUME_GAME);
                 if(object.equals(0)){
-                    GameState.getState().money = GameState.getState().money - 50000;
+                    // deduct money
+                    GameState.getState().money = GameState.getState().money - DuckScenario.cost;
                 }
-                else{GameState.getState().satisfactionScore = GameState.getState().satisfactionScore - 10; }
+                else{
+                    // slightly decrease satisfaction until next scenario is triggered
+                    GameState.getState().satScenarioModifier = 0.9f;
+                }
 
             }
         };
@@ -212,7 +217,7 @@ public class UIDialogs extends UIElement {
         dialog.getContentTable().clear(); // Clear existing content
         dialog.getContentTable().add(label).width(500).height(300).pad(10); // You can adjust the size
 
-        dialog.button("Spend £50000 on duck surgery", 0);
+        dialog.button("Spend £" + DuckScenario.cost + " on duck surgery", 0);
         dialog.button("Let the duck die", 1);
 
         // Show the dialog
@@ -228,11 +233,10 @@ public class UIDialogs extends UIElement {
                 if(object.equals(1)){
                     if(GameState.getState().satisfactionScore >= 0.3 && GameState.getState().getBuildingCount(BuildingType.GYM) >= 2 ) {
                         GameState.getState().money += 200000;
-                        GameState.getState().satisfactionScore += 0.1f;
+                        GameState.getState().satScenarioModifier = 1f;
                         rosesDialogOutcome(true);
                     } else {
-                        GameState.getState().money -= 100000;
-                        GameState.getState().satisfactionScore -= 0.1f;
+                        GameState.getState().satScenarioModifier = 0.9f;
                         rosesDialogOutcome(false);
                     }
                 } else {
@@ -248,7 +252,7 @@ public class UIDialogs extends UIElement {
                 Your rival University has challenged you to a sports competition!
 
                 Rumors suggest that universities with strong sports facilities and motivated students often fare better in such challenges...
-                The victorious university will receive a £200,000 reward, but beware.... failure will cost you £100,000!""",
+                The victorious university will receive a £200,000 reward, but beware... failure will make your students less satisfied!""",
             skin, "large-label"
         );
         // Set the label to wrap text
@@ -298,7 +302,7 @@ public class UIDialogs extends UIElement {
 
                      The rival University proved to be stronger this time, dominating the competition across the 47 events.
 
-                     The loss comes at a cost... £100,000 must now be paid to your rivals. Perhaps your facilities and student satisfaction need a closer look...""",
+                     The loss comes at a cost... Your students are quite upset. Perhaps your facilities and student satisfaction need a closer look...""",
                 skin, "large-label"
             );
         }

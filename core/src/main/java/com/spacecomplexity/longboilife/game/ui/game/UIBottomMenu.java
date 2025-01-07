@@ -72,6 +72,20 @@ public class UIBottomMenu extends UIElement {
         playDrawable = new TextureRegionDrawable(playTexture);
         playDrawable.setMinSize(textureSize, textureSize);
 
+        // Initialise tutorial button
+        TextButton tutorialButton = new TextButton("?", skin);
+        tutorialButton.setSize(textureSize, textureSize);
+        tutorialButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // Call the events to pause the game and open the tutorial text
+                eventHandler.callEvent(EventHandler.Event.PAUSE_GAME);
+                eventHandler.callEvent(EventHandler.Event.TUTORIAL_TEXT_DIALOG);
+            }
+        });
+        // Place tutorial button on the table
+        table.add(tutorialButton).right().padRight(10);
+
         // Initialise pause button
         ImageButton pauseButton = new ImageButton(skin);
         pauseButton.setSize(textureSize, textureSize);
@@ -88,6 +102,7 @@ public class UIBottomMenu extends UIElement {
         });
         // Place pause button on the table
         table.add(pauseButton).right().padRight(10);
+
 
         // Style and place the table
         table.setBackground(skin.getDrawable("panel1"));

@@ -6,7 +6,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -29,7 +28,6 @@ public class MenuAchievements implements Screen {
     private final Main game;
     private final AchievementManager achievementManager;
     private Viewport viewport;
-    private Texture backgroundTexture;
     private Stage stage;
     private Skin skin;
 
@@ -48,6 +46,7 @@ public class MenuAchievements implements Screen {
 
     @Override
     public void show() {
+        stage.clear();
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
@@ -142,6 +141,5 @@ public class MenuAchievements implements Screen {
     public void dispose() {
         stage.dispose();
         skin.dispose();
-        backgroundTexture.dispose();
     }
 }

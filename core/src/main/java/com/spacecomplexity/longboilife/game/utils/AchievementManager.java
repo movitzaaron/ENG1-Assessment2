@@ -44,7 +44,6 @@ public class AchievementManager {
      */
     public void poll(){
         GameState gameState = GameState.getState();
-        EventHandler eventHandler = EventHandler.getEventHandler();
 
         if (!unlockedAchievements.contains(Achievement.BROKE) && gameState.money == 0){
             unlockAchievement(Achievement.BROKE, EventHandler.Event.BROKE_ACHIEVEMENT_DIALOG);
@@ -101,6 +100,8 @@ public class AchievementManager {
      * @return A set of unlocked achievements.
      */
     public Set<Achievement> getUnlockedAchievements() {
+        // reload achievements from prefs file
+        loadAchievements();
         return new HashSet<>(unlockedAchievements);
     }
 

@@ -26,7 +26,6 @@ import com.spacecomplexity.longboilife.game.utils.SaveScore;
 public class MenuLeaderboard implements Screen{
     private final Main game;
     private Viewport viewport;
-    private Texture backgroundTexture;
     private SpriteBatch batch;
     private Stage stage;
     private Skin skin;
@@ -155,7 +154,6 @@ public class MenuLeaderboard implements Screen{
     public void dispose() {
         stage.dispose();
         skin.dispose();
-        backgroundTexture.dispose();
         batch.dispose();
     }
 }

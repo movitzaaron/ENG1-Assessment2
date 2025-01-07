@@ -163,7 +163,14 @@ public class GameUtils {
 
         emptyCategoryModifier = (float) (buildingCategoryCounts.size() - Collections.frequency(buildingCategoryCounts.values(), 0)) / buildingCategoryCounts.size();
 
-        newSatisfactionScore = distanceModifier * buildingCountModifier * buildingProportionModifier * emptyCategoryModifier;
+
+
+        newSatisfactionScore = distanceModifier * buildingCountModifier * buildingProportionModifier * emptyCategoryModifier * gameState.satScenarioModifier;
+
+        gameState.satDistanceModifier = distanceModifier;
+        gameState.satBuildingCountModifier = buildingCountModifier;
+        gameState.satBuildingProportionModifier = buildingProportionModifier;
+        gameState.satEmptyCategoryModifier = emptyCategoryModifier;
         gameState.satisfactionScore = newSatisfactionScore;
 
     }

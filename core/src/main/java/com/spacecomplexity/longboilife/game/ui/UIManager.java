@@ -74,6 +74,7 @@ public class UIManager {
             new UIClockMenu(viewport, table, skin),
             new UISatisfactionMenu(viewport, table, skin),
             new UIMoneyMenu(viewport, table, skin),
+            new UITipsMenu(viewport, table, skin),
             new UIBuildingCounter(viewport, table, skin),
             new UIDialogs(viewport, table, skin, stage),
             new UIAchievementDialog(viewport, table, skin, stage),

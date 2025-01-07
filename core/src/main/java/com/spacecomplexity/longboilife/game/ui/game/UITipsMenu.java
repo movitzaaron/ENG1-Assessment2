@@ -9,8 +9,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.ui.UIElement;
 
-import java.text.NumberFormat;
-import java.util.Locale;
 
 /**
  * Class to represent the Money UI.
@@ -72,11 +70,7 @@ public class UITipsMenu extends UIElement {
             lineCount++;
         }
 
-        if (tipsText.isEmpty()){
-            table.setVisible(false);
-        }else{
-            table.setVisible(true);
-        }
+        table.setVisible(!tipsText.isEmpty());
 
         label.setText(tipsText.toString().strip());
 

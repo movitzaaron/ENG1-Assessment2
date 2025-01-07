@@ -26,8 +26,8 @@ public class UIBottomMenu extends UIElement {
     private final Texture playTexture;
     private final TextureRegionDrawable playDrawable;
 
-    private UIBuildMenu buildMenu;
-    private UIPauseScreen pauseScreen;
+    private final UIBuildMenu buildMenu;
+    private final UIPauseScreen pauseScreen;
 
     /**
      * Initialise bottom menu elements.
@@ -54,7 +54,15 @@ public class UIBottomMenu extends UIElement {
             button.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    buildMenu.openMenu(category);
+                    if (GameState.getState().openMenuCategory != category) {
+                        // if menu isn't open, open it
+                        buildMenu.openMenu(category);
+                    }
+                    else {
+                        // if menu is open, close it
+                        buildMenu.closeMenu();
+                        GameState.getState().openMenuCategory = null;
+                    }
                 }
             });
 

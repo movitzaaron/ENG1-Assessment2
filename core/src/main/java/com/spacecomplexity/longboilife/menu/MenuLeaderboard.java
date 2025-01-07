@@ -1,7 +1,6 @@
 package com.spacecomplexity.longboilife.menu;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,7 +18,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.spacecomplexity.longboilife.Main;
-import com.spacecomplexity.longboilife.MainInputManager;
 import com.spacecomplexity.longboilife.game.utils.SaveScore;
 
 /**
@@ -32,6 +30,8 @@ public class MenuLeaderboard implements Screen{
     private SpriteBatch batch;
     private Stage stage;
     private Skin skin;
+    private Label namesLabel;
+    private Label scoresLabel;
 
     public MenuLeaderboard(Main game){
         this.game = game;
@@ -47,6 +47,7 @@ public class MenuLeaderboard implements Screen{
 
     @Override
     public void show() {
+        stage.clear();
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
@@ -79,12 +80,12 @@ public class MenuLeaderboard implements Screen{
         title.setFontScale(2f);
         title.setAlignment(Align.center);
 
-        Label namesLabel = new Label(names, skin);
+        namesLabel = new Label(names, skin);
         namesLabel.setStyle(labelStyle);
         namesLabel.setAlignment(Align.left);
         namesLabel.setFontScale(1.5f);
 
-        Label scoresLabel = new Label(scores, skin);
+        scoresLabel = new Label(scores, skin);
         scoresLabel.setStyle(labelStyle);
         scoresLabel.setAlignment(Align.right);
         scoresLabel.setFontScale(1.5f);
@@ -106,9 +107,7 @@ public class MenuLeaderboard implements Screen{
         table.add(backButton).pad(10).bottom().left().width(100).height(50);
 
 
-        // Allows UI to capture touch events
-        InputMultiplexer inputMultiplexer = new InputMultiplexer(new MainInputManager(), stage);
-        Gdx.input.setInputProcessor(inputMultiplexer);
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -116,6 +115,16 @@ public class MenuLeaderboard implements Screen{
         // Clear the screen
         ScreenUtils.clear(0, 0, 0, 1f);
 
+        String topFive = SaveScore.getTopFive();
+        String names = "Nothing to show";
+        String scores = "";
+        if(topFive.length() > 1){
+            String[] topFiveSplit = topFive.split("\\|");
+            names = topFiveSplit[0].substring(0, topFiveSplit[0].length() - 2);
+            scores = topFiveSplit[1].substring(0, topFiveSplit[1].length() - 2);
+        }
+        namesLabel.setText(names);
+        scoresLabel.setText(scores);
         // Draw and apply ui
         stage.act(delta);
         stage.draw();

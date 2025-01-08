@@ -19,5 +19,6 @@ public class GrantScenario {
 
     public static void reset() {
         grantScenario = new GrantScenario();
+        grantTaken = false;
     }
 }

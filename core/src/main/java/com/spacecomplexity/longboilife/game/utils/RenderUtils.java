@@ -3,9 +3,12 @@ package com.spacecomplexity.longboilife.game.utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.spacecomplexity.longboilife.game.GameScreen;
 import com.spacecomplexity.longboilife.game.building.Building;
 import com.spacecomplexity.longboilife.game.building.BuildingCategory;
 import com.spacecomplexity.longboilife.game.building.BuildingType;
@@ -146,8 +149,15 @@ public class RenderUtils {
      */
     public static void drawPlacingBuilding(SpriteBatch batch, World world, BuildingType building, Color tint, Color issueTint) {
         float cellSize = getCellSize();
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("ui/fonts/Roboto-Medium.ttf"));
+
+        BitmapFont priceTag = generator.generateFont(new FreeTypeFontGenerator.FreeTypeFontParameter() {{
+            size = 11;
+        }});
 
         Vector2Int mouse = GameUtils.getMouseOnGrid(world);
+
+        String commaPrice = String.format("%,d", Math.round(building.getCost()));
 
         // Check if this would be a valid position to build
         boolean validPosition = world.canBuild(building, mouse);
@@ -168,6 +178,9 @@ public class RenderUtils {
             building.getSize().x * cellSize,
             building.getSize().y * cellSize
         );
+
+
+        priceTag.draw(batch, ("£"+commaPrice), mouse.x * cellSize, mouse.y * cellSize);
 
         // Remove any tints applied
         batch.setColor(Color.WHITE);

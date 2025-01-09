@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.spacecomplexity.longboilife.game.building.Building;
 import com.spacecomplexity.longboilife.game.building.BuildingCategory;
@@ -146,13 +145,8 @@ public class RenderUtils {
      * @param tint      the tint to apply to the building.
      * @param issueTint the tint to apply to the building if it is invalid.
      */
-    public static void drawPlacingBuilding(SpriteBatch batch, World world, BuildingType building, Color tint, Color issueTint) {
+    public static void drawPlacingBuilding(SpriteBatch batch, World world, BuildingType building, Color tint, Color issueTint, BitmapFont font) {
         float cellSize = getCellSize();
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("ui/fonts/Roboto-Medium.ttf"));
-
-        BitmapFont priceTag = generator.generateFont(new FreeTypeFontGenerator.FreeTypeFontParameter() {{
-            size = 11;
-        }});
 
         Vector2Int mouse = GameUtils.getMouseOnGrid(world);
 
@@ -178,8 +172,7 @@ public class RenderUtils {
             building.getSize().y * cellSize
         );
 
-
-        priceTag.draw(batch, ("£"+commaPrice), mouse.x * cellSize, mouse.y * cellSize);
+        font.draw(batch, "-£"+commaPrice, mouse.x * cellSize, mouse.y * cellSize);
 
         // Remove any tints applied
         batch.setColor(Color.WHITE);

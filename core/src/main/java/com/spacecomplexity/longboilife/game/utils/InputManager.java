@@ -8,8 +8,6 @@ import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.globals.Keybindings;
 import com.spacecomplexity.longboilife.game.globals.MainCamera;
 
-import java.security.Key;
-
 public class InputManager {
     private final GameState gameState = GameState.getState();
 
@@ -201,13 +199,6 @@ public class InputManager {
                 }
 
                 eventHandler.callEvent(GameState.getState().paused ? EventHandler.Event.RESUME_GAME : EventHandler.Event.PAUSE_GAME);
-
-                return true;
-            }
-
-            if (keycode == Keybindings.TUTORIAL_MENU.getKey()) {
-                eventHandler.callEvent(EventHandler.Event.PAUSE_GAME);
-                eventHandler.callEvent(EventHandler.Event.TUTORIAL_TEXT_DIALOG);
 
                 return true;
             }

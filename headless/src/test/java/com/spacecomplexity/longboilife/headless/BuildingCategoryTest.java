@@ -13,7 +13,7 @@ public class BuildingCategoryTest {
     @Test
     @DisplayName("Test BuildingCategory enum constants and their display names")
     public void testBuildingCategoryDisplayNames() {
-        assertEquals("Roads", BuildingCategory.PATHWAY.getDisplayName(), "PATHWAY display name should be 'Roads'");
+        assertEquals("Roads", BuildingCategory.PATHWAY.getDisplayName(), "PATHWAY display name should be 'Pathway'");
         assertEquals("Accommodation", BuildingCategory.ACCOMMODATION.getDisplayName(), "ACCOMMODATION display name should be 'Accommodation'");
         assertEquals("Educational", BuildingCategory.EDUCATIONAL.getDisplayName(), "EDUCATIONAL display name should be 'Educational'");
         assertEquals("Food", BuildingCategory.FOOD.getDisplayName(), "FOOD display name should be 'Food'");

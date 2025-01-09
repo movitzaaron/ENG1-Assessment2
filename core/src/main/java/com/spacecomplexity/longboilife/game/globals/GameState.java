@@ -51,16 +51,6 @@ public class GameState {
      */
     public float satisfactionScore;
 
-    public float satDistanceModifier;
-
-    public float satBuildingCountModifier;
-
-    public float satBuildingProportionModifier;
-
-    public float satEmptyCategoryModifier;
-
-    public float satScenarioModifier;
-
     /**
      * The building selected to be placed.
      * <p>
@@ -196,11 +186,6 @@ public class GameState {
         cameraScrollZoomSpeed = 32;
         money = 800000;
         satisfactionScore = 0f;
-        satDistanceModifier = 0f;
-        satBuildingCountModifier = 0f;
-        satBuildingProportionModifier = 0f;
-        satEmptyCategoryModifier = 0f;
-        satScenarioModifier = 1f;
         placingBuilding = null;
         selectedBuilding = null;
         movingBuilding = null;

@@ -6,7 +6,6 @@ import com.spacecomplexity.longboilife.game.utils.Timer;
 
 public class DuckScenario {
     public static DuckScenario duckScenario = new DuckScenario();
-    public static int cost = 5000;
 
     private final Timer timer;
 
@@ -18,11 +17,8 @@ public class DuckScenario {
          */
         timer.setTimer(3 * 60 * 1000, true);
         timer.setEvent(() -> {
-            // only trigger the event if the user can afford the outcome
-            if (GameState.getState().money > cost){
-                EventHandler.getEventHandler().callEvent(EventHandler.Event.PAUSE_GAME);
-                EventHandler.getEventHandler().callEvent(EventHandler.Event.DUCK_SCENARIO_DIALOG);
-            }
+            EventHandler.getEventHandler().callEvent(EventHandler.Event.PAUSE_GAME);
+            EventHandler.getEventHandler().callEvent(EventHandler.Event.DUCK_SCENARIO_DIALOG);
         });
     }
 

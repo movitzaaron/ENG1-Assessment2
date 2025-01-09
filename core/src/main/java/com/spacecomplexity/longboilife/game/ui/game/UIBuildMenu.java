@@ -23,7 +23,6 @@ import java.util.Locale;
  */
 public class UIBuildMenu extends UIElement {
     private final Skin skin;
-    private boolean enabled;
 
     /**
      * Initialise build menu elements.
@@ -64,8 +63,6 @@ public class UIBuildMenu extends UIElement {
         GameState.getState().openMenuCategory = category;
         // Clear previous buildings from the table
         table.clear();
-
-        enabled = true;
 
         // Get list of all buildings to display on this menu
         BuildingType[] buildings = BuildingType.getBuildingsOfType(category);
@@ -123,7 +120,6 @@ public class UIBuildMenu extends UIElement {
      * Close the build menu.
      */
     public void closeMenu() {
-        enabled = false;
         // Hide the build menu
         table.setVisible(false);
         // Update the state to match the menu visibility
@@ -134,9 +130,5 @@ public class UIBuildMenu extends UIElement {
     protected void placeTable() {
         table.setSize(uiViewport.getWorldWidth(), 150);
         table.setPosition(0, 55);
-    }
-
-    public boolean isEnabled(){
-        return enabled;
     }
 }

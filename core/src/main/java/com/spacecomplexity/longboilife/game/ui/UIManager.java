@@ -78,7 +78,7 @@ public class UIManager {
             new UIBuildingCounter(viewport, table, skin),
             new UIDialogs(viewport, table, skin, stage),
             new UIAchievementDialog(viewport, table, skin, stage),
-        };
+            new UIEscapeTip(viewport, table, skin)};
 
         // Hide game UI and show end UI
         EventHandler.getEventHandler().createEvent(EventHandler.Event.GAME_END, (params) -> {

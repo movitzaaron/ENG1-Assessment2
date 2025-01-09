@@ -5,6 +5,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.spacecomplexity.longboilife.game.GameScreen;
+import com.spacecomplexity.longboilife.game.utils.AchievementManager;
+import com.spacecomplexity.longboilife.menu.MenuAchievements;
 import com.spacecomplexity.longboilife.menu.MenuScreen;
 import com.spacecomplexity.longboilife.menu.MenuLeaderboard;
 
@@ -24,13 +26,17 @@ public class Main extends Game {
      */
     public static int prevAppWidth, prevAppHeight;
 
+    // Needed param for MenuAchievements class
+    private AchievementManager achievementManager;
+
     /**
      * Enum containing all screens and there class references.
      */
     public enum ScreenType {
         MENU(MenuScreen.class),
         GAME(GameScreen.class),
-        LB(MenuLeaderboard.class)
+        LB(MenuLeaderboard.class),
+        Achieve(MenuAchievements.class)
         ;
 
         private final Class<? extends Screen> screenClass;
@@ -52,6 +58,7 @@ public class Main extends Game {
         if (Gdx.app.getType() != Application.ApplicationType.HeadlessDesktop){
             switchScreen(ScreenType.MENU);
         }
+        achievementManager = new AchievementManager();
     }
 
     /**
@@ -63,7 +70,13 @@ public class Main extends Game {
         // Lazy loading
         if (!screens.containsKey(screen)) {
             try {
-                Screen newScreen = screen.getScreenClass().getConstructor(Main.class).newInstance(this);
+                 Screen newScreen;
+                if (screen == ScreenType.Achieve) {
+                    // Switch to Achievement screen
+                    newScreen = new MenuAchievements(this, achievementManager);
+                } else {
+                    newScreen = screen.getScreenClass().getConstructor(Main.class).newInstance(this);
+                }
                 screens.put(screen, newScreen);
             } catch (Exception e) {
                 throw new RuntimeException("Failed to create screen: " + screen.name(), e);

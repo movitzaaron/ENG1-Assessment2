@@ -74,6 +74,16 @@ public class MenuScreen implements Screen {
             }
         });
 
+        // Initialise achievement button
+        TextButton achievementButton = new TextButton("Achievements", skin, "round");
+        achievementButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                // Switch to leaderboard screen here
+                game.switchScreen(ScreenType.Achieve);
+            }
+        });
+
         // Initialise exit button
         TextButton exitButton = new TextButton("Exit", skin, "round");
         exitButton.addListener(new ClickListener() {
@@ -89,6 +99,8 @@ public class MenuScreen implements Screen {
         table.add(playButton);
         table.row();
         table.add(lbButton).padTop(10);
+        table.row();
+        table.add(achievementButton).padTop(10);
         table.row();
         table.add(exitButton).padTop(10);
 

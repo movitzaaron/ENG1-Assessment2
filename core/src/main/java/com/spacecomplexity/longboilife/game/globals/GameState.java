@@ -88,6 +88,11 @@ public class GameState {
     public boolean paused;
 
     /**
+     * The category of the currently open menu
+     */
+    public BuildingCategory openMenuCategory;
+
+    /**
      * The current count of buildings.
      * <p>
      * This should be modified by {@link GameState#getBuildingCount(BuildingType)} and {@link GameState#changeBuildingCount(BuildingType, int)} not directly.
@@ -199,6 +204,7 @@ public class GameState {
         placingBuilding = null;
         selectedBuilding = null;
         movingBuilding = null;
+        openMenuCategory = null;
         paused = false;
         buildingsCount = new HashMap<>();
         satisfactionScoreVelocity = 0;

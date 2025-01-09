@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -39,6 +39,8 @@ public class GameScreen implements Screen {
     private InputManager inputManager;
     private AchievementManager achievementManager;
 
+    private final FreeTypeFontGenerator generator;
+
     private Viewport viewport;
 
     private World world;
@@ -52,6 +54,8 @@ public class GameScreen implements Screen {
         // Initialise SpriteBatch and ShapeRender for rendering
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
+
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("ui/fonts/Roboto-Medium.ttf"));
     }
 
     /**
@@ -135,7 +139,7 @@ public class GameScreen implements Screen {
 
         // If there is a building to be placed draw it as a ghost building
         if (gameState.placingBuilding != null) {
-            RenderUtils.drawPlacingBuilding(batch, world, gameState.placingBuilding, new Color(1f, 1f, 1f, 0.75f), new Color(1f, 0f, 0f, 0.75f));
+            RenderUtils.drawPlacingBuilding(batch, world, gameState.placingBuilding, new Color(1f, 1f, 1f, 0.75f), new Color(1f, 0f, 0f, 0.75f), generator.generateFont(new FreeTypeFontGenerator.FreeTypeFontParameter() {{size = 11; borderWidth = 0.8f;}}));
         }
         // If we are placing a building or there is a building selected then draw gridlines
         if (gameState.placingBuilding != null || gameState.selectedBuilding != null) {

@@ -25,7 +25,7 @@ public class UIBottomMenu extends UIElement {
     private final TextureRegionDrawable pauseDrawable;
     private final Texture playTexture;
     private final TextureRegionDrawable playDrawable;
-  
+
     private UIEscapeTip escapeTip;
     private UIBuildMenu buildMenu;
     private UIPauseScreen pauseScreen;
@@ -43,7 +43,6 @@ public class UIBottomMenu extends UIElement {
 
         EventHandler eventHandler = EventHandler.getEventHandler();
 
-        escapeTip = new UIEscapeTip(uiViewport, parentTable, skin);
         buildMenu = new UIBuildMenu(uiViewport, parentTable, skin);
         pauseScreen = new UIPauseScreen(uiViewport, parentTable, skin);
 

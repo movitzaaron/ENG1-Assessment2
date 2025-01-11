@@ -207,12 +207,15 @@ public class InputManager {
                 return true;
             }
 
+            // >>>> NEW CODE START <<<<
+            // NEW: users can press the TUTORIAL_MENU key to open the tutorial
             if (keycode == Keybindings.TUTORIAL_MENU.getKey()) {
                 eventHandler.callEvent(EventHandler.Event.PAUSE_GAME);
                 eventHandler.callEvent(EventHandler.Event.TUTORIAL_TEXT_DIALOG);
 
                 return true;
             }
+            // >>>> NEW CODE START <<<<
 
             return false;
         }

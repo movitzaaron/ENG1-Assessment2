@@ -11,6 +11,7 @@ import com.spacecomplexity.longboilife.game.scenarios.DuckScenario;
 import com.spacecomplexity.longboilife.game.ui.UIElement;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
 
+// NEW: This is all new
 /**
  * A UI test class that creates and shows a modal dialog.
  * The dialog itself is modal, meaning it will block input to underlying UI elements.

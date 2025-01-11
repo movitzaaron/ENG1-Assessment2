@@ -60,6 +60,8 @@ public class UISatisfactionMenu extends UIElement {
 
     @Override
     protected void placeTable() {
+        // >>>> CHANGED CODE START <<<<
         table.setPosition(uiViewport.getWorldWidth() - table.getWidth(), uiViewport.getWorldHeight() - table.getHeight() - 55);
+        // >>>> CHANGED CODE END <<<<
     }
 }

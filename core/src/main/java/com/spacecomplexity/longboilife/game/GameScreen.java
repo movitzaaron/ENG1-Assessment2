@@ -33,20 +33,20 @@ import com.spacecomplexity.longboilife.game.world.World;
 public class GameScreen implements Screen {
     private final Main game;
 
+    // >>>> NEW CODE START <<<<
+    private AchievementManager achievementManager;
+    private final FreeTypeFontGenerator generator;
+    private final GameLogic gameLogic = new GameLogic();
+    // >>>> NEW CODE END <<<<
     private final SpriteBatch batch;
     private final ShapeRenderer shapeRenderer;
     private UIManager ui;
     private InputManager inputManager;
-    private AchievementManager achievementManager;
-
-    private final FreeTypeFontGenerator generator;
-
     private Viewport viewport;
 
     private World world;
 
     private final GameState gameState = GameState.getState();
-    private final GameLogic gameLogic = new GameLogic();
 
     public GameScreen(Main game) {
         this.game = game;
@@ -55,7 +55,9 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
 
+        // >>>> NEW CODE START <<<<
         generator = new FreeTypeFontGenerator(Gdx.files.internal("ui/fonts/Roboto-Medium.ttf"));
+        // >>>> NEW CODE END <<<<
     }
 
     /**
@@ -64,9 +66,12 @@ public class GameScreen implements Screen {
      */
     @Override
     public void show() {
+        // >>>> CHANGED CODE START <<<<
+        // CHANGED: game logic is now handled inside gameLogic
         // Set up non-GUI logic
         gameLogic.setupLogic();
         world = gameLogic.getWorld();
+        // >>>> CHANGED CODE END <<<<
 
         // Create an input multiplexer to handle input from all sources
         InputMultiplexer inputMultiplexer = new InputMultiplexer(new MainInputManager());
@@ -84,7 +89,9 @@ public class GameScreen implements Screen {
         // Initialise UI elements with UIManager
         ui = new UIManager(inputMultiplexer);
 
+        // >>>> NEW CODE START <<<<
         achievementManager = new AchievementManager();
+        // >>>> NEW CODE END <<<<
 
         // Position camera in the center of the world map
         MainCamera.camera().position.set(new Vector3(
@@ -157,6 +164,8 @@ public class GameScreen implements Screen {
         // Render the UI
         ui.render();
 
+        // >>>> NEW CODE START <<<<
+        // NEW: poll all of our scenarios, and the achievement manager every frame
         // Poll the scenario timers to run the event if the timer has expired
         DuckScenario.poll();
         GrantScenario.poll();
@@ -165,6 +174,7 @@ public class GameScreen implements Screen {
 
         // Check if any achievement conditions have been reached
         achievementManager.poll();
+        // >>>> NEW CODE END <<<<
 
         // Poll the timer to run the event if the timer has expired
         // Do not update satisfaction score if the game is paused or has ended

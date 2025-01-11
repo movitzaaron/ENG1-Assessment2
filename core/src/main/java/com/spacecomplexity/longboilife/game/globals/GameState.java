@@ -12,9 +12,12 @@ import java.util.HashMap;
 public class GameState {
     private static final GameState gameState = new GameState();
 
+    // >>>> NEW CODE START <<<<
+    // NEW: returns an instance of gameState for testing purposes
     public static GameState TEST_CreateInstance() {
         return new GameState();
     }
+    // >>>> NEW CODE END <<<<
 
     /**
      * The current scale factor of game for rendering.
@@ -51,6 +54,7 @@ public class GameState {
      */
     public float satisfactionScore;
 
+    // >>>> NEW CODE START <<<<
     /**
      * Current satisfaction modifiers.
      */
@@ -63,6 +67,7 @@ public class GameState {
     public float satEmptyCategoryModifier;
 
     public float satScenarioModifier;
+    // >>>> NEW CODE END <<<<
 
     /**
      * The building selected to be placed.
@@ -90,6 +95,7 @@ public class GameState {
      */
     public boolean paused;
 
+    // >>>> NEW CODE START <<<<
     /**
      * If the user is currently typing.
      */
@@ -99,6 +105,7 @@ public class GameState {
      * The category of the currently open menu
      */
     public BuildingCategory openMenuCategory;
+    // >>>> NEW CODE END <<<<
 
     /**
      * The current count of buildings.
@@ -116,9 +123,13 @@ public class GameState {
      * @return the building count for this specific building.
      */
     public Integer getBuildingCount(BuildingType buildingType) {
+        // >>>> NEW CODE START <<<<
+        // NEW: checks building type is not null
         if (buildingType == null) {
             throw new NullPointerException("Getting building count with null BuildingType should throw NullPointerException");
         }
+        // >>>> NEW CODE END <<<<
+
 
         Integer count = buildingsCount.get(buildingType);
         // If this has not yet been set return 0
@@ -129,6 +140,7 @@ public class GameState {
         return count;
     }
 
+    // >>>> NEW CODE START <<<<
     /**
      * Helper function to get the number of buildings excluding pathways.
      *
@@ -144,6 +156,7 @@ public class GameState {
         }
         return count;
     }
+    // >>>> NEW CODE END <<<<
 
     /**
      * Helper function to change the number of a specified building.
@@ -152,6 +165,8 @@ public class GameState {
      * @param change       the amount to change it by.
      */
     public void changeBuildingCount(BuildingType buildingType, int change) {
+        // >>>> NEW CODE START <<<<
+        // NEW: checks building type is not null and building count does not go negative
         if (buildingType == null) {
             throw new NullPointerException("Changing building count with null BuildingType should throw NullPointerException");
         }
@@ -161,6 +176,7 @@ public class GameState {
         if (count == 0 && change < 0) {
             throw new IllegalStateException("Building count cannot go below 0");
         }
+        // >>>> NEW CODE END <<<<
 
         buildingsCount.put(buildingType, count + change);
     }
@@ -204,15 +220,17 @@ public class GameState {
         cameraScrollZoomSpeed = 32;
         money = 800000;
         satisfactionScore = 0f;
+        // >>>> NEW CODE START <<<<
         satDistanceModifier = 0f;
         satBuildingCountModifier = 0f;
         satBuildingProportionModifier = 0f;
         satEmptyCategoryModifier = 0f;
         satScenarioModifier = 1f;
+        openMenuCategory = null;
+        // >>>> NEW CODE END <<<<
         placingBuilding = null;
         selectedBuilding = null;
         movingBuilding = null;
-        openMenuCategory = null;
         paused = false;
         buildingsCount = new HashMap<>();
         satisfactionScoreVelocity = 0;

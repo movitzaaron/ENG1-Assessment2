@@ -15,7 +15,10 @@ public enum Keybindings {
     FULLSCREEN(Input.Keys.F11),
     CANCEL(Input.Keys.ESCAPE),
     PAUSE(Input.Keys.SPACE),
+    // >>>> NEW CODE START <<<<
+    // NEW: added button to let user enter tutorial whenever they want
     TUTORIAL_MENU(Input.Keys.T)
+    // >>>> NEW CODE END <<<<
     ;
 
     private final int key;

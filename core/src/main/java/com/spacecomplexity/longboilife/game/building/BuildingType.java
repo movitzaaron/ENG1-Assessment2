@@ -9,16 +9,22 @@ import java.util.stream.Stream;
  * Contains a list of all buildings, including there default data.
  */
 public enum BuildingType {
+    // >>>> CHANGED CODE START <<<<
+    // CHANGED: changed size, and cost of buildings
     GREGGS("Greggs", "buildings/greggs.png", new Vector2Int(3, 3), BuildingCategory.FOOD, 5000),
     LIBRARY("Library", "buildings/library.png", new Vector2Int(4, 4), BuildingCategory.EDUCATIONAL, 200000),
     GYM("Gym", "buildings/gym.png", new Vector2Int(4, 3), BuildingCategory.RECREATIONAL, 80000),
     HALLS("Halls", "buildings/halls.png", new Vector2Int(4, 4), BuildingCategory.ACCOMMODATION, 12000),
     ROAD("Road", "buildings/roads/straight.png", new Vector2Int(1, 1), BuildingCategory.PATHWAY, 100),
+    // >>>> CHANGED CODE END <<<<
     ;
 
     private final String displayName;
+    // >>>> CHANGED CODE START <<<<
+    // CHANGED: added a texture path so that we can lazy load the textures for testing
     private Texture texture;
     private final String texturePath;
+    // >>>> CHANGED CODE END <<<<
     private final Vector2Int size;
     private final BuildingCategory category;
     private final float cost;
@@ -41,6 +47,7 @@ public enum BuildingType {
     }
 
 
+    // >>>> NEW CODE START <<<<
     // This setter is used for mocking in testing
     public void setTexture(Texture texture) {
         this.texture = texture;
@@ -61,6 +68,7 @@ public enum BuildingType {
     public String getTexturePath() {
         return texturePath;
     }
+    // >>>> NEW CODE END <<<<
 
     public String getDisplayName() {
         return displayName;

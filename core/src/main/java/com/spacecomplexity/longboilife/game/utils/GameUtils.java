@@ -65,6 +65,7 @@ public class GameUtils {
      * @param world the world reference for buildings.
      */
     public static void updateSatisfactionScore(World world) {
+        // >>>> CHANGED CODE START <<<<
         GameState gameState = GameState.getState();
 
         float newSatisfactionScore;
@@ -173,5 +174,6 @@ public class GameUtils {
         gameState.satEmptyCategoryModifier = emptyCategoryModifier;
         gameState.satisfactionScore = newSatisfactionScore;
 
+        // >>>> CHANGED CODE END <<<<
     }
 }

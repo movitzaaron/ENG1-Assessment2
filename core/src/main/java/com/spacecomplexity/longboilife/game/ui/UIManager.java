@@ -23,7 +23,6 @@ import com.spacecomplexity.longboilife.game.utils.EventHandler;
  */
 public class UIManager {
     private final Viewport viewport;
-
     private final Stage stage;
     private final Skin skin;
 
@@ -74,11 +73,13 @@ public class UIManager {
             new UIClockMenu(viewport, table, skin),
             new UISatisfactionMenu(viewport, table, skin),
             new UIMoneyMenu(viewport, table, skin),
+            // >>>> NEW CODE START <<<<
             new UITipsMenu(viewport, table, skin),
             new UIBuildingCounter(viewport, table, skin),
             new UIDialogs(viewport, table, skin, stage),
             new UIAchievementDialog(viewport, table, skin, stage),
             new UIEscapeTip(viewport, table, skin)};
+            // >>>> NEW CODE END <<<<
 
         // Hide game UI and show end UI
         EventHandler.getEventHandler().createEvent(EventHandler.Event.GAME_END, (params) -> {

@@ -82,6 +82,8 @@ public class UIBottomMenu extends UIElement {
         playDrawable = new TextureRegionDrawable(playTexture);
         playDrawable.setMinSize(textureSize, textureSize);
 
+        // >>>> NEW CODE START <<<<
+        // NEW: now game has a tutorial button
         // Initialise tutorial button
         TextButton tutorialButton = new TextButton("?", skin);
         tutorialButton.setSize(textureSize, textureSize);
@@ -95,6 +97,7 @@ public class UIBottomMenu extends UIElement {
         });
         // Place tutorial button on the table
         table.add(tutorialButton).right().padRight(10);
+        // >>>> NEW CODE END <<<<
 
         // Initialise pause button
         ImageButton pauseButton = new ImageButton(skin);
@@ -112,7 +115,6 @@ public class UIBottomMenu extends UIElement {
         });
         // Place pause button on the table
         table.add(pauseButton).right().padRight(10);
-
 
         // Style and place the table
         table.setBackground(skin.getDrawable("panel1"));

@@ -64,6 +64,8 @@ public class MenuScreen implements Screen {
             }
         });
 
+        // >>>> NEW CODE START <<<<
+        // NEW: add leaderboard button, achievement button and an exit button
         // Initialise leaderboard button
         TextButton lbButton = new TextButton("Leaderboard", skin, "round");
         lbButton.addListener(new ClickListener(){
@@ -103,6 +105,7 @@ public class MenuScreen implements Screen {
         table.add(achievementButton).padTop(10);
         table.row();
         table.add(exitButton).padTop(10);
+        // >>>> NEW CODE END <<<<
 
         // Allows UI to capture touch events
         InputMultiplexer inputMultiplexer = new InputMultiplexer(new MainInputManager(), stage);

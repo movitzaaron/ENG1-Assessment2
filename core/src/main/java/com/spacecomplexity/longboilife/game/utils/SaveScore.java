@@ -5,6 +5,7 @@ import com.badlogic.gdx.Preferences;
 
 import java.util.*;
 
+// NEW: this is all new
 /**
  * <p>Class used for saving user scores to a preferences file, "playerScores".</p>
  */

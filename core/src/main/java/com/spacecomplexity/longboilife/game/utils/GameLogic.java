@@ -17,6 +17,8 @@ import com.spacecomplexity.longboilife.game.world.World;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 
+// NEW: this is all new, but it was moved from the GameScreen into here to separate the logic from the game
+// this was so that it could be used in the headless game version, have logic but without any visuals
 public class GameLogic {
     private final GameState gameState = GameState.getState();
     private World world;

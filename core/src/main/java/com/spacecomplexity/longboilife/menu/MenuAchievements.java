@@ -21,6 +21,7 @@ import com.spacecomplexity.longboilife.Main;
 import com.spacecomplexity.longboilife.MainInputManager;
 import com.spacecomplexity.longboilife.game.utils.AchievementManager;
 
+// NEW: this is all new
 /**
  * Main class to control the leaderboard screen.
  */

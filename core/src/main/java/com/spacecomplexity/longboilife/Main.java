@@ -69,6 +69,7 @@ public class Main extends Game {
     public void switchScreen(ScreenType screen) {
         // Lazy loading
         if (!screens.containsKey(screen)) {
+            // >>>> NEW CODE START <<<<
             try {
                  Screen newScreen;
                 if (screen == ScreenType.Achieve) {
@@ -81,6 +82,7 @@ public class Main extends Game {
             } catch (Exception e) {
                 throw new RuntimeException("Failed to create screen: " + screen.name(), e);
             }
+            // >>>> NEW CODE END <<<<
         }
 
         // Switch to the screen

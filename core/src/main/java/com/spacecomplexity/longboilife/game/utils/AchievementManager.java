@@ -8,6 +8,7 @@ import com.spacecomplexity.longboilife.game.globals.GameState;
 import java.util.HashSet;
 import java.util.Set;
 
+// NEW: this is all new
 /**
  * Class to manage achievements
  */

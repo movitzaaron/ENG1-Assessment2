@@ -26,6 +26,10 @@ public class TutorialScenarioTest {
 
     @Test
     public void testTutorialScenarioConstructorAndGetters() {
+        TutorialScenario tutorialScenario = TutorialScenario.tutorialScenario;
+        Timer timer = tutorialScenario.getTimer();
+
+        assertEquals(1000, timer.getTimeLeft(), "Timer should be set to 1 second");
 
     }
 

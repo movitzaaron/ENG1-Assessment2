@@ -69,7 +69,6 @@ public class UIDialogs extends UIElement {
         Dialog dialog = new Dialog("Welcome to Longboi Life.", skin) {
             @Override
             protected void result(Object object) {
-                System.out.println("Dialog choice: " + object);
                 if (object.equals(1)){
                     //Enables the tutorial
                     tutorialDialogOutcome();
@@ -150,7 +149,6 @@ public class UIDialogs extends UIElement {
         Dialog dialog = new Dialog("University Receives a Prestigious Research Grant", skin) {
             @Override
             protected void result(Object object) {
-                System.out.println("Dialog choice: " + object);
                 if (object.equals(0)){
                     GameState.getState().money += 500000; // may need a revise when balancing game
                 }
@@ -183,7 +181,6 @@ public class UIDialogs extends UIElement {
         Dialog dialog = new Dialog("University Duck has fallen ill", skin) {
             @Override
             protected void result(Object object) {
-                System.out.println("Dialog choice: " + object);
                 EventHandler.getEventHandler().callEvent(EventHandler.Event.RESUME_GAME);
                 if(object.equals(0)){
                     // deduct money
@@ -229,7 +226,6 @@ public class UIDialogs extends UIElement {
         Dialog dialog = new Dialog("Roses!", skin) {
             @Override
             protected void result(Object object) {
-                System.out.println("Dialog choice: " + object);
                 if(object.equals(1)){
                     if(GameState.getState().satisfactionScore >= 0.3 && GameState.getState().getBuildingCount(BuildingType.GYM) >= 2 ) {
                         GameState.getState().money += 200000;

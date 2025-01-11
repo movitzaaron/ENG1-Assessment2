@@ -60,12 +60,14 @@ public class UIBuildMenu extends UIElement {
      * @param category specific category of buildings to show.
      */
     public void openMenu(BuildingCategory category){
+        // >>>> NEW CODE START <<<<
         // Update state with new open menu category
         GameState.getState().openMenuCategory = category;
         // Clear previous buildings from the table
         table.clear();
 
         enabled = true;
+        // >>>> NEW CODE END <<<<
 
         // Get list of all buildings to display on this menu
         BuildingType[] buildings = BuildingType.getBuildingsOfType(category);
@@ -126,8 +128,10 @@ public class UIBuildMenu extends UIElement {
         enabled = false;
         // Hide the build menu
         table.setVisible(false);
+        // >>>> NEW CODE START <<<<
         // Update the state to match the menu visibility
         GameState.getState().openMenuCategory = null;
+        // >>>> NEW CODE END <<<<
     }
 
     @Override
@@ -136,7 +140,9 @@ public class UIBuildMenu extends UIElement {
         table.setPosition(0, 55);
     }
 
+    // >>>> NEW CODE START <<<<
     public boolean isEnabled(){
         return enabled;
     }
+    // >>>> NEW CODE END <<<<
 }

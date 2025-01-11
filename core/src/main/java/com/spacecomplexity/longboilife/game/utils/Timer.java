@@ -32,6 +32,8 @@ public class Timer {
         setTimer(duration, false);
     }
 
+    // >>>> CHANGED CODE START <<<<
+    // CHANGED: does not allow a negative timer, and can start a timer paused
     public void setTimer(long duration, boolean paused) {
         // If duration given is invalid, instantiates timer to 0ms and paused.
         if (duration < 0) {
@@ -45,6 +47,7 @@ public class Timer {
             pauseTimer();
         }
     }
+    // >>>> CHANGED CODE END <<<<
 
     /**
      * Pause the currently running timer.

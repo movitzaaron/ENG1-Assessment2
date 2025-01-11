@@ -19,6 +19,7 @@ public class EventHandler {
         CLOSE_BUILD_MENU,
         GAME_END,
         RETURN_MENU,
+        // >>>> NEW CODE START <<<<
         DUCK_SCENARIO_DIALOG,
         GRANT_SCENARIO_DIALOG,
         ROSES_SCENARIO_DIALOG,
@@ -30,6 +31,7 @@ public class EventHandler {
         ACADEMIC_ACHIEVEMENT_DIALOG,
         FOODIE_ACHIEVEMENT_DIALOG,
         ;
+        // >>>> NEW CODE END <<<<
 
         private Function<Object[], Object> callback = null;
 
@@ -38,9 +40,12 @@ public class EventHandler {
         }
 
         private Function<Object[], Object> getCallback() {
+            // >>>> NEW CODE START <<<<
+            // NEW: checks if callback is null
             if (callback == null) {
                 return null;
             }
+            // >>>> NEW CODE END <<<<
             return callback;
         }
     }

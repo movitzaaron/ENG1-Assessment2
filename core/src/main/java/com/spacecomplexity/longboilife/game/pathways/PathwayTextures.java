@@ -34,6 +34,8 @@ public class PathwayTextures {
       // Add more BuildingTypes and their corresponding texture paths here
     }};
 
+    // >>>> CHANGED/NEW CODE START <<<<
+    // CHANGED: Now textures are lazy loaded
     /**
      * Map containing the loaded textures.
      * Textures are loaded and stored here on demand.
@@ -102,4 +104,5 @@ public class PathwayTextures {
         }
         textureList.clear();
     }
+    // >>>> CHANGED/NEW CODE END <<<<
 }

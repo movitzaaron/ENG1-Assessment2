@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.spacecomplexity.longboilife.Main;
 import com.spacecomplexity.longboilife.game.utils.SaveScore;
 
+// NEW: this is all new
 /**
  * Main class to control the leaderboard screen.
  */

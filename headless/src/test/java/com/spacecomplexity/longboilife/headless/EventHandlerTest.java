@@ -8,6 +8,10 @@ import org.junit.jupiter.api.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Function;
 
+/**
+ * Unit tests for the EventHandler class.
+ *   TEST REF : 5
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class EventHandlerTest {
 

@@ -12,9 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for the PathwayPositions enum.
+ *   TEST REF : 7
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class PathwayPositionsTest {
+public class PathwayPositionsTest extends AbstractHeadlessGdxTest{
 
     @BeforeAll
     public void setUp() {}

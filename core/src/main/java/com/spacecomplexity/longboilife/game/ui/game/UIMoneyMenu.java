@@ -30,7 +30,9 @@ public class UIMoneyMenu extends UIElement {
 
         // Initialise money label
         label = new Label(null, skin);
+        // >>>> NEW CODE START <<<<
         label.setFontScale(1.8f);
+        // >>>> NEW CODE END <<<<
         label.setColor(Color.WHITE);
 
         // Place label onto table
@@ -38,7 +40,9 @@ public class UIMoneyMenu extends UIElement {
 
         // Style and place the table
         table.setBackground(skin.getDrawable("panel1"));
+        // >>>> NEW CODE START <<<<
         table.setSize(180, 60);
+        // >>>> NEW CODE END <<<<
         placeTable();
     }
 
@@ -48,6 +52,8 @@ public class UIMoneyMenu extends UIElement {
 
     @Override
     protected void placeTable() {
+        // >>>> CHANGED CODE START <<<<
         table.setPosition(uiViewport.getWorldWidth() - table.getWidth(), uiViewport.getWorldHeight() - table.getHeight());
+        // >>>> CHANGED CODE END <<<<
     }
 }

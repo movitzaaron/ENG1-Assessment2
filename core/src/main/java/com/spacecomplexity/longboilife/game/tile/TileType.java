@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
  * Contains a list of all tile types, including there default data.
  */
 public enum TileType {
+    // CHANGED: in this class, we changed the textures so that they can be lazy loaded
     GRASS("tiles/grass.png", true),
     WATER("tiles/water.png", false),
     ;

@@ -26,9 +26,11 @@ public class UIOverview extends UIElement {
     public UIOverview(Viewport uiViewport, Table parentTable, Skin skin) {
         super(uiViewport, parentTable, skin);
 
+        // >>>> NEW CODE START <<<<
         GameState.getState().isTyping = true;
 
         String overview = String.format("Game Over!\r\nSatisfaction Score: %.2f%%\r\nEnter your name below to save your score:", GameState.getState().satisfactionScore * 100);
+        // >>>> NEW CODE END <<<<
 
         // Initialise label
         Label label = new Label(overview, skin);
@@ -36,6 +38,7 @@ public class UIOverview extends UIElement {
         label.setFontScale(1.2f);
         label.setColor(Color.WHITE);
 
+        // >>>> NEW CODE START <<<<
         TextField nameField = new TextField(overview, skin);
         nameField.setMaxLength(14);
         nameField.setText("");
@@ -67,7 +70,6 @@ public class UIOverview extends UIElement {
             }
         });
 
-
         // Place label onto table
         table.add(label).align(Align.center).pad(5);
         table.row();
@@ -82,6 +84,7 @@ public class UIOverview extends UIElement {
         table.setBackground(skin.getDrawable("panel1"));
         table.setSize(320, 200);
         placeTable();
+        // >>>> NEW CODE END <<<<
     }
 
     public void render() {

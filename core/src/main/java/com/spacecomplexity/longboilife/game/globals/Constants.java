@@ -48,6 +48,7 @@ public class Constants {
      */
     public static float moveCostRecovery = 0.25f;
 
+    // >>>> NEW CODE START <<<<
     /**
      * The number of buildings required for the buildingCount satisfaction modifier to be 1.
      */
@@ -57,6 +58,7 @@ public class Constants {
      * The minimum difference in number between 2 categories of building that will lead to a satisfaction score reduction
      */
     public static int satisfactionMaxAllowedBuildingDifference = 2;
+    // >>>> NEW CODE END <<<<
 
     /**
      * Which category of buildings will not be deselected when built.

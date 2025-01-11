@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.spacecomplexity.longboilife.game.ui.UIElement;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
 
+// NEW: This is completely new
 public class UIAchievementDialog extends UIElement {
     private final Skin skin;
     private final Stage stage;

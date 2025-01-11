@@ -65,18 +65,21 @@ jobs:
       #     path: lwjgl3/build/libs/longboi-life-${{ env.PROJECT_VERSION }}.jar
 
       - name: Upload test report as workflow artifact
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: test-report
           path: headless/build/reports/tests/test/
 
       - name: Upload Jacoco report as workflow artifact
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-report
           path: headless/build/reports/jacoco/test/html/
 
       - name: Upload Checkstyle Reports
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: checkstyle-reports

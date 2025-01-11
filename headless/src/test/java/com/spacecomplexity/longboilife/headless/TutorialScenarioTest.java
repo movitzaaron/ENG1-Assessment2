@@ -10,7 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
- * Unit tests for the Tile class.
+ * Unit tests for the TutorialScenario class.
+ *   TEST REF : 11
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TutorialScenarioTest {

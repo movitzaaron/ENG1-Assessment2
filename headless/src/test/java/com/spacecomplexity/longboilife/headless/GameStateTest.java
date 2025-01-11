@@ -52,7 +52,6 @@ class GameStateTest extends AbstractHeadlessGdxTest {
         assertNull(gameState.movingBuilding, "Default movingBuilding should be null");
         assertFalse(gameState.paused, "Default paused should be false");
         assertNotNull(gameState.buildingsCount, "buildingsCount should be initialized");
-        System.out.println(gameState.buildingsCount);
         assertTrue(gameState.buildingsCount.isEmpty(), "buildingsCount should be empty after reset");
         assertEquals(0f, gameState.satisfactionScoreVelocity, "Default satisfactionScoreVelocity should be 0");
         assertFalse(gameState.satisfactionModifierPositive, "Default satisfactionModifierPositive should be false");

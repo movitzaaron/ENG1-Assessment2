@@ -113,17 +113,19 @@ public class UIDialogs extends UIElement {
         // Label for the tutorial dialog
         Label tutorialLabel = new Label(
             """
-                press T at any time to bring this text back, or press the '?' button
+                Press T at any time to bring this text back, or press the '?' button
 
-                1. To get started place buildings by selecting them from the build menu.
+                1. Move around the map by using WASD keys and change zoom using Q and E keys.
 
-                2. Placing a building costs money. Once placed, the building can be moved or sold by clicking on it.
+                2. To get started place buildings by selecting them from the build menu.
 
-                3. Throughout the game events will occur that will impact your gameplay.
+                3. Placing a building costs money. Once placed, the building can be moved or sold by clicking on it.
 
-                4. To keep your students satisfied you must create adequate supporting buildings and connect them via roads.
+                4. Throughout the game events will occur that will impact your gameplay.
 
-                5. Grow your university by strategically managing your buildings and funds.
+                5. To keep your students satisfied you must create adequate supporting buildings and connect them via roads.
+
+                6. Grow your university by strategically managing your buildings and funds.
 
 
                 Good luck, and enjoy Longboi Life!""",

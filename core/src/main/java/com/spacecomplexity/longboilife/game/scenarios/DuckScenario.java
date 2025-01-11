@@ -6,7 +6,7 @@ import com.spacecomplexity.longboilife.game.utils.Timer;
 
 public class DuckScenario {
     public static DuckScenario duckScenario = new DuckScenario();
-    public static int cost = 5000;
+    public static int cost = 50000;
 
     private final Timer timer;
 

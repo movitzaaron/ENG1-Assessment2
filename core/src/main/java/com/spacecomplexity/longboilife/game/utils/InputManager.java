@@ -28,29 +28,31 @@ public class InputManager {
      */
     public void handleContinuousInput() {
         float deltaTime = Gdx.graphics.getDeltaTime();
+        if(!GameState.getState().isTyping) {
 
-        // Calculate camera speed and move camera around given camera direction keys pressed
-        float cameraSpeed = gameState.cameraSpeed * deltaTime * MainCamera.camera().zoom * gameState.scaleFactor;
-        if (Gdx.input.isKeyPressed(Keybindings.CAMERA_UP.getKey())) {
-            MainCamera.camera().position.y += cameraSpeed;
-        }
-        if (Gdx.input.isKeyPressed(Keybindings.CAMERA_DOWN.getKey())) {
-            MainCamera.camera().position.y -= cameraSpeed;
-        }
-        if (Gdx.input.isKeyPressed(Keybindings.CAMERA_LEFT.getKey())) {
-            MainCamera.camera().position.x -= cameraSpeed;
-        }
-        if (Gdx.input.isKeyPressed(Keybindings.CAMERA_RIGHT.getKey())) {
-            MainCamera.camera().position.x += cameraSpeed;
-        }
+            // Calculate camera speed and move camera around given camera direction keys pressed
+            float cameraSpeed = gameState.cameraSpeed * deltaTime * MainCamera.camera().zoom * gameState.scaleFactor;
+            if (Gdx.input.isKeyPressed(Keybindings.CAMERA_UP.getKey())) {
+                MainCamera.camera().position.y += cameraSpeed;
+            }
+            if (Gdx.input.isKeyPressed(Keybindings.CAMERA_DOWN.getKey())) {
+                MainCamera.camera().position.y -= cameraSpeed;
+            }
+            if (Gdx.input.isKeyPressed(Keybindings.CAMERA_LEFT.getKey())) {
+                MainCamera.camera().position.x -= cameraSpeed;
+            }
+            if (Gdx.input.isKeyPressed(Keybindings.CAMERA_RIGHT.getKey())) {
+                MainCamera.camera().position.x += cameraSpeed;
+            }
 
-        // Calculate camera zoom speed and zoom camera around given camera zoom keys pressed
-        float cameraZoomSpeed = gameState.cameraKeyZoomSpeed * deltaTime * MainCamera.camera().zoom;
-        if (Gdx.input.isKeyPressed(Keybindings.CAMERA_ZOOM_IN.getKey())) {
-            MainCamera.camera().zoom += cameraZoomSpeed;
-        }
-        if (Gdx.input.isKeyPressed(Keybindings.CAMERA_ZOOM_OUT.getKey())) {
-            MainCamera.camera().zoom -= cameraZoomSpeed;
+            // Calculate camera zoom speed and zoom camera around given camera zoom keys pressed
+            float cameraZoomSpeed = gameState.cameraKeyZoomSpeed * deltaTime * MainCamera.camera().zoom;
+            if (Gdx.input.isKeyPressed(Keybindings.CAMERA_ZOOM_IN.getKey())) {
+                MainCamera.camera().zoom += cameraZoomSpeed;
+            }
+            if (Gdx.input.isKeyPressed(Keybindings.CAMERA_ZOOM_OUT.getKey())) {
+                MainCamera.camera().zoom -= cameraZoomSpeed;
+            }
         }
     }
 

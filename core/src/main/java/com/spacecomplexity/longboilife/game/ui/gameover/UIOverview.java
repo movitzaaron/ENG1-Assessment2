@@ -26,6 +26,8 @@ public class UIOverview extends UIElement {
     public UIOverview(Viewport uiViewport, Table parentTable, Skin skin) {
         super(uiViewport, parentTable, skin);
 
+        GameState.getState().isTyping = true;
+
         String overview = String.format("Game Over!\r\nSatisfaction Score: %.2f%%\r\nEnter your name below to save your score:", GameState.getState().satisfactionScore * 100);
 
         // Initialise label
@@ -45,6 +47,7 @@ public class UIOverview extends UIElement {
         exitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                GameState.getState().isTyping = false;
                 // Call the events to return to the menu
                 EventHandler.getEventHandler().callEvent(EventHandler.Event.RETURN_MENU);
             }
@@ -56,6 +59,7 @@ public class UIOverview extends UIElement {
         saveButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                GameState.getState().isTyping = false;
                 // Save the user score
                 SaveScore.updateScores(nameField.getText(), Math.round(GameState.getState().satisfactionScore * 1000));
                 // Call the events to return to the menu

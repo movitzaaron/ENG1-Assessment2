@@ -51,6 +51,9 @@ public class GameState {
      */
     public float satisfactionScore;
 
+    /**
+     * Current satisfaction modifiers.
+     */
     public float satDistanceModifier;
 
     public float satBuildingCountModifier;
@@ -86,6 +89,11 @@ public class GameState {
      * If the game is currently paused.
      */
     public boolean paused;
+
+    /**
+     * If the user is currently typing.
+     */
+    public boolean isTyping;
 
     /**
      * The category of the currently open menu

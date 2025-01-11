@@ -11,6 +11,7 @@ import static org.mockito.Mockito.*;
 
 /**
  * Unit tests for the BuildingType enum.
+ *   TEST REF : 3
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BuildingTypeTest extends AbstractHeadlessGdxTest {

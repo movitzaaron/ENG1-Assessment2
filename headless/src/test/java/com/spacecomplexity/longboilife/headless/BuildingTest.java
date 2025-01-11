@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for the Building class.
+ *   TEST REF : 2
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BuildingTest extends AbstractHeadlessGdxTest {

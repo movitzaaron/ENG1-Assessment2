@@ -11,6 +11,10 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit tests for the GameState class.
+ *   TEST REF : 6
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Execution(ExecutionMode.SAME_THREAD)
 class GameStateTest extends AbstractHeadlessGdxTest {

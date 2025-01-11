@@ -7,6 +7,10 @@ import org.junit.jupiter.api.TestInstance;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit tests for the BuildingCategory enum.
+ *   TEST REF : 1
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BuildingCategoryTest {
 

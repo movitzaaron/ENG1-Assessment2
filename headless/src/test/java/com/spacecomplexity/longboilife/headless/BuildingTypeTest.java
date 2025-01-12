@@ -109,7 +109,7 @@ public class BuildingTypeTest extends AbstractHeadlessGdxTest {
     // Test for RECREATIONAL
     BuildingType[] recreationalBuildings =
         BuildingType.getBuildingsOfType(BuildingCategory.RECREATIONAL);
-    assertEquals(1, recreationalBuildings.length, "There should be 1 RECREATIONAL building type");
+    assertEquals(2, recreationalBuildings.length, "There should be 2 RECREATIONAL building types");
     assertEquals(BuildingType.GYM, recreationalBuildings[0], "RECREATIONAL building should be GYM");
   }
 

@@ -193,9 +193,9 @@ public class GameUtils {
      * Increase money based on number of greggs
      */
     public static void updateMoney(){
-        GameState gameState = GameState.getState();
-        float deltaTime = Gdx.graphics.getDeltaTime();
-        gameState.money += deltaTime * 10 * gameState.getBuildingCount(BuildingType.GREGGS);
+      GameState gameState = GameState.getState();
+      float deltaTime = Gdx.graphics.getDeltaTime();
+      gameState.money += deltaTime * 10 * gameState.getBuildingCount(BuildingType.GREGGS);
 
     }
     // >>>> NEW CODE END <<<<

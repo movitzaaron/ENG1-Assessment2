@@ -15,8 +15,8 @@ public enum BuildingType {
       new Vector2Int(4, 4),
       BuildingCategory.EDUCATIONAL,
       200000),
-    GYM("Gym", "buildings/gym.png", new Vector2Int(4, 3), BuildingCategory.RECREATIONAL, 80000),
-    POOL("Pool", "buildings/pool.png", new Vector2Int(3, 4), BuildingCategory.RECREATIONAL, 60000),
+  GYM("Gym", "buildings/gym.png", new Vector2Int(4, 3), BuildingCategory.RECREATIONAL, 80000),
+  POOL("Pool", "buildings/pool.png", new Vector2Int(3, 4), BuildingCategory.RECREATIONAL, 60000),
   HALLS(
       "Halls", "buildings/halls.png", new Vector2Int(4, 4), BuildingCategory.ACCOMMODATION, 12000),
   ROAD("Road", "buildings/roads/straight.png", new Vector2Int(1, 1), BuildingCategory.PATHWAY, 100),

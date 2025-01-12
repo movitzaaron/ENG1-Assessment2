@@ -71,13 +71,14 @@ public class MenuLeaderboard implements Screen {
 
     // Initialise erase button
     TextButton eraseButton = new TextButton("Erase", skin, "round");
-    eraseButton.addListener(new ClickListener(){
-      @Override
-      public void clicked(InputEvent event, float x, float y) {
-        // delete all data in scores preferences file
-        SaveScore.deleteScores();
-      }
-    });
+    eraseButton.addListener(
+        new ClickListener() {
+          @Override
+          public void clicked(InputEvent event, float x, float y) {
+            // delete all data in scores preferences file
+            SaveScore.deleteScores();
+          }
+        });
 
     // Initialize the leaderboard label
     String topFive = SaveScore.getTopFive();
@@ -123,7 +124,6 @@ public class MenuLeaderboard implements Screen {
     buttonTable.bottom().right().pad(30);
     buttonTable.add(backButton).width(100).height(50);
     buttonTable.add(eraseButton).width(100).height(50);
-
 
     Gdx.input.setInputProcessor(stage);
   }

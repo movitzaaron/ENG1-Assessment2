@@ -137,10 +137,9 @@ public class MenuAchievements implements Screen {
       achievementsLabel.setStyle(new Label.LabelStyle(font, unlocked ? Color.GREEN : Color.GRAY));
     }
 
-      // Draw and apply ui
-      stage.act(delta);
-      stage.draw();
-
+    // Draw and apply ui
+    stage.act(delta);
+    stage.draw();
   }
 
   @Override

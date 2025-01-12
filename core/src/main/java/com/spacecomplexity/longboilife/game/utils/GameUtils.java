@@ -196,7 +196,6 @@ public class GameUtils {
       GameState gameState = GameState.getState();
       float deltaTime = Gdx.graphics.getDeltaTime();
       gameState.money += deltaTime * 10 * gameState.getBuildingCount(BuildingType.GREGGS);
-
     }
     // >>>> NEW CODE END <<<<
 }

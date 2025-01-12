@@ -143,4 +143,11 @@ public class SaveScore {
     scores.flush();
     System.out.println("Successful flush.");
   }
+
+  /** Deletes all data from scores file */
+  public static void deleteScores() {
+    scores.clear();
+    System.out.println("Successful delete.");
+    callFlush();
+  }
 }

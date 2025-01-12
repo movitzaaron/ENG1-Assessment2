@@ -28,6 +28,7 @@ public class MenuAchievements implements Screen {
   private Viewport viewport;
   private Stage stage;
   private Skin skin;
+  private Label achievementsLabel;
 
   /**
    * Constructs the achievements menu.
@@ -76,12 +77,13 @@ public class MenuAchievements implements Screen {
     for (AchievementManager.Achievement achievement : AchievementManager.Achievement.values()) {
       boolean unlocked = achievementManager.getUnlockedAchievements().contains(achievement);
 
-      Label achievementLabel = new Label(achievement.name(), skin);
-      achievementLabel.setStyle(new Label.LabelStyle(font, unlocked ? Color.GREEN : Color.GRAY));
-      achievementLabel.setFontScale(1.5f);
-      achievementLabel.setAlignment(Align.left);
+      achievementsLabel = new Label(achievement.name(), skin);
+      achievementsLabel.setStyle(new Label.LabelStyle(font, unlocked ? Color.GREEN : Color.GRAY));
+      achievementsLabel.setFontScale(1.5f);
+      achievementsLabel.setAlignment(Align.left);
 
-      achievementsTable.add(achievementLabel).pad(10).left().expandX();
+      achievementsTable.add(achievementsLabel).pad(10).left().expandX();
+
       achievementsTable.row();
     }
 
@@ -99,6 +101,17 @@ public class MenuAchievements implements Screen {
           }
         });
 
+    // Initialise erase button
+    TextButton eraseButton = new TextButton("Erase", skin, "round");
+    eraseButton.addListener(
+        new ClickListener() {
+          @Override
+          public void clicked(InputEvent event, float x, float y) {
+            // delete all data in scores preferences file
+            achievementManager.resetAchievements(Gdx.app.getPreferences("achievements"));
+          }
+        });
+
     // Position back button in the bottom-right
     Table buttonTable = new Table();
     buttonTable.setFillParent(true);
@@ -106,6 +119,7 @@ public class MenuAchievements implements Screen {
 
     buttonTable.bottom().right().pad(30);
     buttonTable.add(backButton).width(100).height(50);
+    buttonTable.add(eraseButton).width(100).height(50);
 
     // Allows UI to capture touch events
     InputMultiplexer inputMultiplexer = new InputMultiplexer(new MainInputManager(), stage);
@@ -116,10 +130,17 @@ public class MenuAchievements implements Screen {
   public void render(float delta) {
     // Clear the screen
     ScreenUtils.clear(0, 0, 0, 1f);
+    BitmapFont font = skin.getFont("font-title");
+    boolean unlocked = false;
+    for (AchievementManager.Achievement achievement : AchievementManager.Achievement.values()) {
+      unlocked = achievementManager.getUnlockedAchievements().contains(achievement);
+      achievementsLabel.setStyle(new Label.LabelStyle(font, unlocked ? Color.GREEN : Color.GRAY));
+    }
 
-    // Draw and apply ui
-    stage.act(delta);
-    stage.draw();
+      // Draw and apply ui
+      stage.act(delta);
+      stage.draw();
+
   }
 
   @Override

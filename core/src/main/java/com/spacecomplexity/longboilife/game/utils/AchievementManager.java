@@ -108,6 +108,8 @@ public class AchievementManager {
     System.out.println("Achievement unlocked: " + achievement.name());
   }
 
+  private void unlockAchievementsNS(Preferences preferences) {}
+
   /** Load achievements from persistent storage. */
   private void loadAchievements(Preferences preferences) {
     for (Achievement achievement : Achievement.values()) {

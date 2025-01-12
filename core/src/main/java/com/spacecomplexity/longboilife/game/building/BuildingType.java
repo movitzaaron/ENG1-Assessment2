@@ -9,13 +9,14 @@ public enum BuildingType {
   // >>>> CHANGED CODE START <<<<
   // CHANGED: changed size, and cost of buildings
   GREGGS("Greggs", "buildings/greggs.png", new Vector2Int(3, 3), BuildingCategory.FOOD, 5000),
-  LIBRARY(
+    LIBRARY(
       "Library",
       "buildings/library.png",
       new Vector2Int(4, 4),
       BuildingCategory.EDUCATIONAL,
       200000),
-  GYM("Gym", "buildings/gym.png", new Vector2Int(4, 3), BuildingCategory.RECREATIONAL, 80000),
+    GYM("Gym", "buildings/gym.png", new Vector2Int(4, 3), BuildingCategory.RECREATIONAL, 80000),
+    POOL("Pool", "buildings/pool.png", new Vector2Int(3, 4), BuildingCategory.RECREATIONAL, 60000),
   HALLS(
       "Halls", "buildings/halls.png", new Vector2Int(4, 4), BuildingCategory.ACCOMMODATION, 12000),
   ROAD("Road", "buildings/roads/straight.png", new Vector2Int(1, 1), BuildingCategory.PATHWAY, 100),

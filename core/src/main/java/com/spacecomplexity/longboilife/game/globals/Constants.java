@@ -1,70 +1,52 @@
 package com.spacecomplexity.longboilife.game.globals;
 
 import com.spacecomplexity.longboilife.game.building.BuildingCategory;
-
 import java.util.TreeMap;
 
-/**
- * Class contain the constants used throughout the game.
- */
+/** Class contain the constants used throughout the game. */
 public class Constants {
-    /**
-     * The size of tiles (in px).
-     */
-    public static final int TILE_SIZE = 8;
+  /** The size of tiles (in px). */
+  public static final int TILE_SIZE = 8;
 
-    /**
-     * The height of the window at scaling level 1.
-     */
-    public static final int SCALING_1_HEIGHT = 1080;
+  /** The height of the window at scaling level 1. */
+  public static final int SCALING_1_HEIGHT = 1080;
 
-    /**
-     * Map of the UI scaling at the specified window height.
-     */
-    public static final TreeMap<Integer, Float> UI_SCALING_MAP = new TreeMap<>() {{
-        put(0, 1f);
-        put(720, 1.5f);
-        put(1440, 2f);
-        put(2160, 2.5f);
-    }};
+  /** Map of the UI scaling at the specified window height. */
+  public static final TreeMap<Integer, Float> UI_SCALING_MAP =
+      new TreeMap<>() {
+        {
+          put(0, 1f);
+          put(720, 1.5f);
+          put(1440, 2f);
+          put(2160, 2.5f);
+        }
+      };
 
-    /**
-     * Minimum camera zoom level.
-     */
-    public static final float MIN_ZOOM = 0.05f;
+  /** Minimum camera zoom level. */
+  public static final float MIN_ZOOM = 0.05f;
 
-    /**
-     * Maximum camera zoom level.
-     */
-    public static final float MAX_ZOOM = 0.5f;
+  /** Maximum camera zoom level. */
+  public static final float MAX_ZOOM = 0.5f;
 
-    /**
-     * The proportion of money the user will get back form selling the building.
-     */
-    public static float sellCostRecovery = 0.5f;
+  /** The proportion of money the user will get back form selling the building. */
+  public static float sellCostRecovery = 0.5f;
 
-    /**
-     * The proportion of money the user will need in order to move the building.
-     */
-    public static float moveCostRecovery = 0.25f;
+  /** The proportion of money the user will need in order to move the building. */
+  public static float moveCostRecovery = 0.25f;
 
-    // >>>> NEW CODE START <<<<
-    /**
-     * The number of buildings required for the buildingCount satisfaction modifier to be 1.
-     */
-    public static int satisfactionMinBuildingCount = 20;
+  // >>>> NEW CODE START <<<<
+  /** The number of buildings required for the buildingCount satisfaction modifier to be 1. */
+  public static int satisfactionMinBuildingCount = 20;
 
-    /**
-     * The minimum difference in number between 2 categories of building that will lead to a satisfaction score reduction
-     */
-    public static int satisfactionMaxAllowedBuildingDifference = 2;
-    // >>>> NEW CODE END <<<<
+  /**
+   * The minimum difference in number between 2 categories of building that will lead to a
+   * satisfaction score reduction
+   */
+  public static int satisfactionMaxAllowedBuildingDifference = 2;
 
-    /**
-     * Which category of buildings will not be deselected when built.
-     */
-    public static BuildingCategory[] dontRemoveSelection = new BuildingCategory[]{
-        BuildingCategory.PATHWAY
-    };
+  // >>>> NEW CODE END <<<<
 
+  /** Which category of buildings will not be deselected when built. */
+  public static BuildingCategory[] dontRemoveSelection =
+      new BuildingCategory[] {BuildingCategory.PATHWAY};
 }

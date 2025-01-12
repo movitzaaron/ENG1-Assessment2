@@ -8,52 +8,51 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.ui.UIElement;
-
 import java.text.NumberFormat;
 import java.util.Locale;
 
-/**
- * Class to represent the Money UI.
- */
+/** Class to represent the Money UI. */
 public class UIMoneyMenu extends UIElement {
-    private Label label;
+  private Label label;
 
-    /**
-     * Initialise money menu elements.
-     *
-     * @param uiViewport  the viewport used to render UI.
-     * @param parentTable the table to render this element onto.
-     * @param skin        the provided skin.
-     */
-    public UIMoneyMenu(Viewport uiViewport, Table parentTable, Skin skin) {
-        super(uiViewport, parentTable, skin);
+  /**
+   * Initialise money menu elements.
+   *
+   * @param uiViewport the viewport used to render UI.
+   * @param parentTable the table to render this element onto.
+   * @param skin the provided skin.
+   */
+  public UIMoneyMenu(Viewport uiViewport, Table parentTable, Skin skin) {
+    super(uiViewport, parentTable, skin);
 
-        // Initialise money label
-        label = new Label(null, skin);
-        // >>>> NEW CODE START <<<<
-        label.setFontScale(1.8f);
-        // >>>> NEW CODE END <<<<
-        label.setColor(Color.WHITE);
+    // Initialise money label
+    label = new Label(null, skin);
+    // >>>> NEW CODE START <<<<
+    label.setFontScale(1.8f);
+    // >>>> NEW CODE END <<<<
+    label.setColor(Color.WHITE);
 
-        // Place label onto table
-        table.add(label).align(Align.center);
+    // Place label onto table
+    table.add(label).align(Align.center);
 
-        // Style and place the table
-        table.setBackground(skin.getDrawable("panel1"));
-        // >>>> NEW CODE START <<<<
-        table.setSize(180, 60);
-        // >>>> NEW CODE END <<<<
-        placeTable();
-    }
+    // Style and place the table
+    table.setBackground(skin.getDrawable("panel1"));
+    // >>>> NEW CODE START <<<<
+    table.setSize(180, 60);
+    // >>>> NEW CODE END <<<<
+    placeTable();
+  }
 
-    public void render() {
-        label.setText(NumberFormat.getCurrencyInstance(Locale.UK).format(GameState.getState().money));
-    }
+  public void render() {
+    label.setText(NumberFormat.getCurrencyInstance(Locale.UK).format(GameState.getState().money));
+  }
 
-    @Override
-    protected void placeTable() {
-        // >>>> CHANGED CODE START <<<<
-        table.setPosition(uiViewport.getWorldWidth() - table.getWidth(), uiViewport.getWorldHeight() - table.getHeight());
-        // >>>> CHANGED CODE END <<<<
-    }
+  @Override
+  protected void placeTable() {
+    // >>>> CHANGED CODE START <<<<
+    table.setPosition(
+        uiViewport.getWorldWidth() - table.getWidth(),
+        uiViewport.getWorldHeight() - table.getHeight());
+    // >>>> CHANGED CODE END <<<<
+  }
 }

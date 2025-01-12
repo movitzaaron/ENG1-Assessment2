@@ -24,11 +24,26 @@ import com.spacecomplexity.longboilife.game.utils.Vector2Int;
  * }
  * </pre>
  *
- * Each element in the map can be any valid enum name as specified in {@link TileType}. Each element
- * in the buildings contains the name {@link
+ * <p>Each element in the map can be any valid enum name as specified in {@link TileType}. Each
+ * element in the buildings contains the name {@link
  * com.spacecomplexity.longboilife.game.building.BuildingType} and position on the map.
  */
 public class SaveMap {
+  /**
+   * Represents a building within the game world.
+   *
+   * <p>This class stores the basic properties of a building, including its name and its position on
+   * a 2D grid (specified by {@code x} and {@code y} coordinates). The class can be used to
+   * instantiate building objects with default values.
+   *
+   * <p><strong>Attributes:</strong>
+   *
+   * <ul>
+   *   <li>{@code name} - The name of the building.
+   *   <li>{@code x} - The x-coordinate of the building's position on the grid.
+   *   <li>{@code y} - The y-coordinate of the building's position on the grid.
+   * </ul>
+   */
   public static class Building {
     String name;
     int x;
@@ -90,6 +105,20 @@ public class SaveMap {
     return world;
   }
 
+  /**
+   * Builds all buildings in the world based on the current building list.
+   *
+   * <p>This method iterates through a list of buildings, determines their type and position, and
+   * places them in the game world. It also handles exceptions for invalid building types or
+   * locations where buildings cannot be placed.
+   *
+   * <p>Note that the y-axis is flipped during placement to accommodate the difference in coordinate
+   * systems between the JSON data (top-left origin) and LibGDX (bottom-left origin).
+   *
+   * @param world the {@link World} in which the buildings will be placed
+   * @throws InvalidSaveMapException if a building has an invalid type or cannot be placed at the
+   *     specified location
+   */
   public void buildBuildings(World world) throws InvalidSaveMapException {
     // Go through each building and build it in the world
     for (Building building : buildings) {

@@ -153,8 +153,6 @@ public class RenderUtils {
 
     Vector2Int mouse = GameUtils.getMouseOnGrid(world);
 
-    String commaPrice = String.format("%,d", Math.round(building.getCost()));
-
     // Check if this would be a valid position to build
     boolean validPosition = world.canBuild(building, mouse);
 
@@ -174,6 +172,8 @@ public class RenderUtils {
         building.getSize().x * cellSize,
         building.getSize().y * cellSize);
 
+    String commaPrice = String.format("%,d", Math.round(building.getCost()));
+
     font.draw(batch, "-£" + commaPrice, mouse.x * cellSize, mouse.y * cellSize);
 
     // Remove any tints applied
@@ -192,13 +192,14 @@ public class RenderUtils {
    */
   public static void outlineBuilding(
       ShapeRenderer shapeRenderer, Building building, Color colour, int thickness) {
-    float cellSize = getCellSize();
 
     // Set line thickness directly to GL as LibGdx does not have a way of doing this.
     Gdx.gl.glLineWidth(thickness);
     // Begin the shape render with specified colour
     shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
     shapeRenderer.setColor(colour);
+
+    float cellSize = getCellSize();
 
     // Draw a box around the building
     shapeRenderer.rect(

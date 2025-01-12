@@ -1,6 +1,6 @@
 package com.spacecomplexity.longboilife.game.utils;
 
-/** Class to represent a simple timer */
+/** Class to represent a simple timer. */
 public class Timer {
   private long finishTime;
   private long onPauseTime;
@@ -32,6 +32,20 @@ public class Timer {
 
   // >>>> CHANGED CODE START <<<<
   // CHANGED: does not allow a negative timer, and can start a timer paused
+  /**
+   * Sets the timer with a specified duration and paused state.
+   *
+   * <p>This method initialises the timer with a given duration in milliseconds and determines
+   * whether the timer starts in a paused state. If an invalid duration (negative value) is
+   * provided, the timer defaults to 0 milliseconds and is paused.
+   *
+   * <p>The timer calculates its finish time based on the current system time and the specified
+   * duration. If the {@code paused} parameter is {@code true}, the timer will be paused immediately
+   * upon initialisation.
+   *
+   * @param duration the duration of the timer in milliseconds; must be non-negative
+   * @param paused {@code true} if the timer should start in a paused state, {@code false} otherwise
+   */
   public void setTimer(long duration, boolean paused) {
     // If duration given is invalid, instantiates timer to 0ms and paused.
     if (duration < 0) {

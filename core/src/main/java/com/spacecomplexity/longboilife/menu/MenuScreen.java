@@ -29,6 +29,15 @@ public class MenuScreen implements Screen {
   private Stage stage;
   private Skin skin;
 
+  /**
+   * Constructs the main menu screen.
+   *
+   * <p>This constructor initialises the menu screen, setting up the viewport, stage, and rendering
+   * elements needed for displaying the main menu. It also loads the background texture and UI skin
+   * for styling buttons and other elements.
+   *
+   * @param game the main game instance
+   */
   public MenuScreen(Main game) {
     this.game = game;
 

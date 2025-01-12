@@ -25,9 +25,13 @@ public class Vector2Int {
   @Override
   public boolean equals(Object obj) {
     // Check for the same reference
-    if (this == obj) return true;
+    if (this == obj) {
+      return true;
+    }
     // Check class type
-    if (obj == null || getClass() != obj.getClass()) return false;
+    if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
 
     // Check if fields are equal
     Vector2Int that = (Vector2Int) obj;

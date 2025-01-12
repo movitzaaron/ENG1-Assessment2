@@ -30,6 +30,15 @@ public class MenuLeaderboard implements Screen {
   private Label namesLabel;
   private Label scoresLabel;
 
+  /**
+   * Constructs the leaderboard menu.
+   *
+   * <p>This constructor initialises the menu for displaying the game leaderboard. It sets up the
+   * viewport, stage, and other rendering elements required for displaying leaderboard information.
+   * The UI skin is also loaded for consistent styling of buttons and other elements.
+   *
+   * @param game the main game instance
+   */
   public MenuLeaderboard(Main game) {
     this.game = game;
 

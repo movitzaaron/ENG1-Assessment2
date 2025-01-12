@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -30,6 +29,16 @@ public class MenuAchievements implements Screen {
   private Stage stage;
   private Skin skin;
 
+  /**
+   * Constructs the achievements menu.
+   *
+   * <p>This constructor initialises the menu for displaying player achievements. It sets up the
+   * viewport, stage, and skin required for rendering the UI elements. The menu relies on the {@link
+   * AchievementManager} to fetch and manage the player's achievements.
+   *
+   * @param game the main game instance
+   * @param achievementManager the manager responsible for tracking and retrieving achievements
+   */
   public MenuAchievements(Main game, AchievementManager achievementManager) {
     this.game = game;
     this.achievementManager = achievementManager;

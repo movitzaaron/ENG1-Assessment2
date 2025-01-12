@@ -17,7 +17,10 @@ public class Main extends Game {
   public static boolean fullscreen = false;
 
   /** The previous dimensions of the game, for returning from fullscreen. */
-  public static int prevAppWidth, prevAppHeight;
+  public static int prevAppWidth;
+
+  /** The previous dimensions of the game, for returning from fullscreen. */
+  public static int prevAppHeight;
 
   // Needed param for MenuAchievements class
   private AchievementManager achievementManager;

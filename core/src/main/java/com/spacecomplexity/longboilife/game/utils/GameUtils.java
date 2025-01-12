@@ -176,4 +176,13 @@ public class GameUtils {
 
         // >>>> CHANGED CODE END <<<<
     }
+
+    // >>>> NEW CODE START <<<<
+    public static void updateMoney(World world){
+        GameState gameState = GameState.getState();
+        float deltaTime = Gdx.graphics.getDeltaTime();
+        gameState.money += deltaTime * 10 * gameState.getBuildingCount(BuildingType.GREGGS);
+
+    }
+    // >>>> NEW CODE END <<<<
 }

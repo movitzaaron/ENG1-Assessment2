@@ -181,6 +181,9 @@ public class GameScreen implements Screen {
         if (!gameState.paused && !MainTimer.getTimerManager().getTimer().poll()) {
             // Update the satisfaction score
             GameUtils.updateSatisfactionScore(world);
+            // >>>> NEW CODE START <<<<
+            GameUtils.updateMoney(world);
+            // >>>> NEW CODE END <<<<
         }
     }
 

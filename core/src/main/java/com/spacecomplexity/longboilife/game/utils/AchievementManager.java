@@ -71,7 +71,7 @@ public class AchievementManager {
    * @param preferences the preferences file to persist unlocked achievements
    */
   public void poll(GameState gameState, Preferences preferences) {
-    if (!unlockedAchievements.contains(Achievement.BROKE) && gameState.money == 0) {
+    if (!unlockedAchievements.contains(Achievement.BROKE) && gameState.money <= 1000) {
       unlockAchievement(
           Achievement.BROKE, EventHandler.Event.BROKE_ACHIEVEMENT_DIALOG, preferences);
     } else if (!unlockedAchievements.contains(Achievement.SATISFIED)
@@ -115,11 +115,6 @@ public class AchievementManager {
         unlockedAchievements.add(achievement);
       }
     }
-  }
-
-  /** Reset all achievements (for debugging or testing). */
-  protected void resetAchievements() {
-    resetAchievements(achPreferences);
   }
 
   /** Reset all achievements (for debugging or testing). */

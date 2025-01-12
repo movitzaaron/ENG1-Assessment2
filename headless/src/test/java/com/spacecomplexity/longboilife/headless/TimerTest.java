@@ -1,10 +1,7 @@
 package com.spacecomplexity.longboilife.headless;
 
-import com.spacecomplexity.longboilife.game.globals.MainTimer;
-import com.spacecomplexity.longboilife.game.utils.EventHandler;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.*;
-import com.badlogic.gdx.Gdx;
 import static org.junit.jupiter.api.Assertions.*;
 import com.spacecomplexity.longboilife.game.utils.Timer;
 

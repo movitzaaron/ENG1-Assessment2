@@ -65,6 +65,17 @@ public class TimerTest extends AbstractHeadlessGdxTest{
     }
 
     @Test
+    public void testResumeWhenNotPaused() {
+        // Arrange
+        Timer timer = new Timer();
+
+        // Act & Assert
+        IllegalStateException exception = assertThrows(IllegalStateException.class, timer::resumeTimer, "Timer should throw IllegalStateException when trying to resume a timer that is not paused");
+
+        assertEquals("Timer has not been paused", exception.getMessage());
+    }
+
+    @Test
     public void testPoll() {
         // Arrange
         Timer timer = new Timer();

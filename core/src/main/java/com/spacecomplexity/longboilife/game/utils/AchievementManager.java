@@ -8,10 +8,26 @@ import java.util.HashSet;
 import java.util.Set;
 
 // NEW: this is all new
-/** Class to manage achievements */
+/**
+ * Manages the achievements system in the game.
+ *
+ * <p>This class is responsible for tracking, unlocking, and storing achievements. Achievements are
+ * unlocked based on specific conditions checked against the current game state. Once unlocked,
+ * achievements are persisted using {@link Preferences} to ensure they remain available across
+ * sessions.
+ *
+ * <p><strong>Key Features:</strong>
+ *
+ * <ul>
+ *   <li>Tracks the state of unlocked achievements.
+ *   <li>Checks game state conditions to determine if achievements should be unlocked.
+ *   <li>Integrates with the event handling system to trigger achievement-related events.
+ *   <li>Supports persistence and reset of achievements.
+ * </ul>
+ */
 public class AchievementManager {
 
-  // Enum to define available achievements
+  /** Defines the available achievements in the game. */
   public enum Achievement {
     BROKE,
     SATISFIED,
@@ -23,7 +39,7 @@ public class AchievementManager {
   /** Accesses preferences file if it exists, otherwise creates it. */
   private static final Preferences achPreferences = Gdx.app.getPreferences("achievements");
 
-  /** Creates set of unlocked achievements */
+  /** Creates set of unlocked achievements. */
   private final Set<Achievement> unlockedAchievements = new HashSet<>();
 
   /** Load achievements from persistent storage. */
@@ -36,13 +52,23 @@ public class AchievementManager {
     loadAchievements(preferences);
   }
 
+  /**
+   * Polls the game state to evaluate achievement conditions.
+   *
+   * <p>Checks the current game state against the conditions for each achievement. If a condition is
+   * met and the achievement has not been unlocked, the achievement is unlocked and its associated
+   * event is triggered.
+   */
   public void poll() {
     GameState gameState = GameState.getState();
     poll(gameState, achPreferences);
   }
 
   /**
-   * Check the game state against the conditions of each achievement and call the event if necessary
+   * Polls the game state and evaluates conditions for unlocking achievements.
+   *
+   * @param gameState the current game state
+   * @param preferences the preferences file to persist unlocked achievements
    */
   public void poll(GameState gameState, Preferences preferences) {
     if (!unlockedAchievements.contains(Achievement.BROKE) && gameState.money == 0) {

@@ -39,8 +39,8 @@ public class Constants {
   public static int satisfactionMinBuildingCount = 20;
 
   /**
-   * The minimum difference in number between 2 categories of building that will lead to a
-   * satisfaction score reduction
+   * The minimum difference in number between 2 categories of building that will lead to
+   * satisfaction score reduction.
    */
   public static int satisfactionMaxAllowedBuildingDifference = 2;
 

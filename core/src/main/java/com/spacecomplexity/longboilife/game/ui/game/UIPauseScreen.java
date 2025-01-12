@@ -36,12 +36,14 @@ public class UIPauseScreen extends UIElement {
     placeTable();
   }
 
+  /**
+   * Renders the UI element.
+   *
+   * <p>This method sets the visibility of the table based on the game's paused state. If the game
+   * is currently paused, the table is made visible; otherwise, it is hidden.
+   */
   public void render() {
-    if (GameState.getState().paused) {
-      table.setVisible(true);
-    } else {
-      table.setVisible(false);
-    }
+    table.setVisible(GameState.getState().paused);
   }
 
   @Override

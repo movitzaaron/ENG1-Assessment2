@@ -11,7 +11,7 @@ public class GameState {
 
   // >>>> NEW CODE START <<<<
   // NEW: returns an instance of gameState for testing purposes
-  public static GameState TEST_CreateInstance() {
+  public static GameState testCreateInstance() {
     return new GameState();
   }
 
@@ -80,7 +80,7 @@ public class GameState {
   /** If the user is currently typing. */
   public boolean isTyping;
 
-  /** The category of the currently open menu */
+  /** The category of the currently open menu. */
   public BuildingCategory openMenuCategory;
 
   // >>>> NEW CODE END <<<<
@@ -167,7 +167,7 @@ public class GameState {
   /** If the last satisfaction modifier calculated was positive. */
   public boolean satisfactionModifierPositive = false;
 
-  /** If the game has ended */
+  /** If the game has ended. */
   public boolean gameOver = false;
 
   /**

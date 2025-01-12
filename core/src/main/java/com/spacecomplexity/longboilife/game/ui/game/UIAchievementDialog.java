@@ -10,12 +10,37 @@ import com.spacecomplexity.longboilife.game.ui.UIElement;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
 
 // NEW: This is completely new
+/**
+ * Represents the achievement dialog UI in the game.
+ *
+ * <p>This class is responsible for creating and displaying dialog boxes whenever specific
+ * achievements are unlocked in the game. It handles multiple achievement types, such as 'broke',
+ * 'satisfied', and others, and uses the {@link EventHandler} system to respond to
+ * achievement-related events.
+ *
+ * <p><strong>Key Features:</strong>
+ *
+ * <ul>
+ *   <li>Displays achievement dialogs with a consistent visual style.
+ *   <li>Responds to achievement-related events using {@link EventHandler}.
+ *   <li>Provides specific dialogs for each achievement type.
+ * </ul>
+ *
+ * <p><strong>Usage:</strong>
+ *
+ * <pre>{@code
+ * UIAchievementDialog achDialog = new UIAchievementDialog(uiViewport, parentTable, skin, stage);
+ * // Events will automatically trigger the appropriate dialog when fired.
+ * }</pre>
+ *
+ * <p>This class extends {@link UIElement} to integrate into the game's UI system.
+ */
 public class UIAchievementDialog extends UIElement {
   private final Skin skin;
   private final Stage stage;
   private final String title = "You unlocked an achievement!";
 
-  /** A UI class that creates dialogs to display achievements */
+  /** A UI class that creates dialogs to display achievements. */
   public UIAchievementDialog(Viewport uiViewport, Table parentTable, Skin skin, Stage stage) {
     super(uiViewport, parentTable, skin);
     this.skin = skin;
@@ -63,7 +88,7 @@ public class UIAchievementDialog extends UIElement {
   @Override
   protected void placeTable() {}
 
-  /** Dialog for the 'broke' achievement */
+  /** Dialog for the 'broke' achievement. */
   private void brokeDialog() {
     Dialog dialog = new Dialog(title, skin);
 
@@ -82,7 +107,7 @@ public class UIAchievementDialog extends UIElement {
     dialog.show(stage);
   }
 
-  /** Dialog for the 'satisfied' achievement */
+  /** Dialog for the 'satisfied' achievement. */
   private void satisfiedDialog() {
     Dialog dialog = new Dialog(title, skin);
 
@@ -101,6 +126,7 @@ public class UIAchievementDialog extends UIElement {
     dialog.show(stage);
   }
 
+  /** Dialog for the 'fitness' achievement. */
   private void fitnessDialog() {
     Dialog dialog = new Dialog(title, skin);
 
@@ -119,6 +145,7 @@ public class UIAchievementDialog extends UIElement {
     dialog.show(stage);
   }
 
+  /** Dialog for the 'academic' achievement. */
   private void academicDialog() {
     Dialog dialog = new Dialog(title, skin);
 
@@ -137,6 +164,7 @@ public class UIAchievementDialog extends UIElement {
     dialog.show(stage);
   }
 
+  /** Dialog for the 'foodie' achievement. */
   private void foodieDialog() {
     Dialog dialog = new Dialog(title, skin);
 

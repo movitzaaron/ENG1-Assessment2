@@ -2,7 +2,11 @@ package com.spacecomplexity.longboilife.game.ui.scenario;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.spacecomplexity.longboilife.game.building.BuildingType;
@@ -13,13 +17,42 @@ import com.spacecomplexity.longboilife.game.utils.EventHandler;
 
 // NEW: This is all new
 /**
- * A UI test class that creates and shows a modal dialog. The dialog itself is modal, meaning it
- * will block input to underlying UI elements.
+ * Represents the UI for scenario-related modal dialogs in the game.
+ *
+ * <p>This class handles the creation and display of modal dialogs for various scenarios, such as
+ * tutorials, grants, and event-triggered challenges. Dialogs are modal, meaning they block input to
+ * underlying UI elements until dismissed. The dialogs include custom content, such as dynamic
+ * messages and buttons that trigger game state changes.
+ *
+ * <p><strong>Key Features:</strong>
+ *
+ * <ul>
+ *   <li>Customisable dialogs for scenarios like tutorial, duck illness, grants, and the Roses
+ *       competition.
+ *   <li>Integration with the {@link EventHandler} system to dynamically respond to game events.
+ *   <li>Displays rich, formatted text with scrollable content when needed.
+ * </ul>
+ *
+ * <p><strong>Usage:</strong>
+ *
+ * <pre>{@code
+ * UIDialogs uiDialogs = new UIDialogs(uiViewport, parentTable, skin, stage);
+ * // Trigger dialogs through event calls.
+ * EventHandler.getEventHandler().callEvent(EventHandler.Event.TUTORIAL_DIALOG);
+ * }</pre>
  */
 public class UIDialogs extends UIElement {
   private final Skin skin;
   private final Stage stage;
 
+  /**
+   * Constructs the UIDialogs instance and initialises event-driven dialogs.
+   *
+   * @param uiViewport the viewport used for rendering the UI
+   * @param parentTable the parent table to which this UI element belongs
+   * @param skin the skin used for styling UI elements
+   * @param stage the stage to display the dialogs on
+   */
   public UIDialogs(Viewport uiViewport, Table parentTable, Skin skin, Stage stage) {
     super(uiViewport, parentTable, skin);
     this.skin = skin;
@@ -112,15 +145,6 @@ public class UIDialogs extends UIElement {
   }
 
   private void tutorialDialogOutcome() {
-    // Followup dialog: Tutorial explanation
-    Dialog tutorialDialog =
-        new Dialog("Tutorial", skin) {
-          @Override
-          protected void result(Object object) {
-            // Resumes the game when "Continue" is clicked
-            EventHandler.getEventHandler().callEvent(EventHandler.Event.RESUME_GAME);
-          }
-        };
     // Label for the tutorial dialog
     Label tutorialLabel =
         new Label(
@@ -150,6 +174,16 @@ public class UIDialogs extends UIElement {
     scrollPane.setScrollingDisabled(true, false); // Enable vertical scrolling only
     scrollPane.setFadeScrollBars(false); // Keep scrollbars always visible
     scrollPane.setForceScroll(false, true); // Force vertical scroll even if not actively scrolling
+
+    // Followup dialog: Tutorial explanation
+    Dialog tutorialDialog =
+        new Dialog("Tutorial", skin) {
+          @Override
+          protected void result(Object object) {
+            // Resumes the game when "Continue" is clicked
+            EventHandler.getEventHandler().callEvent(EventHandler.Event.RESUME_GAME);
+          }
+        };
     tutorialDialog
         .getContentTable()
         .add(scrollPane)

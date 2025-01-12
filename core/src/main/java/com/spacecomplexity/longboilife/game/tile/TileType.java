@@ -24,6 +24,16 @@ public enum TileType {
     this.isNaturallyBuildable = isNaturallyBuildable;
   }
 
+  /**
+   * Retrieves the texture associated with this object.
+   *
+   * <p>If the texture has not yet been loaded, this method initialises it using the specified
+   * {@code texturePath}. Once initialised, the texture is cached for subsequent calls.
+   *
+   * @return The {@link Texture} object associated with this instance. <strong>Note:</strong> Ensure
+   *     proper disposal of the texture using {@link Texture#dispose()} to avoid memory leaks when
+   *     the texture is no longer needed.
+   */
   public Texture getTexture() {
     if (texture == null) {
       this.texture = new Texture(texturePath);

@@ -9,7 +9,7 @@ public enum BuildingType {
   // >>>> CHANGED CODE START <<<<
   // CHANGED: changed size, and cost of buildings
   GREGGS("Greggs", "buildings/greggs.png", new Vector2Int(3, 3), BuildingCategory.FOOD, 5000),
-    LIBRARY(
+  LIBRARY(
       "Library",
       "buildings/library.png",
       new Vector2Int(4, 4),
@@ -95,6 +95,19 @@ public enum BuildingType {
     return cost;
   }
 
+  /**
+   * Retrieves an array of {@link BuildingType} elements that belong to the specified {@link
+   * BuildingCategory}.
+   *
+   * <p>This method filters all available building types based on the given category and returns
+   * only those that match the specified category.
+   *
+   * @param category the building category to filter by
+   * @return an array of {@link BuildingType} objects that belong to the specified category. If no
+   *     building types match, returns an empty array.
+   * @see BuildingType
+   * @see BuildingCategory
+   */
   public static BuildingType[] getBuildingsOfType(BuildingCategory category) {
     return Stream.of(BuildingType.values())
         .filter(buildingType -> buildingType.getCategory().equals(category))

@@ -47,6 +47,17 @@ public class UITipsMenu extends UIElement {
     placeTable();
   }
 
+  /**
+   * Renders the tips UI element.
+   *
+   * <p>This method dynamically generates and displays gameplay tips based on the current game
+   * state. It checks various satisfaction modifiers and provides actionable advice to the player on
+   * how to improve their satisfaction score, such as placing buildings closer together or balancing
+   * the types of buildings.
+   *
+   * <p>The tips are displayed only if there are actionable suggestions, and the table's size and
+   * position are adjusted dynamically based on the number of tips generated.
+   */
   public void render() {
     GameState gameState = GameState.getState();
     StringBuilder tipsText = new StringBuilder();

@@ -50,6 +50,16 @@ public class UIBuildingCounter extends UIElement {
     placeTable();
   }
 
+  /**
+   * Renders the building count information.
+   *
+   * <p>This method retrieves the count of all building types in the game and displays the
+   * information on the UI. It iterates through all available {@link BuildingType} values, obtains
+   * their respective counts from the {@link GameState}, and formats the counts as a string with
+   * line breaks between each type.
+   *
+   * <p>The formatted building count string is then displayed on the {@code counterLabel}.
+   */
   public void render() {
     // Get the count of all buildings and display them
     String buildingCount =

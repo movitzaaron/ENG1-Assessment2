@@ -38,8 +38,6 @@ public class UIBottomMenu extends UIElement {
   public UIBottomMenu(Viewport uiViewport, Table parentTable, Skin skin) {
     super(uiViewport, parentTable, skin);
 
-    EventHandler eventHandler = EventHandler.getEventHandler();
-
     buildMenu = new UIBuildMenu(uiViewport, parentTable, skin);
     pauseScreen = new UIPauseScreen(uiViewport, parentTable, skin);
 
@@ -82,6 +80,7 @@ public class UIBottomMenu extends UIElement {
     // >>>> NEW CODE START <<<<
     // NEW: now game has a tutorial button
     // Initialise tutorial button
+    EventHandler eventHandler = EventHandler.getEventHandler();
     TextButton tutorialButton = new TextButton("?", skin);
     tutorialButton.setSize(textureSize, textureSize);
     tutorialButton.addListener(

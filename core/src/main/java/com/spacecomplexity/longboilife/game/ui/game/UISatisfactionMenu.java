@@ -50,6 +50,13 @@ public class UISatisfactionMenu extends UIElement {
     placeTable();
   }
 
+  /**
+   * Renders the satisfaction score UI.
+   *
+   * <p>This method updates the displayed satisfaction score and its associated colour and progress
+   * bar value based on the current game state. The score is formatted as a percentage and displayed
+   * in green if the satisfaction modifier is positive, or red if negative.
+   */
   public void render() {
     scoreLabel.setText(String.format("%.2f%%", GameState.getState().satisfactionScore * 100));
     scoreLabel.setColor(

@@ -8,8 +8,30 @@ import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.globals.Keybindings;
 import com.spacecomplexity.longboilife.game.globals.MainCamera;
 
-import java.security.Key;
-
+/**
+ * Manages all input-related events and interactions in the game.
+ *
+ * <p>The {@code InputManager} class handles player input, such as keyboard and mouse events, for
+ * controlling the camera, interacting with game elements, and triggering actions. It separates
+ * continuous input handling (e.g., camera movement) from event-driven input (e.g., mouse clicks or
+ * key presses).
+ *
+ * <p><strong>Key Features:</strong>
+ *
+ * <ul>
+ *   <li>Handles camera movement and zoom based on key and mouse inputs.
+ *   <li>Processes mouse events for building placement, selection, and dragging actions.
+ *   <li>Handles keyboard events to pause, cancel operations, or open the tutorial dialog.
+ *   <li>Integrates seamlessly with {@link EventHandler} for triggering game events.
+ * </ul>
+ *
+ * <p><strong>Usage:</strong>
+ *
+ * <pre>{@code
+ * InputMultiplexer inputMultiplexer = new InputMultiplexer();
+ * InputManager inputManager = new InputManager(inputMultiplexer);
+ * }</pre>
+ */
 public class InputManager {
   private final GameState gameState = GameState.getState();
 
@@ -120,10 +142,7 @@ public class InputManager {
           // If a building is selected then try to build this
           if (GameState.getState().placingBuilding != null) {
             eventHandler.callEvent(EventHandler.Event.BUILD);
-          }
-
-          // Else try and select a building already on the map
-          else {
+          } else { // Else try and select a building already on the map
             eventHandler.callEvent(EventHandler.Event.SELECT_BUILDING);
           }
 
@@ -137,6 +156,9 @@ public class InputManager {
           lastScreenY = screenY;
 
           break;
+
+        default:
+          return false;
       }
 
       return true;
@@ -181,6 +203,8 @@ public class InputManager {
           lastScreenX = screenX;
           lastScreenY = screenY;
           break;
+        default:
+          return false;
       }
 
       return true;
@@ -199,10 +223,8 @@ public class InputManager {
         eventHandler.callEvent(EventHandler.Event.CANCEL_OPERATIONS);
 
         return true;
-      }
-
-      // If the pause key is pressed, pause/resume the game
-      else if (keycode == Keybindings.PAUSE.getKey()) {
+      } else if (keycode
+          == Keybindings.PAUSE.getKey()) { // If the pause key is pressed, pause/resume the game
         // If the game is over don't allow pause
         if (gameState.gameOver) {
           return true;
@@ -224,7 +246,7 @@ public class InputManager {
 
         return true;
       }
-      // >>>> NEW CODE START <<<<
+      // >>>> NEW CODE END <<<
 
       return false;
     }

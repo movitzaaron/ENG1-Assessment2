@@ -14,7 +14,6 @@ import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.ui.UIElement;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
 import com.spacecomplexity.longboilife.game.utils.Vector2Int;
-
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -101,10 +100,6 @@ public class UIBuildMenu extends UIElement {
 
       // Initialise building labels
       Label titleLabel = new Label(building.getDisplayName(), skin);
-      Label costLabel =
-          new Label(NumberFormat.getCurrencyInstance(Locale.UK).format(building.getCost()), skin);
-      Label sizeLabel =
-          new Label(String.format("%dx%d", building.getSize().x, building.getSize().y), skin);
 
       // create container for UI elements relating to this building
       Table buildingTable = new Table();
@@ -113,8 +108,16 @@ public class UIBuildMenu extends UIElement {
       buildingTable.row();
       buildingTable.add(titleLabel).padTop(2);
       buildingTable.row();
+
+      Label costLabel =
+          new Label(NumberFormat.getCurrencyInstance(Locale.UK).format(building.getCost()), skin);
+
       buildingTable.add(costLabel).padTop(2);
       buildingTable.row();
+
+      Label sizeLabel =
+          new Label(String.format("%dx%d", building.getSize().x, building.getSize().y), skin);
+
       buildingTable.add(sizeLabel).padTop(2);
 
       // Add the container to the building table

@@ -9,7 +9,12 @@ import com.spacecomplexity.longboilife.game.globals.Constants;
 import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.globals.MainCamera;
 import com.spacecomplexity.longboilife.game.world.World;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Vector;
 
 /** A class used for game utilities. */
 public class GameUtils {
@@ -38,7 +43,9 @@ public class GameUtils {
 
     // If height is 0 then the window is minimised so don't bother calculating as this could cause
     // unintended behaviour with scaling at 0
-    if (screenHeight == 0) return;
+    if (screenHeight == 0) {
+      return;
+    }
 
     // Calculate scale factor based on screen height linearly using constant
     GameState.getState().scaleFactor = screenHeight / (float) Constants.SCALING_1_HEIGHT;
@@ -62,9 +69,7 @@ public class GameUtils {
    */
   public static void updateSatisfactionScore(World world) {
     // >>>> CHANGED CODE START <<<<
-    GameState gameState = GameState.getState();
-
-    float newSatisfactionScore;
+    final GameState gameState = GameState.getState();
 
     float distanceModifier = 0;
     float buildingCountModifier = 1;
@@ -172,30 +177,29 @@ public class GameUtils {
                     - Collections.frequency(buildingCategoryCounts.values(), 0))
             / buildingCategoryCounts.size();
 
-    newSatisfactionScore =
+    float newSatisfactionScore =
         distanceModifier
             * buildingCountModifier
             * buildingProportionModifier
             * emptyCategoryModifier
             * gameState.satScenarioModifier;
 
+    gameState.satisfactionScore = newSatisfactionScore;
     gameState.satDistanceModifier = distanceModifier;
     gameState.satBuildingCountModifier = buildingCountModifier;
     gameState.satBuildingProportionModifier = buildingProportionModifier;
     gameState.satEmptyCategoryModifier = emptyCategoryModifier;
-    gameState.satisfactionScore = newSatisfactionScore;
 
     // >>>> CHANGED CODE END <<<<
   }
-    // >>>> NEW CODE START <<<<
 
-    /**
-     * Increase money based on number of greggs
-     */
-    public static void updateMoney(){
-      GameState gameState = GameState.getState();
-      float deltaTime = Gdx.graphics.getDeltaTime();
-      gameState.money += deltaTime * 10 * gameState.getBuildingCount(BuildingType.GREGGS);
-    }
-    // >>>> NEW CODE END <<<<
+  // >>>> NEW CODE START <<<<
+
+  /** Increase money based on number of greggs. */
+  public static void updateMoney() {
+    GameState gameState = GameState.getState();
+    float deltaTime = Gdx.graphics.getDeltaTime();
+    gameState.money += deltaTime * 50 * gameState.getBuildingCount(BuildingType.GREGGS);
+  }
+  // >>>> NEW CODE END <<<<
 }

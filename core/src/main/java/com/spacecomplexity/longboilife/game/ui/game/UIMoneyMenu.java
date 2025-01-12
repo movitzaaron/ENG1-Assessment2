@@ -44,7 +44,8 @@ public class UIMoneyMenu extends UIElement {
   }
 
   public void render() {
-    label.setText(NumberFormat.getCurrencyInstance(Locale.UK).format((int) GameState.getState().money));
+    label.setText(
+        NumberFormat.getCurrencyInstance(Locale.UK).format((int) GameState.getState().money));
   }
 
   @Override

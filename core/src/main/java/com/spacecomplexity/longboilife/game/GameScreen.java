@@ -22,7 +22,13 @@ import com.spacecomplexity.longboilife.game.scenarios.GrantScenario;
 import com.spacecomplexity.longboilife.game.scenarios.RosesScenario;
 import com.spacecomplexity.longboilife.game.scenarios.TutorialScenario;
 import com.spacecomplexity.longboilife.game.ui.UIManager;
-import com.spacecomplexity.longboilife.game.utils.*;
+import com.spacecomplexity.longboilife.game.utils.AchievementManager;
+import com.spacecomplexity.longboilife.game.utils.CameraManager;
+import com.spacecomplexity.longboilife.game.utils.EventHandler;
+import com.spacecomplexity.longboilife.game.utils.GameLogic;
+import com.spacecomplexity.longboilife.game.utils.GameUtils;
+import com.spacecomplexity.longboilife.game.utils.InputManager;
+import com.spacecomplexity.longboilife.game.utils.RenderUtils;
 import com.spacecomplexity.longboilife.game.world.World;
 
 /** Main class to control the game logic. */
@@ -44,6 +50,26 @@ public class GameScreen implements Screen {
 
   private final GameState gameState = GameState.getState();
 
+  /**
+   * Constructs a new {@code GameScreen} instance, initializing rendering components and resources.
+   *
+   * <p>This constructor sets up the rendering tools required for the game screen, including {@link
+   * SpriteBatch} and {@link ShapeRenderer} for graphical rendering. Additionally, it initializes a
+   * {@link FreeTypeFontGenerator} for generating custom fonts from a TTF file.
+   *
+   * @param game the main game instance used to manage application-wide resources and states
+   *     <strong>Initialization Details:</strong>
+   *     <ul>
+   *       <li>{@link SpriteBatch} is created for efficient batch rendering of 2D textures.
+   *       <li>{@link ShapeRenderer} is initialized for drawing shapes like lines and polygons.
+   *       <li>{@link FreeTypeFontGenerator} is initialized with the "Roboto-Medium.ttf" font file
+   *           for generating fonts.
+   *     </ul>
+   *
+   * @see SpriteBatch
+   * @see ShapeRenderer
+   * @see FreeTypeFontGenerator
+   */
   public GameScreen(Main game) {
     this.game = game;
 
@@ -66,9 +92,6 @@ public class GameScreen implements Screen {
     world = gameLogic.getWorld();
     // >>>> CHANGED CODE END <<<<
 
-    // Create an input multiplexer to handle input from all sources
-    InputMultiplexer inputMultiplexer = new InputMultiplexer(new MainInputManager());
-
     // Initialises camera with CameraManager
     CameraManager camera = new CameraManager(world);
     MainCamera.setMainCamera(camera);
@@ -78,6 +101,9 @@ public class GameScreen implements Screen {
 
     // Calculates the scaling factor based initial screen height
     GameUtils.calculateScaling();
+
+    // Create an input multiplexer to handle input from all sources
+    InputMultiplexer inputMultiplexer = new InputMultiplexer(new MainInputManager());
 
     // Initialise UI elements with UIManager
     ui = new UIManager(inputMultiplexer);

@@ -13,14 +13,34 @@ import com.spacecomplexity.longboilife.game.scenarios.TutorialScenario;
 import com.spacecomplexity.longboilife.game.tile.InvalidSaveMapException;
 import com.spacecomplexity.longboilife.game.tile.Tile;
 import com.spacecomplexity.longboilife.game.world.World;
-
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 
 // NEW: this is all new, but it was moved from the GameScreen into here to separate the logic from
-// the game
-// this was so that it could be used in the headless game version, have logic but without any
-// visuals
+/**
+ * Represents the core logic of the game.
+ *
+ * <p>This class separates the game's logic from visual elements, enabling headless operation and
+ * easier testing. It encapsulates all gameplay mechanics such as event handling, building
+ * management, and scenario initialisation. The {@code GameLogic} class ensures that gameplay
+ * actions can be performed independently of the user interface.
+ *
+ * <p><strong>Key Features:</strong>
+ *
+ * <ul>
+ *   <li>Initialises game state and scenarios.
+ *   <li>Handles player actions like building, moving, and selling structures.
+ *   <li>Manages events through the {@link EventHandler} system.
+ *   <li>Loads the game world from a map file.
+ * </ul>
+ *
+ * <p><strong>Usage:</strong>
+ *
+ * <pre>{@code
+ * GameLogic gameLogic = new GameLogic();
+ * gameLogic.setupLogic(); // Initialise the game logic
+ * }</pre>
+ */
 public class GameLogic {
   private final GameState gameState = GameState.getState();
   private World world;
@@ -29,6 +49,14 @@ public class GameLogic {
   // This is to make sure that we can test the rest of the code easier by being able to create a
   // headless application.
 
+  /**
+   * Sets up the core game logic.
+   *
+   * <p>Resets the game state, loads the game world, and initialises scenarios and events. The logic
+   * is prepared for headless operation, decoupled from graphical elements.
+   *
+   * @throws RuntimeException if the map file cannot be loaded or is invalid
+   */
   public void setupLogic() {
     gameState.reset();
 
@@ -94,9 +122,7 @@ public class GameLogic {
                 .noneMatch(category -> gameState.placingBuilding.getCategory() == category)) {
               gameState.placingBuilding = null;
             }
-          }
-          // If there is a moving building then this is a moved building.
-          else {
+          } else { // If there is a moving building then this is a moved building.
             // If the user doesn't have enough money to buy the building then don't build
             float cost = toBuild.getCost() * Constants.moveCostRecovery;
             if (gameState.money < cost) {

@@ -10,11 +10,35 @@ import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.ui.UIElement;
 
 // NEW: This is brand new
+/**
+ * Represents the "Escape Tip" UI element in the game.
+ *
+ * <p>This UI element displays a tip message instructing the player to press "ESC" to cancel
+ * building placement. It is dynamically shown or hidden based on the player's current action
+ * in the game.</p>
+ *
+ * <p><strong>Key Features:</strong></p>
+ * <ul>
+ *   <li>Displays a clear message to help players cancel building placement.</li>
+ *   <li>Automatically toggles visibility based on the player's current state.</li>
+ *   <li>Integrates seamlessly with the game's UI system.</li>
+ * </ul>
+ *
+ * <p><strong>Usage:</strong></p>
+ * <pre>{@code
+ * UIEscapeTip escapeTip = new UIEscapeTip(uiViewport, parentTable, skin);
+ * escapeTip.showTip(); // To show the tip
+ * escapeTip.hideTip(); // To hide the tip
+ * }</pre>
+ *
+ * <p>This class extends {@link UIElement}, inheriting the ability to render within the game's UI
+ * hierarchy.</p>
+ */
 public class UIEscapeTip extends UIElement {
   private Label label;
 
   /**
-   * Initialise Tip UI elements
+   * Initialise Tip UI elements.
    *
    * @param uiViewport the viewport used to render UI.
    * @param parentTable the table to render this element onto.

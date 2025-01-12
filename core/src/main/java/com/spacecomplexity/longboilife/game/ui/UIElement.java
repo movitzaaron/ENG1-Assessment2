@@ -10,7 +10,7 @@ public abstract class UIElement {
   protected Table table;
 
   /**
-   * Initialise base UI elements
+   * Initialise base UI elements.
    *
    * @param uiViewport the viewport used to render UI.
    * @param parentTable the table to render this element onto.

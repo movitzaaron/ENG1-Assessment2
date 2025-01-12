@@ -4,6 +4,7 @@ import java.util.function.Function;
 
 /** Class to manage events which can be called from anywhere within the game. */
 public class EventHandler {
+  /** Defines the available events in the game. */
   public enum Event {
     BUILD,
     SELECT_BUILDING,

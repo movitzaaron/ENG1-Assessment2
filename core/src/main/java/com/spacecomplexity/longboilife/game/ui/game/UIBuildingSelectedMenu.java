@@ -94,6 +94,12 @@ public class UIBuildingSelectedMenu extends UIElement {
         });
   }
 
+  /**
+   * Renders the building selected menu.
+   *
+   * <p>Ensures the menu stays positioned relative to the world space where it was opened. The
+   * menu's position is updated dynamically based on the camera and viewport transformations.
+   */
   public void render() {
     // Keep the menu placed relative to world space
     if (worldSpaceOpened != null) {
@@ -109,6 +115,13 @@ public class UIBuildingSelectedMenu extends UIElement {
     }
   }
 
+  /**
+   * Opens the building selected menu.
+   *
+   * <p>Determines the position of the menu based on the current mouse location in world space.
+   * Updates the action costs for moving and selling the selected building and makes the menu
+   * visible.
+   */
   private void openMenu() {
     // Get the world space of current mouse position so that we can keep it positioned relatively
     Vector3 mouse = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
@@ -134,6 +147,12 @@ public class UIBuildingSelectedMenu extends UIElement {
     table.setVisible(true);
   }
 
+  /**
+   * Closes the building selected menu.
+   *
+   * <p>Hides the menu and resets the world space coordinates to avoid unnecessary position updates
+   * during rendering.
+   */
   private void closeMenu() {
     // Remove the open coordinates so we don't calculate the menus position every frame
     worldSpaceOpened = null;
@@ -141,6 +160,12 @@ public class UIBuildingSelectedMenu extends UIElement {
     table.setVisible(false);
   }
 
+  /**
+   * Places the table for the menu.
+   *
+   * <p>As the menu is dynamically positioned relative to the world space, the table placement logic
+   * is handled during rendering and does not require initial placement.
+   */
   @Override
   protected void placeTable() {
     // Element can move a lot so is placed in the render loop

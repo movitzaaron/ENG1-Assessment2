@@ -2,7 +2,10 @@ package com.spacecomplexity.longboilife.game.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 // NEW: this is all new
 /** Class used for saving user scores to a preferences file, "playerScores". */
@@ -58,6 +61,30 @@ public class SaveScore {
     return scoreStringBuild.substring(0, scoreStringBuild.length() - 1);
   }
 
+  /**
+   * Retrieves the top five scores and their corresponding names.
+   *
+   * <p>This method fetches scores from a persistent data store, sorts them in descending order, and
+   * formats the top five entries as a single string. The names and scores are separated by a
+   * vertical bar ({@code |}) to distinguish between them.
+   *
+   * <p>The format of the returned string is as follows:
+   *
+   * <pre>
+   * Name1
+   * Name2
+   * ...
+   * Name5
+   * |
+   * Score1
+   * Score2
+   * ...
+   * Score5
+   * </pre>
+   *
+   * @return A formatted string containing the top five names and scores, separated by a vertical
+   *     bar.
+   */
   public static String getTopFive() {
     StringBuilder nameStringBuilder = new StringBuilder();
     StringBuilder scoreStringBuilder = new StringBuilder();
@@ -85,7 +112,9 @@ public class SaveScore {
     // add the top 5 entries to the StringBuilder
     int count = 0;
     for (Map.Entry<String, Integer> entry : sortedScoreMap.entrySet()) {
-      if (count == 5) break;
+      if (count == 5) {
+        break;
+      }
       nameStringBuilder.append(entry.getKey()).append("\r\n");
       scoreStringBuilder.append(entry.getValue().toString()).append("\r\n");
 
@@ -113,12 +142,5 @@ public class SaveScore {
   private static void callFlush() {
     scores.flush();
     System.out.println("Successful flush.");
-  }
-
-  // Clears prefs, currently used for testing
-  public static void deletePrefs() {
-    scores.clear();
-    System.out.println("Deleted preferences.");
-    callFlush();
   }
 }

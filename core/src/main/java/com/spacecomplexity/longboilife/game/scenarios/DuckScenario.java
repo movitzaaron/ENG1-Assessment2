@@ -4,12 +4,53 @@ import com.spacecomplexity.longboilife.game.globals.GameState;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
 import com.spacecomplexity.longboilife.game.utils.Timer;
 
+/**
+ * Represents the "Duck Scenario" in the game.
+ *
+ * <p>This class defines the logic and behavior for the Duck Scenario, including the initialisation
+ * of a countdown timer, handling associated events, and managing game state interactions. The
+ * scenario triggers a dialog and pauses the game if the player can afford the scenario's outcome.
+ *
+ * <p><strong>Key Features:</strong>
+ *
+ * <ul>
+ *   <li>Manages a countdown timer that triggers the scenario-specific events.
+ *   <li>Handles game pauses and dialogs related to the Duck Scenario.
+ *   <li>Provides utility methods to pause, resume, and poll the timer states.
+ * </ul>
+ *
+ * <p>This class uses the singleton pattern to ensure there is only one instance of the DuckScenario
+ * throughout the game's lifecycle.
+ *
+ * <p><strong>Usage:</strong>
+ *
+ * <pre>{@code
+ * // Poll the state of the scenario
+ * DuckScenario.poll();
+ *
+ * // Pause the scenario timers
+ * DuckScenario.pauseTimers();
+ *
+ * // Reset the scenario to its initial state
+ * DuckScenario.reset();
+ * }</pre>
+ */
 public class DuckScenario {
+  /** Singleton instance of the DuckScenario. */
   public static DuckScenario duckScenario = new DuckScenario();
+
+  /** The cost associated with triggering the Duck Scenario event. */
   public static int cost = 50000;
 
   private final Timer timer;
 
+  /**
+   * Private constructor to initialise the DuckScenario.
+   *
+   * <p>Sets up a countdown timer with a duration of 3 minutes and attaches an event that checks if
+   * the player can afford the scenario cost. If the condition is met, the game is paused, and a
+   * scenario dialog is triggered.
+   */
   private DuckScenario() {
     timer = new Timer();
     /*
@@ -30,20 +71,20 @@ public class DuckScenario {
   /**
    * Retrieve the start timer.
    *
-   * @return The timer managing the start of the Duck Death event.
+   * @return The {@link Timer} managing the start of the Duck Death event.
    */
   public Timer getTimer() {
     return timer;
   }
 
-  /** Pause both timers if they are currently going */
+  /** Pause both timers if they are currently going. */
   public static void pauseTimers() {
     if (!duckScenario.getTimer().isPaused()) {
       duckScenario.getTimer().pauseTimer();
     }
   }
 
-  /** Resume both timers if they were previously paused */
+  /** Resume both timers if they were previously paused. */
   public static void resumeTimers() {
     if (duckScenario.getTimer().isPaused()) {
       duckScenario.getTimer().resumeTimer();
@@ -63,6 +104,12 @@ public class DuckScenario {
     }
   }
 
+  /**
+   * Resets the DuckScenario instance.
+   *
+   * <p>This method recreates the singleton instance and resets the timer and associated events to
+   * their initial state.
+   */
   public static void reset() {
     duckScenario = new DuckScenario();
   }

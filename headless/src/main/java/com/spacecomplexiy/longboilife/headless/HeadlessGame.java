@@ -43,9 +43,9 @@ public class HeadlessGame extends ApplicationAdapter {
         // Poll the timer to run the event if the timer has expired
         // Do not update satisfaction score if the game is paused or has ended
         if (!gameState.paused && !MainTimer.getTimerManager().getTimer().poll()) {
-            // Update the satisfaction score
-            GameUtils.updateSatisfactionScore(world);
-            GameUtils.updateMoney();
+          // Update the satisfaction score
+          GameUtils.updateSatisfactionScore(world);
+          GameUtils.updateMoney();
         }
     }
 }

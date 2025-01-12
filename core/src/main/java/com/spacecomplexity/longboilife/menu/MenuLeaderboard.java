@@ -112,17 +112,10 @@ public class MenuLeaderboard implements Screen {
     boardTable.add(namesLabel).pad(20).left().expand();
     boardTable.add(scoresLabel).pad(20).right().expand();
     boardTable.setBackground(skin.getDrawable("panel1"));
-//
     table.add(title).center();
-//
     table.row().pad(10);
-//
     table.add(boardTable).expand();
-//
-//    table.row().pad(10);
-//
-//    table.add(backButton).pad(10).bottom().right().width(100).height(50);
-//    table.add(eraseButton).pad(10).bottom().left().width(100).height(50);
+
     Table buttonTable = new Table();
     buttonTable.setFillParent(true);
     stage.addActor(buttonTable);

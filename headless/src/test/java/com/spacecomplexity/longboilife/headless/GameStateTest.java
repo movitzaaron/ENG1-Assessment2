@@ -18,7 +18,7 @@ class GameStateTest extends AbstractHeadlessGdxTest {
 
   @BeforeEach
   void setUp() {
-    gameState = GameState.TEST_CreateInstance();
+    gameState = GameState.testCreateInstance();
     gameState.reset();
   }
 

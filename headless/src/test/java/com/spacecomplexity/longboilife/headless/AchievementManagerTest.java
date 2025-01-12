@@ -142,7 +142,7 @@ public class AchievementManagerTest extends AbstractHeadlessGdxTest {
 
   @BeforeEach
   void setUp() {
-    gameState = GameState.TEST_CreateInstance();
+    gameState = GameState.testCreateInstance();
     gameState.reset();
 
     achievementManager = new AchievementManager(fakePreferences);

@@ -45,6 +45,7 @@ public class HeadlessGame extends ApplicationAdapter {
         if (!gameState.paused && !MainTimer.getTimerManager().getTimer().poll()) {
             // Update the satisfaction score
             GameUtils.updateSatisfactionScore(world);
+            GameUtils.updateMoney();
         }
     }
 }

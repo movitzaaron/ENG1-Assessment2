@@ -2,43 +2,41 @@ package com.spacecomplexity.longboilife.game.building;
 
 import com.spacecomplexity.longboilife.game.utils.Vector2Int;
 
-/**
- * Represents a building in the game.
- */
+/** Represents a building in the game. */
 public class Building {
-    private final BuildingType type;
-    private Vector2Int position;
+  private final BuildingType type;
+  private Vector2Int position;
 
-    /**
-     * Constructs a building instance given the specific type.
-     *
-     * @param type     the type of building to create.
-     * @param position the position of this building in the world.
-     */
-    public Building(BuildingType type, Vector2Int position) {
-        // >>>> NEW CODE START <<<<
-        //// NEW: Validate building type and position
-        if (type == null) {
-            throw new NullPointerException("Building type cannot be null.");
-        }
-
-        if (position == null) {
-            throw new NullPointerException("Building position cannot be null.");
-        }
-        //// >>>> NEW CODE END <<<<e
-        this.type = type;
-        this.position = position;
+  /**
+   * Constructs a building instance given the specific type.
+   *
+   * @param type the type of building to create.
+   * @param position the position of this building in the world.
+   */
+  public Building(BuildingType type, Vector2Int position) {
+    // >>>> NEW CODE START <<<<
+    //// NEW: Validate building type and position
+    if (type == null) {
+      throw new NullPointerException("Building type cannot be null.");
     }
 
-    public BuildingType getType() {
-        return type;
+    if (position == null) {
+      throw new NullPointerException("Building position cannot be null.");
     }
+    //// >>>> NEW CODE END <<<<e
+    this.type = type;
+    this.position = position;
+  }
 
-    public Vector2Int getPosition() {
-        return position;
-    }
+  public BuildingType getType() {
+    return type;
+  }
 
-    public void setPosition(Vector2Int position) {
-        this.position = position;
-    }
+  public Vector2Int getPosition() {
+    return position;
+  }
+
+  public void setPosition(Vector2Int position) {
+    this.position = position;
+  }
 }

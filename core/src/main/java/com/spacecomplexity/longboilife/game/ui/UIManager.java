@@ -18,136 +18,144 @@ import com.spacecomplexity.longboilife.game.ui.gameover.UIOverview;
 import com.spacecomplexity.longboilife.game.ui.scenario.UIDialogs;
 import com.spacecomplexity.longboilife.game.utils.EventHandler;
 
-/**
- * Class to manage the UI in the game.
- */
+/** Class to manage the UI in the game. */
 public class UIManager {
-    private final Viewport viewport;
-    private final Stage stage;
-    private final Skin skin;
+  private final Viewport viewport;
+  private final Stage stage;
+  private final Skin skin;
 
-    private UIElement[] uiElements;
+  private UIElement[] uiElements;
 
-    /**
-     * Initialise UI elements needed for the game.
-     *
-     * @param inputMultiplexer to add the UI events to the input processing
-     */
-    public UIManager(InputMultiplexer inputMultiplexer) {
-        // Initialise viewport for rescaling
-        viewport = new ScalingViewport(Scaling.fit, 640, 480);
+  /**
+   * Initialise UI elements needed for the game.
+   *
+   * @param inputMultiplexer to add the UI events to the input processing
+   */
+  public UIManager(InputMultiplexer inputMultiplexer) {
+    // Initialise viewport for rescaling
+    viewport = new ScalingViewport(Scaling.fit, 640, 480);
 
-        // Initialise stage
-        stage = new Stage(viewport);
-        inputMultiplexer.addProcessor(stage);
+    // Initialise stage
+    stage = new Stage(viewport);
+    inputMultiplexer.addProcessor(stage);
 
-        // Initialise root table
-        Table table = new Table();
-        table.setFillParent(true);
-        stage.addActor(table);
+    // Initialise root table
+    Table table = new Table();
+    table.setFillParent(true);
+    stage.addActor(table);
 
-        // Load external UI skin
-        skin = new Skin(Gdx.files.internal("ui/skin/uiskin.json"));
+    // Load external UI skin
+    skin = new Skin(Gdx.files.internal("ui/skin/uiskin.json"));
 
-        // Load external font
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("ui/fonts/Roboto-Medium.ttf"));
-        // Generate a bitmap font for size 12
-        BitmapFont ourFont12 = generator.generateFont(new FreeTypeFontGenerator.FreeTypeFontParameter() {{
-            size = 12;
-        }});
-        // Generate a bitmap font for size 14
-        BitmapFont ourFont16 = generator.generateFont(new FreeTypeFontGenerator.FreeTypeFontParameter() {{
-            size = 14;
-        }});
-        generator.dispose();
+    // Load external font
+    FreeTypeFontGenerator generator =
+        new FreeTypeFontGenerator(Gdx.files.internal("ui/fonts/Roboto-Medium.ttf"));
+    // Generate a bitmap font for size 12
+    BitmapFont ourFont12 =
+        generator.generateFont(
+            new FreeTypeFontGenerator.FreeTypeFontParameter() {
+              {
+                size = 12;
+              }
+            });
+    // Generate a bitmap font for size 14
+    BitmapFont ourFont16 =
+        generator.generateFont(
+            new FreeTypeFontGenerator.FreeTypeFontParameter() {
+              {
+                size = 14;
+              }
+            });
+    generator.dispose();
 
-        // Set skins font to our font
-        skin.get("default", Label.LabelStyle.class).font = ourFont12;
-        skin.get("default", TextButton.TextButtonStyle.class).font = ourFont16;
+    // Set skins font to our font
+    skin.get("default", Label.LabelStyle.class).font = ourFont12;
+    skin.get("default", TextButton.TextButtonStyle.class).font = ourFont16;
 
-        // Create our UI elements
-        // Note: The order of these is the order that they will be rendered
-        uiElements = new UIElement[]{
-            new UIBuildingSelectedMenu(viewport, table, skin),
-            new UIBottomMenu(viewport, table, skin),
-            new UIClockMenu(viewport, table, skin),
-            new UISatisfactionMenu(viewport, table, skin),
-            new UIMoneyMenu(viewport, table, skin),
-            // >>>> NEW CODE START <<<<
-            new UITipsMenu(viewport, table, skin),
-            new UIBuildingCounter(viewport, table, skin),
-            new UIDialogs(viewport, table, skin, stage),
-            new UIAchievementDialog(viewport, table, skin, stage),
-            new UIEscapeTip(viewport, table, skin)};
-            // >>>> NEW CODE END <<<<
+    // Create our UI elements
+    // Note: The order of these is the order that they will be rendered
+    uiElements =
+        new UIElement[] {
+          new UIBuildingSelectedMenu(viewport, table, skin),
+          new UIBottomMenu(viewport, table, skin),
+          new UIClockMenu(viewport, table, skin),
+          new UISatisfactionMenu(viewport, table, skin),
+          new UIMoneyMenu(viewport, table, skin),
+          // >>>> NEW CODE START <<<<
+          new UITipsMenu(viewport, table, skin),
+          new UIBuildingCounter(viewport, table, skin),
+          new UIDialogs(viewport, table, skin, stage),
+          new UIAchievementDialog(viewport, table, skin, stage),
+          new UIEscapeTip(viewport, table, skin)
+        };
+    // >>>> NEW CODE END <<<<
 
-        // Hide game UI and show end UI
-        EventHandler.getEventHandler().createEvent(EventHandler.Event.GAME_END, (params) -> {
-            GameState.getState().gameOver = true;
-            EventHandler.getEventHandler().callEvent(EventHandler.Event.CANCEL_OPERATIONS);
+    // Hide game UI and show end UI
+    EventHandler.getEventHandler()
+        .createEvent(
+            EventHandler.Event.GAME_END,
+            (params) -> {
+              GameState.getState().gameOver = true;
+              EventHandler.getEventHandler().callEvent(EventHandler.Event.CANCEL_OPERATIONS);
 
-            // Run dispose functions on UI elements
-            for (UIElement uiElement : uiElements) {
+              // Run dispose functions on UI elements
+              for (UIElement uiElement : uiElements) {
                 uiElement.dispose();
-            }
-            table.clear();
+              }
+              table.clear();
 
-            // Create the new end elements
-            uiElements = new UIElement[]{
-                new UIOverview(viewport, table, skin),
-            };
+              // Create the new end elements
+              uiElements =
+                  new UIElement[] {
+                    new UIOverview(viewport, table, skin),
+                  };
 
-            return null;
-        });
+              return null;
+            });
+  }
+
+  /** Apply and draw UI onto the screen. */
+  public void render() {
+    // Render on each of the UI elements
+    for (UIElement uiElement : uiElements) {
+      uiElement.render();
     }
 
-    /**
-     * Apply and draw UI onto the screen.
-     */
-    public void render() {
-        // Render on each of the UI elements
-        for (UIElement uiElement : uiElements) {
-            uiElement.render();
-        }
+    // Apply and then draw
+    viewport.apply();
+    stage.act(Gdx.graphics.getDeltaTime());
+    stage.draw();
+  }
 
-        // Apply and then draw
-        viewport.apply();
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
+  /**
+   * Handles resizing events, to ensure the UI is scaled correctly.
+   *
+   * @param width the new width in pixels.
+   * @param height the new height in pixels.
+   */
+  public void resize(int width, int height) {
+    // Update world size to match scaling of uiScaleFactor
+    viewport.setWorldSize(
+        (float) width / GameState.getState().uiScaleFactor,
+        (float) height / GameState.getState().uiScaleFactor);
+
+    // Updates viewport to match new window size
+    viewport.update(width, height, true);
+
+    // Run resize functions on UI elements
+    for (UIElement uiElement : uiElements) {
+      uiElement.resize();
     }
+  }
 
-    /**
-     * Handles resizing events, to ensure the UI is scaled correctly.
-     *
-     * @param width  the new width in pixels.
-     * @param height the new height in pixels.
-     */
-    public void resize(int width, int height) {
-        // Update world size to match scaling of uiScaleFactor
-        viewport.setWorldSize(
-            (float) width / GameState.getState().uiScaleFactor,
-            (float) height / GameState.getState().uiScaleFactor
-        );
+  /** Dispose of all loaded assets. */
+  public void dispose() {
+    stage.dispose();
+    skin.dispose();
 
-        // Updates viewport to match new window size
-        viewport.update(width, height, true);
-
-        // Run resize functions on UI elements
-        for (UIElement uiElement : uiElements) {
-            uiElement.resize();
-        }
+    // Run dispose functions on UI elements
+    for (UIElement uiElement : uiElements) {
+      uiElement.dispose();
     }
-
-    /**
-     * Dispose of all loaded assets.
-     */
-    public void dispose() {
-        stage.dispose();
-        skin.dispose();
-
-        // Run dispose functions on UI elements
-        for (UIElement uiElement : uiElements) {
-            uiElement.dispose();
-        }
-    }
+  }
 }

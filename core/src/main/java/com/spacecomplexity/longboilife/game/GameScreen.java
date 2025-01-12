@@ -25,208 +25,206 @@ import com.spacecomplexity.longboilife.game.ui.UIManager;
 import com.spacecomplexity.longboilife.game.utils.*;
 import com.spacecomplexity.longboilife.game.world.World;
 
-
-
-/**
- * Main class to control the game logic.
- */
+/** Main class to control the game logic. */
 public class GameScreen implements Screen {
-    private final Main game;
+  private final Main game;
+
+  // >>>> NEW CODE START <<<<
+  private AchievementManager achievementManager;
+  private final FreeTypeFontGenerator generator;
+  private final GameLogic gameLogic = new GameLogic();
+  // >>>> NEW CODE END <<<<
+  private final SpriteBatch batch;
+  private final ShapeRenderer shapeRenderer;
+  private UIManager ui;
+  private InputManager inputManager;
+  private Viewport viewport;
+
+  private World world;
+
+  private final GameState gameState = GameState.getState();
+
+  public GameScreen(Main game) {
+    this.game = game;
+
+    // Initialise SpriteBatch and ShapeRender for rendering
+    batch = new SpriteBatch();
+    shapeRenderer = new ShapeRenderer();
 
     // >>>> NEW CODE START <<<<
-    private AchievementManager achievementManager;
-    private final FreeTypeFontGenerator generator;
-    private final GameLogic gameLogic = new GameLogic();
+    generator = new FreeTypeFontGenerator(Gdx.files.internal("ui/fonts/Roboto-Medium.ttf"));
     // >>>> NEW CODE END <<<<
-    private final SpriteBatch batch;
-    private final ShapeRenderer shapeRenderer;
-    private UIManager ui;
-    private InputManager inputManager;
-    private Viewport viewport;
+  }
 
-    private World world;
+  /** Responsible for setting up the game initial state. Called when the game is first run. */
+  @Override
+  public void show() {
+    // >>>> CHANGED CODE START <<<<
+    // CHANGED: game logic is now handled inside gameLogic
+    // Set up non-GUI logic
+    gameLogic.setupLogic();
+    world = gameLogic.getWorld();
+    // >>>> CHANGED CODE END <<<<
 
-    private final GameState gameState = GameState.getState();
+    // Create an input multiplexer to handle input from all sources
+    InputMultiplexer inputMultiplexer = new InputMultiplexer(new MainInputManager());
 
-    public GameScreen(Main game) {
-        this.game = game;
+    // Initialises camera with CameraManager
+    CameraManager camera = new CameraManager(world);
+    MainCamera.setMainCamera(camera);
 
-        // Initialise SpriteBatch and ShapeRender for rendering
-        batch = new SpriteBatch();
-        shapeRenderer = new ShapeRenderer();
+    // Initialise viewport for rescaling
+    viewport = new ScreenViewport(MainCamera.camera().getCamera());
 
-        // >>>> NEW CODE START <<<<
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("ui/fonts/Roboto-Medium.ttf"));
-        // >>>> NEW CODE END <<<<
-    }
+    // Calculates the scaling factor based initial screen height
+    GameUtils.calculateScaling();
 
-    /**
-     * Responsible for setting up the game initial state.
-     * Called when the game is first run.
-     */
-    @Override
-    public void show() {
-        // >>>> CHANGED CODE START <<<<
-        // CHANGED: game logic is now handled inside gameLogic
-        // Set up non-GUI logic
-        gameLogic.setupLogic();
-        world = gameLogic.getWorld();
-        // >>>> CHANGED CODE END <<<<
+    // Initialise UI elements with UIManager
+    ui = new UIManager(inputMultiplexer);
 
-        // Create an input multiplexer to handle input from all sources
-        InputMultiplexer inputMultiplexer = new InputMultiplexer(new MainInputManager());
+    // >>>> NEW CODE START <<<<
+    achievementManager = new AchievementManager();
+    // >>>> NEW CODE END <<<<
 
-        // Initialises camera with CameraManager
-        CameraManager camera = new CameraManager(world);
-        MainCamera.setMainCamera(camera);
+    // Position camera in the center of the world map
+    MainCamera.camera()
+        .position
+        .set(
+            new Vector3(
+                world.getWidth() * Constants.TILE_SIZE * gameState.scaleFactor / 2,
+                world.getHeight() * Constants.TILE_SIZE * gameState.scaleFactor / 2,
+                0));
 
-        // Initialise viewport for rescaling
-        viewport = new ScreenViewport(MainCamera.camera().getCamera());
+    // Set up an InputManager to handle user inputs
+    inputManager = new InputManager(inputMultiplexer);
+    // Set the Gdx input processor to handle all our input processes
+    Gdx.input.setInputProcessor(inputMultiplexer);
 
-        // Calculates the scaling factor based initial screen height
-        GameUtils.calculateScaling();
+    // Set up the final event of ending the game, we cannot do this in logic because
+    // we cannot switch screens
+    EventHandler eventHandler = EventHandler.getEventHandler();
 
-        // Initialise UI elements with UIManager
-        ui = new UIManager(inputMultiplexer);
+    // Return to the menu
+    eventHandler.createEvent(
+        EventHandler.Event.RETURN_MENU,
+        (params) -> {
+          game.switchScreen(Main.ScreenType.MENU);
 
-        // >>>> NEW CODE START <<<<
-        achievementManager = new AchievementManager();
-        // >>>> NEW CODE END <<<<
-
-        // Position camera in the center of the world map
-        MainCamera.camera().position.set(new Vector3(
-            world.getWidth() * Constants.TILE_SIZE * gameState.scaleFactor / 2,
-            world.getHeight() * Constants.TILE_SIZE * gameState.scaleFactor / 2,
-            0
-        ));
-
-        // Set up an InputManager to handle user inputs
-        inputManager = new InputManager(inputMultiplexer);
-        // Set the Gdx input processor to handle all our input processes
-        Gdx.input.setInputProcessor(inputMultiplexer);
-
-        // Set up the final event of ending the game, we cannot do this in logic because
-        // we cannot switch screens
-        EventHandler eventHandler = EventHandler.getEventHandler();
-
-        // Return to the menu
-        eventHandler.createEvent(EventHandler.Event.RETURN_MENU, (params) -> {
-            game.switchScreen(Main.ScreenType.MENU);
-
-            return null;
+          return null;
         });
+  }
+
+  /** Renders the game world, and make calls to handle continuous inputs. Called every frame. */
+  @Override
+  public void render(float delta) {
+    // Call to handles any constant input
+    inputManager.handleContinuousInput();
+
+    // Clear the screen
+    ScreenUtils.clear(0, 0, 0, 1f);
+
+    // Applies viewport transformations and updates camera ready for rendering
+    viewport.apply();
+    MainCamera.camera().update();
+    // Update the SpriteBatch and ShapeRenderer to match the updates camera
+    batch.setProjectionMatrix(MainCamera.camera().getCombinedMatrix());
+    shapeRenderer.setProjectionMatrix(MainCamera.camera().getCombinedMatrix());
+
+    // Darkened the world when paused
+    Color worldTint = gameState.paused ? Color.LIGHT_GRAY : Color.WHITE;
+
+    // Draw the world tiles
+    RenderUtils.drawWorld(batch, world, worldTint);
+    // Draw the worlds buildings
+    RenderUtils.drawBuildings(batch, world, worldTint);
+
+    // If there is a building to be placed draw it as a ghost building
+    if (gameState.placingBuilding != null) {
+      RenderUtils.drawPlacingBuilding(
+          batch,
+          world,
+          gameState.placingBuilding,
+          new Color(1f, 1f, 1f, 0.75f),
+          new Color(1f, 0f, 0f, 0.75f),
+          generator.generateFont(
+              new FreeTypeFontGenerator.FreeTypeFontParameter() {
+                {
+                  size = 11;
+                  borderWidth = 0.8f;
+                }
+              }));
+    }
+    // If we are placing a building or there is a building selected then draw gridlines
+    if (gameState.placingBuilding != null || gameState.selectedBuilding != null) {
+      RenderUtils.drawWorldGridlines(shapeRenderer, world, Color.BLACK);
+    }
+    // If there is a building selected then outline it
+    if (gameState.selectedBuilding != null) {
+      RenderUtils.outlineBuilding(shapeRenderer, gameState.selectedBuilding, Color.RED, 2);
+    }
+    // If there is a moving selected then outline where it was previously
+    if (gameState.movingBuilding != null) {
+      RenderUtils.outlineBuilding(shapeRenderer, gameState.movingBuilding, Color.PURPLE, 2);
     }
 
-    /**
-     * Renders the game world, and make calls to handle continuous inputs.
-     * Called every frame.
-     */
-    @Override
-    public void render(float delta) {
-        // Call to handles any constant input
-        inputManager.handleContinuousInput();
+    // Render the UI
+    ui.render();
 
-        // Clear the screen
-        ScreenUtils.clear(0, 0, 0, 1f);
+    // >>>> NEW CODE START <<<<
+    // NEW: poll all of our scenarios, and the achievement manager every frame
+    // Poll the scenario timers to run the event if the timer has expired
+    DuckScenario.poll();
+    GrantScenario.poll();
+    RosesScenario.poll();
+    TutorialScenario.poll();
 
-        // Applies viewport transformations and updates camera ready for rendering
-        viewport.apply();
-        MainCamera.camera().update();
-        // Update the SpriteBatch and ShapeRenderer to match the updates camera
-        batch.setProjectionMatrix(MainCamera.camera().getCombinedMatrix());
-        shapeRenderer.setProjectionMatrix(MainCamera.camera().getCombinedMatrix());
+    // Check if any achievement conditions have been reached
+    achievementManager.poll();
+    // >>>> NEW CODE END <<<<
 
-        // Darkened the world when paused
-        Color worldTint = gameState.paused ? Color.LIGHT_GRAY : Color.WHITE;
-
-        // Draw the world tiles
-        RenderUtils.drawWorld(batch, world, worldTint);
-        // Draw the worlds buildings
-        RenderUtils.drawBuildings(batch, world, worldTint);
-
-        // If there is a building to be placed draw it as a ghost building
-        if (gameState.placingBuilding != null) {
-            RenderUtils.drawPlacingBuilding(batch, world, gameState.placingBuilding, new Color(1f, 1f, 1f, 0.75f), new Color(1f, 0f, 0f, 0.75f), generator.generateFont(new FreeTypeFontGenerator.FreeTypeFontParameter() {{size = 11; borderWidth = 0.8f;}}));
-        }
-        // If we are placing a building or there is a building selected then draw gridlines
-        if (gameState.placingBuilding != null || gameState.selectedBuilding != null) {
-            RenderUtils.drawWorldGridlines(shapeRenderer, world, Color.BLACK);
-        }
-        // If there is a building selected then outline it
-        if (gameState.selectedBuilding != null) {
-            RenderUtils.outlineBuilding(shapeRenderer, gameState.selectedBuilding, Color.RED, 2);
-        }
-        // If there is a moving selected then outline where it was previously
-        if (gameState.movingBuilding != null) {
-            RenderUtils.outlineBuilding(shapeRenderer, gameState.movingBuilding, Color.PURPLE, 2);
-        }
-
-        // Render the UI
-        ui.render();
-
-        // >>>> NEW CODE START <<<<
-        // NEW: poll all of our scenarios, and the achievement manager every frame
-        // Poll the scenario timers to run the event if the timer has expired
-        DuckScenario.poll();
-        GrantScenario.poll();
-        RosesScenario.poll();
-        TutorialScenario.poll();
-
-        // Check if any achievement conditions have been reached
-        achievementManager.poll();
-        // >>>> NEW CODE END <<<<
-
-        // Poll the timer to run the event if the timer has expired
-        // Do not update satisfaction score if the game is paused or has ended
-        if (!gameState.paused && !MainTimer.getTimerManager().getTimer().poll()) {
-            // Update the satisfaction score
-            GameUtils.updateSatisfactionScore(world);
-            // >>>> NEW CODE START <<<<
-            GameUtils.updateMoney(world);
-            // >>>> NEW CODE END <<<<
-        }
+    // Poll the timer to run the event if the timer has expired
+    // Do not update satisfaction score if the game is paused or has ended
+    if (!gameState.paused && !MainTimer.getTimerManager().getTimer().poll()) {
+      // Update the satisfaction score
+      GameUtils.updateSatisfactionScore(world);
     }
+  }
 
-    /**
-     * Handles resizing events, to ensure the game can be scaled.
-     * Called when the game window is resized.
-     *
-     * @param width  the new width in pixels.
-     * @param height the new height in pixels.
-     */
-    @Override
-    public void resize(int width, int height) {
-        // Updates viewport to match new window size
-        viewport.update(width, height, false);
+  /**
+   * Handles resizing events, to ensure the game can be scaled. Called when the game window is
+   * resized.
+   *
+   * @param width the new width in pixels.
+   * @param height the new height in pixels.
+   */
+  @Override
+  public void resize(int width, int height) {
+    // Updates viewport to match new window size
+    viewport.update(width, height, false);
 
-        // Recalculate scaling factors with new height
-        GameUtils.calculateScaling();
+    // Recalculate scaling factors with new height
+    GameUtils.calculateScaling();
 
-        // Rescale UI
-        ui.resize(width, height);
-    }
+    // Rescale UI
+    ui.resize(width, height);
+  }
 
-    @Override
-    public void pause() {
-    }
+  @Override
+  public void pause() {}
 
-    @Override
-    public void resume() {
-    }
+  @Override
+  public void resume() {}
 
-    @Override
-    public void hide() {
-        ui.dispose();
-    }
+  @Override
+  public void hide() {
+    ui.dispose();
+  }
 
-    /**
-     * Release all resources held by the game.
-     * Called when the game is being closed.
-     */
-    @Override
-    public void dispose() {
-        batch.dispose();
-        shapeRenderer.dispose();
-        ui.dispose();
-    }
+  /** Release all resources held by the game. Called when the game is being closed. */
+  @Override
+  public void dispose() {
+    batch.dispose();
+    shapeRenderer.dispose();
+    ui.dispose();
+  }
 }

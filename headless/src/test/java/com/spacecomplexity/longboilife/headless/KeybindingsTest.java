@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import com.spacecomplexity.longboilife.game.globals.Keybindings;
 import org.junit.jupiter.api.Test;
 
+/** Unit tests for the Vector2Int class. TEST REF: 16 */
 class KeybindingsTest {
 
   @Test

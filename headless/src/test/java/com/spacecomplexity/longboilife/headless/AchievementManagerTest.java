@@ -15,6 +15,7 @@ import org.junit.jupiter.api.*;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
+/** Unit tests for the Vector2Int class. TEST REF: 18 */
 public class AchievementManagerTest extends AbstractHeadlessGdxTest {
   private static FakePreferences fakePreferences;
   private AchievementManager achievementManager;

@@ -6,7 +6,7 @@ import com.spacecomplexity.longboilife.game.utils.Vector2Int;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-/** Unit tests for the Vector2Int class. */
+/** Unit tests for the Vector2Int class. TEST REF: 17 */
 class Vector2IntTest {
 
   @Test
